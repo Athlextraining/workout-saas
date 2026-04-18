@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "./reveal";
 
 export default function Home() {
   return (
@@ -6,9 +7,9 @@ export default function Home() {
       {/* Hero */}
       <section className="hero-shell">
         <div className="hero-bg" aria-hidden="true">
+          <div className="hero-image" />
+          <div className="hero-vignette" />
           <div className="hero-grid" />
-          <div className="hero-orb hero-orb-1" />
-          <div className="hero-orb hero-orb-2 " />
           <div className="hero-grain" />
           <div className="hero-fade" />
         </div>
@@ -64,7 +65,7 @@ export default function Home() {
       <section className="proof-shell">
         <div className="proof-bg" aria-hidden="true" />
 
-        <div className="proof-eyebrow-row">
+        <Reveal className="proof-eyebrow-row">
           <div className="proof-stars">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg
@@ -78,13 +79,15 @@ export default function Home() {
             ))}
             <span className="proof-rating">4.9 · +1.200 atletas</span>
           </div>
-        </div>
+        </Reveal>
 
-        <h2 className="proof-headline">
-          Atletas que <em>compiten de verdad</em> confían en ATHX.
-        </h2>
+        <Reveal delay={0.1}>
+          <h2 className="proof-headline">
+            Atletas que <em>compiten de verdad</em> confían en ATHX.
+          </h2>
+        </Reveal>
 
-        <div className="proof-stats">
+        <Reveal className="proof-stats" delay={0.2}>
           {[
             { stat: "91%", label: "Completan el ciclo" },
             { stat: "88%", label: "Mejoran su PR" },
@@ -95,19 +98,19 @@ export default function Home() {
               <span className="proof-stat-label">{s.label}</span>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* Features — sticky stack */}
       <section id="programa" className="features-shell">
-        <div className="features-intro reveal">
+        <Reveal className="features-intro">
           <p className="features-intro-tag">El programa</p>
           <h2 className="features-intro-title">
             Tres pilares.
             <br />
             Cero relleno.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="features-stack">
           {[
@@ -155,58 +158,64 @@ export default function Home() {
       <section className="pricing-shell">
         <div className="pricing-bg" aria-hidden="true" />
 
-        <p className="pricing-eyebrow reveal">Precio simple</p>
-        <h2 className="pricing-headline reveal">
-          Un programa.
-          <br />
-          Un precio.
-        </h2>
+        <Reveal>
+          <p className="pricing-eyebrow">Precio simple</p>
+          <h2 className="pricing-headline">
+            Un programa.
+            <br />
+            Un precio.
+          </h2>
+        </Reveal>
 
-        <div className="pricing-card reveal">
-          <span className="pricing-badge">Popular</span>
+        <Reveal delay={0.15}>
+          <div className="pricing-card">
+            <span className="pricing-badge">Popular</span>
 
-          <p className="pricing-tag">Programa ATHX 2026</p>
+            <p className="pricing-tag">Programa ATHX 2026</p>
 
-          <div className="pricing-price-row">
-            <span className="pricing-price">9,99€</span>
-            <span className="pricing-price-unit">/mes</span>
+            <div className="pricing-price-row">
+              <span className="pricing-price">9,99€</span>
+              <span className="pricing-price-unit">/mes</span>
+            </div>
+            <p className="pricing-sub">Cancela cuando quieras.</p>
+
+            <div className="pricing-divider" />
+
+            <div>
+              {[
+                "Ciclo completo de 6 semanas",
+                "2 categorías: ATHX y ATHX PRO",
+                "Plan semanal de lunes a domingo",
+                "Warmup, fuerza y WOD por día",
+                "Primera semana gratis",
+              ].map((b) => (
+                <div key={b} className="pricing-feature">
+                  <span className="pricing-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <polyline points="5 12 10 17 19 8" />
+                    </svg>
+                  </span>
+                  <span className="pricing-feature-text">{b}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link href="/login" className="pricing-cta">
+              Empezar ahora
+            </Link>
+            <p className="pricing-fineprint">Sin tarjeta. Sin compromiso.</p>
           </div>
-          <p className="pricing-sub">Cancela cuando quieras.</p>
-
-          <div className="pricing-divider" />
-
-          <div>
-            {[
-              "Ciclo completo de 6 semanas",
-              "2 categorías: ATHX y ATHX PRO",
-              "Plan semanal de lunes a domingo",
-              "Warmup, fuerza y WOD por día",
-              "Primera semana gratis",
-            ].map((b) => (
-              <div key={b} className="pricing-feature">
-                <span className="pricing-check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="5 12 10 17 19 8" />
-                  </svg>
-                </span>
-                <span className="pricing-feature-text">{b}</span>
-              </div>
-            ))}
-          </div>
-
-          <Link href="/login" className="pricing-cta">
-            Empezar ahora
-          </Link>
-          <p className="pricing-fineprint">Sin tarjeta. Sin compromiso.</p>
-        </div>
+        </Reveal>
       </section>
 
       {/* Why choose */}
-      <section className="reveal px-6 py-20">
+      <section className="px-6 py-20">
         <div className="max-w-md mx-auto space-y-8">
-          <h2 className="text-3xl font-bold leading-tight text-center">
-            Por qué ATHX Coaching
-          </h2>
+          <Reveal>
+            <h2 className="text-3xl font-bold leading-tight text-center">
+              Por qué ATHX Coaching
+            </h2>
+          </Reveal>
           <ul className="space-y-5">
             {[
               "Estructura clara: nunca te preguntas qué tocaba hoy.",
@@ -214,22 +223,23 @@ export default function Home() {
               "Movimientos de competición desde la semana 1.",
               "Diseñado para móvil: planifica desde el box.",
               "Sin contratos. Suscripción mensual.",
-            ].map((why) => (
-              <li
-                key={why}
-                className="reveal flex items-start gap-3 border-l-2 border-accent/40 pl-4"
-              >
-                <span className="text-base leading-snug">{why}</span>
-              </li>
+            ].map((why, i) => (
+              <Reveal key={why} delay={i * 0.08} y={24}>
+                <li className="flex items-start gap-3 border-l-2 border-accent/40 pl-4">
+                  <span className="text-base leading-snug">{why}</span>
+                </li>
+              </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="reveal px-6 py-20">
+      <section className="px-6 py-20">
         <div className="max-w-md mx-auto space-y-6">
-          <h2 className="text-3xl font-bold text-center">FAQ</h2>
+          <Reveal>
+            <h2 className="text-3xl font-bold text-center">FAQ</h2>
+          </Reveal>
           <div className="space-y-3">
             {[
               {
@@ -252,29 +262,28 @@ export default function Home() {
                 q: "¿Cómo cancelo?",
                 a: "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
               },
-            ].map((item) => (
-              <details
-                key={item.q}
-                className="glass rounded-xl px-5 py-4 group"
-              >
-                <summary className="text-sm font-medium list-none flex items-center justify-between cursor-pointer">
-                  <span>{item.q}</span>
-                  <span className="text-accent transition-transform group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="text-muted text-sm mt-3 leading-relaxed">
-                  {item.a}
-                </p>
-              </details>
+            ].map((item, i) => (
+              <Reveal key={item.q} delay={i * 0.06} y={20}>
+                <details className="glass rounded-xl px-5 py-4 group">
+                  <summary className="text-sm font-medium list-none flex items-center justify-between cursor-pointer">
+                    <span>{item.q}</span>
+                    <span className="text-accent transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="text-muted text-sm mt-3 leading-relaxed">
+                    {item.a}
+                  </p>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Footer CTA */}
-      <section className="reveal px-6 py-20">
-        <div className="max-w-md mx-auto text-center space-y-6">
+      <section className="px-6 py-20">
+        <Reveal className="max-w-md mx-auto text-center space-y-6">
           <h2 className="text-4xl font-bold leading-tight">
             Tu próximo PR
             <br />
@@ -289,7 +298,7 @@ export default function Home() {
           <p className="text-muted text-xs">
             Primera semana gratis · Sin tarjeta
           </p>
-        </div>
+        </Reveal>
       </section>
     </div>
   );
