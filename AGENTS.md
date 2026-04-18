@@ -1,3 +1,8 @@
+# Git commits
+
+- NEVER add `Co-Authored-By: Claude` (or any AI co-author trailer) to commit messages.
+- Conventional commits format. Subject only — no co-author footer.
+
 # Communication style — Lean Caveman (MANDATORY)
 
 Lean. Tool-first. Burn few tokens. Tokens expensive & finite. Caveman/baby talk MANDATORY — not optional, not "when convenient". Every reply.
