@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ATHX Training — Entrena. Potencia. Compite.",
-  description: "Programa de entrenamiento de 6 semanas para preparar ATHX Games 2026. Diseñado por atletas, ejecutado por ti.",
+  title: "ATHX Coaching — Entrena. Potencia. Compite.",
+  description:
+    "Programa de entrenamiento de 6 semanas para preparar ATHX Games 2026. Diseñado por atletas, ejecutado por ti.",
 };
 
 export default function RootLayout({

@@ -6,16 +6,21 @@ export default function Home() {
       {/* Hero */}
       <section className="reveal min-h-[88vh] flex flex-col justify-center px-6 pt-12 pb-16">
         <div className="max-w-md mx-auto w-full space-y-8 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-accent">ATHX Training</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-accent">
+            ATHX Training
+          </p>
           <h1 className="text-5xl font-bold tracking-tight leading-[1.05]">
-            Entrena.<br />Potencia.<br />
+            Entrena.
+            <br />
+            Potencia.
+            <br />
             <span className="bg-gradient-to-r from-[var(--accent-orange)] to-[var(--accent-purple)] bg-clip-text text-transparent">
               Compite.
             </span>
           </h1>
           <p className="text-muted text-base leading-relaxed">
-            Programa de 6 semanas diseñado para llevarte al pico de forma
-            justo en ATHX Games 2026.
+            Programa de 6 semanas diseñado para llevarte al pico de forma justo
+            en ATHX Games 2026.
           </p>
           <div className="flex flex-col gap-3 pt-2">
             <Link
@@ -66,24 +71,23 @@ export default function Home() {
           {
             tag: "ATHX Specific",
             title: "Pensado para ATHX Games",
-            body:
-              "Cada sesion está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
+            body: "Cada sesion está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
           },
           {
             tag: "Diseñado por atletas",
             title: "Metodología profesional",
-            body:
-              "Periodización en 4 fases: BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM.",
+            body: "Periodización en 4 fases: BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM.",
           },
           {
             tag: "Preparación competición",
             title: "Llegas afilado al día clave",
-            body:
-              "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
+            body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
           },
         ].map((f) => (
           <div key={f.tag} className="reveal max-w-md mx-auto space-y-3">
-            <p className="text-xs uppercase tracking-[0.18em] text-accent">{f.tag}</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-accent">
+              {f.tag}
+            </p>
             <h2 className="text-3xl font-bold leading-tight">{f.title}</h2>
             <p className="text-muted text-base leading-relaxed">{f.body}</p>
           </div>
@@ -134,7 +138,7 @@ export default function Home() {
       <section className="reveal px-6 py-20">
         <div className="max-w-md mx-auto space-y-8">
           <h2 className="text-3xl font-bold leading-tight text-center">
-            Por qué ATHX Training
+            Por qué ATHX Coaching
           </h2>
           <ul className="space-y-5">
             {[
@@ -192,7 +196,9 @@ export default function Home() {
                     +
                   </span>
                 </summary>
-                <p className="text-muted text-sm mt-3 leading-relaxed">{item.a}</p>
+                <p className="text-muted text-sm mt-3 leading-relaxed">
+                  {item.a}
+                </p>
               </details>
             ))}
           </div>
@@ -203,7 +209,9 @@ export default function Home() {
       <section className="reveal px-6 py-20">
         <div className="max-w-md mx-auto text-center space-y-6">
           <h2 className="text-4xl font-bold leading-tight">
-            Tu próximo PR<br />empieza el lunes.
+            Tu próximo PR
+            <br />
+            empieza el lunes.
           </h2>
           <Link
             href="/login"
@@ -211,7 +219,9 @@ export default function Home() {
           >
             Empezar ahora
           </Link>
-          <p className="text-muted text-xs">Primera semana gratis · Sin tarjeta</p>
+          <p className="text-muted text-xs">
+            Primera semana gratis · Sin tarjeta
+          </p>
         </div>
       </section>
     </div>
