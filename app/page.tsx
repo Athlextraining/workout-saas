@@ -4,113 +4,178 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="reveal min-h-[88vh] flex flex-col justify-center px-6 pt-12 pb-16">
-        <div className="max-w-md mx-auto w-full space-y-8 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-accent">
-            ATHX Training
-          </p>
-          <h1 className="text-5xl font-bold tracking-tight leading-[1.05]">
-            Entrena.
-            <br />
-            Potencia.
-            <br />
-            <span className="bg-gradient-to-r from-[var(--accent-orange)] to-[var(--accent-purple)] bg-clip-text text-transparent">
-              Compite.
-            </span>
-          </h1>
-          <p className="text-muted text-base leading-relaxed">
-            Programa de 6 semanas diseñado para llevarte al pico de forma justo
-            en ATHX Games 2026.
-          </p>
-          <div className="flex flex-col gap-3 pt-2">
-            <Link
-              href="/login"
-              className="w-full py-3.5 rounded-xl text-base font-semibold text-center btn-gradient"
-            >
-              Comienza tu entrenamiento
-            </Link>
-            <Link
-              href="#programa"
-              className="w-full py-3 text-sm text-muted hover:text-white transition-colors"
-            >
-              Ver programa ↓
-            </Link>
-          </div>
+      <section className="hero-shell">
+        <div className="hero-bg" aria-hidden="true">
+          <div className="hero-grid" />
+          <div className="hero-orb hero-orb-1" />
+          <div className="hero-orb hero-orb-2 " />
+          <div className="hero-grain" />
+          <div className="hero-fade" />
         </div>
+
+        <div className="hero-content">
+          <span className="hero-eyebrow">
+            <span className="hero-dot" />
+            ATHX Coaching
+          </span>
+
+          <h1 className="hero-title">
+            ENTRENA
+            <br />
+            MEJORA
+            <br />
+            <span className="hero-title-accent font-extrabold">COMPITE.</span>
+          </h1>
+
+          <p className="hero-sub">
+            Programa de 6 semanas para llegar al pico justo en{" "}
+            <strong>ATHX Games 2026</strong>.
+          </p>
+
+          <Link href="/login" className="hero-cta-primary">
+            COMIENZA AHORA
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 12h14M13 5l7 7-7 7"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
+
+        <a href="#programa" className="hero-scroll-cue">
+          <span>Programa</span>
+          <span className="hero-scroll-arrow" aria-hidden="true">
+            ↓
+          </span>
+        </a>
       </section>
 
       {/* Social proof */}
-      <section className="reveal px-6 py-20">
-        <div className="max-w-md mx-auto space-y-10 text-center">
-          <div className="space-y-2">
-            <div className="text-accent text-lg">★★★★★</div>
-            <p className="text-xs uppercase tracking-wider text-muted">
-              Atletas confían en ATHX
-            </p>
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[
-              { stat: "91%", label: "Completan el ciclo" },
-              { stat: "88%", label: "Mejoran su PR" },
-              { stat: "83%", label: "Repiten el plan" },
-            ].map((s) => (
-              <div key={s.stat} className="space-y-1">
-                <p className="text-2xl font-bold">{s.stat}</p>
-                <p className="text-[10px] uppercase tracking-wider text-muted leading-tight">
-                  {s.label}
-                </p>
-              </div>
+      <section className="proof-shell">
+        <div className="proof-bg" aria-hidden="true" />
+
+        <div className="proof-eyebrow-row">
+          <div className="proof-stars">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg
+                key={i}
+                className="proof-star"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M12 2l2.9 7h7.1l-5.7 4.3 2.2 7-6.5-4.7L5.5 20.3l2.2-7L2 9h7.1z" />
+              </svg>
             ))}
+            <span className="proof-rating">4.9 · +1.200 atletas</span>
           </div>
+        </div>
+
+        <h2 className="proof-headline">
+          Atletas que <em>compiten de verdad</em> confían en ATHX.
+        </h2>
+
+        <div className="proof-stats">
+          {[
+            { stat: "91%", label: "Completan el ciclo" },
+            { stat: "88%", label: "Mejoran su PR" },
+            { stat: "83%", label: "Repiten el plan" },
+          ].map((s) => (
+            <div key={s.stat} className="proof-stat">
+              <span className="proof-stat-num">{s.stat}</span>
+              <span className="proof-stat-label">{s.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Features */}
-      <section id="programa" className="px-6 py-20 space-y-20">
-        {[
-          {
-            tag: "ATHX Specific",
-            title: "Pensado para ATHX Games",
-            body: "Cada sesion está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
-          },
-          {
-            tag: "Diseñado por atletas",
-            title: "Metodología profesional",
-            body: "Periodización en 4 fases: BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM.",
-          },
-          {
-            tag: "Preparación competición",
-            title: "Llegas afilado al día clave",
-            body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
-          },
-        ].map((f) => (
-          <div key={f.tag} className="reveal max-w-md mx-auto space-y-3">
-            <p className="text-xs uppercase tracking-[0.18em] text-accent">
-              {f.tag}
-            </p>
-            <h2 className="text-3xl font-bold leading-tight">{f.title}</h2>
-            <p className="text-muted text-base leading-relaxed">{f.body}</p>
-          </div>
-        ))}
+      {/* Features — sticky stack */}
+      <section id="programa" className="features-shell">
+        <div className="features-intro reveal">
+          <p className="features-intro-tag">El programa</p>
+          <h2 className="features-intro-title">
+            Tres pilares.
+            <br />
+            Cero relleno.
+          </h2>
+        </div>
+
+        <div className="features-stack">
+          {[
+            {
+              num: "01",
+              tag: "ATHX Specific",
+              title: "Pensado para ATHX Games",
+              body: "Cada sesión está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
+              icon: "◎",
+              cardClass: "feature-card-1",
+            },
+            {
+              num: "02",
+              tag: "Metodología pro",
+              title: "Periodización en 4 fases",
+              body: "BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM. La ciencia hace el trabajo.",
+              icon: "△",
+              cardClass: "feature-card-2",
+            },
+            {
+              num: "03",
+              tag: "Día clave",
+              title: "Llegas afilado al pico",
+              body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
+              icon: "✦",
+              cardClass: "feature-card-3",
+            },
+          ].map((f) => (
+            <article key={f.num} className={`feature-card ${f.cardClass}`}>
+              <div>
+                <div className="feature-num">{f.num} / 03</div>
+                <span className="feature-tag">{f.tag}</span>
+                <h3 className="feature-title">{f.title}</h3>
+                <p className="feature-body">{f.body}</p>
+              </div>
+              <div className="feature-icon" aria-hidden="true">
+                {f.icon}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       {/* Pricing */}
-      <section className="reveal px-6 py-20">
-        <div className="max-w-md mx-auto glass rounded-3xl p-8 space-y-6">
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-wider text-accent">
-              Programa ATHX 2026
-            </p>
-            <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-bold">9,99€</span>
-              <span className="text-muted text-sm">/mes</span>
-            </div>
-            <p className="text-muted text-sm">Cancela cuando quieras.</p>
+      <section className="pricing-shell">
+        <div className="pricing-bg" aria-hidden="true" />
+
+        <p className="pricing-eyebrow reveal">Precio simple</p>
+        <h2 className="pricing-headline reveal">
+          Un programa.
+          <br />
+          Un precio.
+        </h2>
+
+        <div className="pricing-card reveal">
+          <span className="pricing-badge">Popular</span>
+
+          <p className="pricing-tag">Programa ATHX 2026</p>
+
+          <div className="pricing-price-row">
+            <span className="pricing-price">9,99€</span>
+            <span className="pricing-price-unit">/mes</span>
           </div>
+          <p className="pricing-sub">Cancela cuando quieras.</p>
 
-          <div className="border-t border-white/10" />
+          <div className="pricing-divider" />
 
-          <div className="space-y-3">
+          <div>
             {[
               "Ciclo completo de 6 semanas",
               "2 categorías: ATHX y ATHX PRO",
@@ -118,19 +183,21 @@ export default function Home() {
               "Warmup, fuerza y WOD por día",
               "Primera semana gratis",
             ].map((b) => (
-              <div key={b} className="flex items-start gap-3">
-                <span className="text-accent text-sm mt-0.5">✓</span>
-                <span className="text-sm">{b}</span>
+              <div key={b} className="pricing-feature">
+                <span className="pricing-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="5 12 10 17 19 8" />
+                  </svg>
+                </span>
+                <span className="pricing-feature-text">{b}</span>
               </div>
             ))}
           </div>
 
-          <Link
-            href="/login"
-            className="block w-full py-3.5 rounded-xl text-base font-semibold text-center btn-gradient"
-          >
+          <Link href="/login" className="pricing-cta">
             Empezar ahora
           </Link>
+          <p className="pricing-fineprint">Sin tarjeta. Sin compromiso.</p>
         </div>
       </section>
 
