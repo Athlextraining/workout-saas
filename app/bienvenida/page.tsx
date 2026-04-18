@@ -5,8 +5,8 @@ import { useState, useTransition, ViewTransition } from 'react'
 const STEPS = [
   {
     icon: '🧠',
-    title: 'Metodologia inteligente',
-    description: 'Cada semana se genera un plan basado en principios de periodizacion y progresion. No es aleatorio — hay ciencia detras.',
+    title: 'Metodologia profesional',
+    description: 'Cada semana sigue principios de periodizacion y progresion. No es aleatorio — hay ciencia detras.',
   },
   {
     icon: '⏱',
@@ -21,7 +21,7 @@ const STEPS = [
   {
     icon: '🚀',
     title: 'Todo listo',
-    description: 'Tu primer plan semanal te esta esperando. Cada lunes tendras uno nuevo, generado con IA.',
+    description: 'Tu primer plan semanal te esta esperando. Cada lunes desbloqueas la siguiente semana del ciclo.',
   },
 ]
 

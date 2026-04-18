@@ -295,8 +295,8 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
         <div className="text-6xl mb-6">💪</div>
         <h1 className="text-3xl font-bold">Bienvenido a Workout</h1>
         <p className="text-muted text-base">
-          Entrenamientos semanales generados con IA,
-          basados en metodologia profesional
+          Programa de 6 semanas para preparar
+          ATHX Games 2026
         </p>
       </div>
       <button
@@ -744,8 +744,8 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
       <div className="glass rounded-xl p-5 space-y-4">
         {[
           'Plan semanal completo (lunes a domingo)',
-          'Generado con IA cada semana',
-          'Metodologia profesional',
+          'Ciclo de 6 semanas: BASE, BUILD, PEAK, DELOAD',
+          'Metodologia ATHX Games 2026',
           'Cancela cuando quieras',
         ].map((item) => (
           <div key={item} className="flex items-center gap-3">
