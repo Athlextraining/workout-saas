@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { signOut } from '@/modules/identity/application/sign-out'
 import { getActiveSubscription } from '@/modules/billing/infra/subscription-repository'
 import { PortalButton } from './portal-button'
+import { SignOutButton } from './sign-out-button'
 
 export default async function PerfilPage() {
   const user = await getCurrentUser()
@@ -48,12 +49,7 @@ export default async function PerfilPage() {
         {subscription && <PortalButton />}
 
         <form action={signOut}>
-          <button
-            type="submit"
-            className="w-full py-3 rounded-xl text-red-400 glass hover:bg-white/10 transition-colors"
-          >
-            Cerrar sesion
-          </button>
+          <SignOutButton />
         </form>
       </div>
     </div>

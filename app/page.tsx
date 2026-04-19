@@ -119,7 +119,13 @@ export default function Home() {
               tag: "ATHX Specific",
               title: "Pensado para ATHX Games",
               body: "Cada sesión está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
-              icon: "◎",
+              icon: (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 18h6" />
+                  <path d="M10 21h4" />
+                  <path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1.2 1.5 1.2 2.5h5.6c0-1 .4-1.7 1.2-2.5A6 6 0 0 0 12 3z" />
+                </svg>
+              ),
               cardClass: "feature-card-1",
             },
             {
@@ -127,7 +133,15 @@ export default function Home() {
               tag: "Metodología pro",
               title: "Periodización en 4 fases",
               body: "BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM. La ciencia hace el trabajo.",
-              icon: "△",
+              icon: (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 21h18" />
+                  <path d="M3 17h4v4" />
+                  <path d="M8 13h4v8" />
+                  <path d="M13 9h4v12" />
+                  <path d="M18 4h3v17" />
+                </svg>
+              ),
               cardClass: "feature-card-2",
             },
             {
@@ -135,7 +149,19 @@ export default function Home() {
               tag: "Día clave",
               title: "Llegas afilado al pico",
               body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
-              icon: "✦",
+              icon: (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="5" />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="1.5"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              ),
               cardClass: "feature-card-3",
             },
           ].map((f) => (
@@ -174,7 +200,10 @@ export default function Home() {
             <p className="pricing-tag">Programa ATHX 2026</p>
 
             <div className="pricing-price-row">
-              <span className="pricing-price">9,99€</span>
+              <span className="pricing-price">
+                18
+                <sup className="text-sm align-super">,90</sup>€
+              </span>
               <span className="pricing-price-unit">/mes</span>
             </div>
             <p className="pricing-sub">Cancela cuando quieras.</p>

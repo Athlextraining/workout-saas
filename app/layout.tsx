@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import { Navbar } from "./navbar";
 import { NavbarSkeleton } from "./navbar-skeleton";
+import { NavProgress } from "./nav-progress";
 
 const league_spartan = League_Spartan({
   variable: "--font-league-spartan",
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${league_spartan.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <NavProgress />
         <Suspense fallback={<NavbarSkeleton />}>
           <Navbar />
         </Suspense>

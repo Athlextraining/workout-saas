@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
 import { getCurrentWeekWorkout } from "@/modules/training/application/get-current-week-workout";
 import { isFreeWeek as isFreeCycleWeek } from "@/modules/training/domain/cycle";
+import { Reveal } from "../reveal";
 import { SubscribeButton } from "./subscribe-button";
 
 export default async function EntrenamientoPage() {
@@ -10,29 +12,63 @@ export default async function EntrenamientoPage() {
   // Not registered: CTA to sign up
   if (!user) {
     return (
-      <div className="max-w-lg mx-auto py-12 px-4">
-        <div className="glass rounded-xl p-8 text-center space-y-6">
-          <div className="text-5xl">💪</div>
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold">
-              Tu plan personalizado te espera
-            </h1>
-            <p className="text-muted text-sm">
-              Registrate para acceder a un ciclo de 6 semanas adaptado a tu
-              nivel y categoria.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <a
-              href="/login"
-              className="block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
-            >
-              Empezar ahora
-            </a>
-            <p className="text-muted text-xs">Primera semana gratis</p>
-          </div>
+      <section className="train-cta-shell">
+        <div className="train-cta-bg" aria-hidden="true">
+          <div className="train-cta-image" />
+          <div className="train-cta-vignette" />
+          <div className="train-cta-grain" />
+          <div className="train-cta-fade" />
         </div>
-      </div>
+
+        <div className="train-cta-content">
+          <span className="hero-eyebrow">
+            <span className="hero-dot" />
+            Acceso exclusivo
+          </span>
+
+          <Reveal delay={0.1}>
+            <h1 className="train-cta-title">
+              TU PLAN
+              <br />
+              <span className="train-cta-title-accent font-extrabold">
+                TE ESPERA.
+              </span>
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <p className="train-cta-sub">
+              Ciclo de <strong>6 semanas</strong> adaptado a tu categoria.
+              Regístrate y empieza el lunes.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.3} className="w-full">
+            <Link href="/login" className="hero-cta-primary">
+              COMIENZA AHORA
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12h14M13 5l7 7-7 7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </Reveal>
+
+          <Reveal delay={0.4}>
+            <p className="train-cta-fineprint">Primera semana gratis</p>
+          </Reveal>
+        </div>
+      </section>
     );
   }
 

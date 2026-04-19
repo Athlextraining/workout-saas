@@ -1,14 +1,30 @@
 'use client'
 
-import { useState, useRef, useTransition, ViewTransition } from 'react'
+import { useState, useRef, useEffect, useTransition, ViewTransition } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { saveBasicInfo } from '@/modules/onboarding/application/save-basic-info'
 import { saveCategory } from '@/modules/onboarding/application/save-category'
 import { saveFitnessData } from '@/modules/onboarding/application/save-fitness-data'
 import { completeOnboarding } from '@/modules/onboarding/application/complete-onboarding'
 import { updateAvatar } from '@/modules/identity/application/update-avatar'
 import { createSupabaseBrowserClient } from '@/shared/infra/supabase/client'
+import { Reveal } from '../reveal'
 
-const TOTAL_STEPS = 10
+const STEP_BACKGROUNDS: Record<number, string> = {
+  1: '/nombrebackground.webp',
+  2: '/edadbackground.webp',
+  3: '/pesobackground.webp',
+}
+
+type RMField = 'strictPress' | 'backSquat' | 'deadlift'
+
+const RM_BACKGROUNDS: Record<RMField, string> = {
+  strictPress: '/strictpressbackground.webp',
+  backSquat: '/backsquatbackground.webp',
+  deadlift: '/deadliftbackground.webp',
+}
+
+const TOTAL_STEPS = 9
 
 function ProgressDots({ current, total }: { current: number; total: number }) {
   return (
@@ -35,6 +51,23 @@ export default function OnboardingPage() {
   const [, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [activeRMField, setActiveRMField] = useState<RMField | null>(null)
+
+  // Preload upcoming images so the crossfade has them in cache.
+  useEffect(() => {
+    const next = STEP_BACKGROUNDS[step + 1]
+    if (next) {
+      const img = new Image()
+      img.src = next
+    }
+    if (step === 5) {
+      // Entering step 6 next: warm all 3 movement images.
+      Object.values(RM_BACKGROUNDS).forEach((src) => {
+        const img = new Image()
+        img.src = src
+      })
+    }
+  }, [step])
 
   const [data, setData] = useState({
     fullName: '',
@@ -45,12 +78,12 @@ export default function OnboardingPage() {
     rmStrictPress: '',
     rmBackSquat: '',
     rmDeadlift: '',
-    run5kMinutes: '',
   })
 
   function goNext() {
     setError(null)
     setDirection('forward')
+    setActiveRMField(null)
     startTransition(() => {
       setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1))
     })
@@ -59,6 +92,7 @@ export default function OnboardingPage() {
   function goBack() {
     setError(null)
     setDirection('back')
+    setActiveRMField(null)
     startTransition(() => {
       setStep((s) => Math.max(s - 1, 0))
     })
@@ -110,7 +144,6 @@ export default function OnboardingPage() {
     formData.set('rmStrictPress', data.rmStrictPress)
     formData.set('rmBackSquat', data.rmBackSquat)
     formData.set('rmDeadlift', data.rmDeadlift)
-    formData.set('run5kMinutes', data.run5kMinutes)
 
     const result = await saveFitnessData(formData)
     if (result?.error) {
@@ -150,9 +183,138 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="fixed inset-0 flex flex-col" style={{ background: 'linear-gradient(180deg, #0A0A0A 0%, #1A1A2E 100%)' }}>
+    <div className="fixed inset-0 flex flex-col bg-[var(--bg-primary)] overflow-hidden">
+      {/* Cinematic background per step */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <AnimatePresence>
+          {STEP_BACKGROUNDS[step] && (
+            <motion.div
+              key={step}
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url(${STEP_BACKGROUNDS[step]})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'contrast(1.1) brightness(0.45) saturate(0.85)',
+              }}
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1.14 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                scale: { duration: 8, ease: 'linear' },
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {step === 4 && (
+            <motion.div
+              key="sex-bg"
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="absolute inset-0 hero-grid" />
+              <motion.div
+                className="absolute inset-0 onboarding-glow-blue"
+                animate={{ opacity: data.sex === 'male' ? 1 : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute inset-0 onboarding-glow-pink"
+                animate={{ opacity: data.sex === 'female' ? 1 : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {step === 6 && (
+            <motion.div
+              key="rm-bg"
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="absolute inset-0 hero-grid" />
+              <AnimatePresence>
+                {activeRMField && (
+                  <motion.div
+                    key={activeRMField}
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage: `url(${RM_BACKGROUNDS[activeRMField]})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      filter: 'contrast(1.1) brightness(0.4) saturate(0.85)',
+                    }}
+                    initial={{ opacity: 0, scale: 1.06 }}
+                    animate={{ opacity: 1, scale: 1.12 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      opacity: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                      scale: { duration: 8, ease: 'linear' },
+                    }}
+                  />
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {step === 7 && (
+            <motion.div
+              key="avatar-bg"
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="absolute inset-0 hero-grid" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {step === 5 && (
+            <motion.div
+              key="category-bg"
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="absolute inset-0 hero-grid" />
+              <motion.div
+                className="absolute inset-0 onboarding-glow-green"
+                animate={{ opacity: data.category === 'athx' ? 1 : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute inset-0 onboarding-glow-amber"
+                animate={{ opacity: data.category === 'athx_pro' ? 1 : 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="absolute inset-0 onboarding-vignette" />
+        <div className="absolute inset-0 onboarding-fade" />
+      </div>
+
       {/* Header */}
-      <div className="px-4 pt-safe-top" style={{ viewTransitionName: 'onboarding-header' }}>
+      <div className="px-4 pt-safe-top relative z-10" style={{ viewTransitionName: 'onboarding-header' }}>
         <div className="flex items-center justify-between h-14">
           {step > 0 && step < TOTAL_STEPS - 1 ? (
             <button onClick={goBack} className="text-sm text-muted">
@@ -171,7 +333,7 @@ export default function OnboardingPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex items-center justify-center px-6">
+      <div className="flex-1 flex items-center justify-center px-6 relative z-10">
         <ViewTransition
           key={step}
           enter={direction === 'forward' ? 'slide-forward' : 'slide-back'}
@@ -257,26 +419,19 @@ export default function OnboardingPage() {
                   }
                   updateField(map[field], v)
                 }}
-                onNext={goNext}
-                onSkip={goNext}
-              />
-            )}
-            {step === 7 && (
-              <StepRun5K
-                value={data.run5kMinutes}
-                onChange={(v) => updateField('run5kMinutes', v)}
+                onFieldFocus={setActiveRMField}
                 onNext={handleSaveFitness}
-                onSkip={() => { handleSaveFitness() }}
+                onSkip={handleSaveFitness}
                 loading={loading}
               />
             )}
-            {step === 8 && (
+            {step === 7 && (
               <StepAvatar
                 onNext={goNext}
                 onSkip={goNext}
               />
             )}
-            {step === 9 && (
+            {step === 8 && (
               <StepPayment
                 onSubscribe={handleSubscribe}
               />
@@ -290,21 +445,47 @@ export default function OnboardingPage() {
 
 function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
-    <div className="text-center space-y-8">
-      <div className="space-y-2">
-        <div className="text-6xl mb-6">💪</div>
-        <h1 className="text-3xl font-bold">Bienvenido a Workout</h1>
-        <p className="text-muted text-base">
-          Programa de 6 semanas para preparar
-          ATHX Games 2026
+    <div className="flex flex-col items-center text-center gap-7">
+      <span className="hero-eyebrow">
+        <span className="hero-dot" />
+        ATHX Coaching
+      </span>
+
+      <Reveal delay={0.05}>
+        <h1 className="onboarding-welcome-title">
+          BIENVENIDO
+          <br />
+          <span className="hero-title-accent font-extrabold">AL CICLO.</span>
+        </h1>
+      </Reveal>
+
+      <Reveal delay={0.15}>
+        <p className="hero-sub">
+          6 semanas para llegar afilado a{' '}
+          <strong>ATHX Games 2026</strong>.
         </p>
-      </div>
-      <button
-        onClick={onNext}
-        className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
-      >
-        Empezar
-      </button>
+      </Reveal>
+
+      <Reveal delay={0.25} className="w-full">
+        <button onClick={onNext} className="hero-cta-primary">
+          EMPEZAR
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h14M13 5l7 7-7 7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </Reveal>
     </div>
   )
 }
@@ -392,7 +573,6 @@ function StepSex({
   const options = [
     { value: 'male', label: 'Hombre' },
     { value: 'female', label: 'Mujer' },
-    { value: 'other', label: 'Otro' },
   ]
 
   return (
@@ -495,15 +675,19 @@ function StepCategory({
 function StepRM({
   values,
   onChange,
+  onFieldFocus,
   onNext,
   onSkip,
+  loading,
 }: {
   values: { strictPress: string; backSquat: string; deadlift: string }
   onChange: (field: string, v: string) => void
+  onFieldFocus: (field: RMField) => void
   onNext: () => void
   onSkip: () => void
+  loading: boolean
 }) {
-  const fields = [
+  const fields: { key: RMField; label: string }[] = [
     { key: 'strictPress', label: 'Strict Press' },
     { key: 'backSquat', label: 'Back Squat' },
     { key: 'deadlift', label: 'Deadlift' },
@@ -526,8 +710,9 @@ function StepRM({
               <input
                 type="number"
                 placeholder="0"
-                value={values[f.key as keyof typeof values]}
+                value={values[f.key]}
                 onChange={(e) => onChange(f.key, e.target.value)}
+                onFocus={() => onFieldFocus(f.key)}
                 min={0}
                 max={500}
                 autoComplete="off"
@@ -542,61 +727,7 @@ function StepRM({
       <div className="space-y-3">
         <button
           onClick={onNext}
-          disabled={!hasAny}
-          className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
-        >
-          Siguiente
-        </button>
-        <button
-          onClick={onSkip}
-          className="w-full py-3 text-sm text-muted hover:text-white transition-colors"
-        >
-          Omitir
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function StepRun5K({
-  value,
-  onChange,
-  onNext,
-  onSkip,
-  loading,
-}: {
-  value: string
-  onChange: (v: string) => void
-  onNext: () => void
-  onSkip: () => void
-  loading: boolean
-}) {
-  return (
-    <div className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tu tiempo en 5K</h2>
-        <p className="text-muted text-sm">Opcional — para calibrar el cardio</p>
-      </div>
-
-      <div className="relative">
-        <input
-          type="number"
-          placeholder="25"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && value && onNext()}
-          min={10}
-          max={60}
-          autoComplete="off"
-          className="w-full px-4 py-3.5 rounded-xl text-base input-glass"
-        />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted text-sm">min</span>
-      </div>
-
-      <div className="space-y-3">
-        <button
-          onClick={onNext}
-          disabled={loading || !value}
+          disabled={!hasAny || loading}
           className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
         >
           {loading ? 'Guardando...' : 'Siguiente'}

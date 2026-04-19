@@ -1,20 +1,35 @@
 'use client'
 
+import { useState } from 'react'
+import { Spinner } from '../spinner'
+
 export function PortalButton() {
+  const [loading, setLoading] = useState(false)
+
   async function handlePortal() {
-    const res = await fetch('/api/stripe/portal', { method: 'POST' })
-    const { url } = await res.json()
-    if (url) {
-      window.location.href = url
+    if (loading) return
+    setLoading(true)
+    try {
+      const res = await fetch('/api/stripe/portal', { method: 'POST' })
+      const { url } = await res.json()
+      if (url) {
+        window.location.href = url
+        return
+      }
+    } catch (err) {
+      console.error('Portal error:', err)
     }
+    setLoading(false)
   }
 
   return (
     <button
       onClick={handlePortal}
-      className="w-full py-3 rounded-xl glass hover:bg-white/10 transition-colors"
+      disabled={loading}
+      className="w-full py-3 rounded-xl glass hover:bg-white/10 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
     >
-      Gestionar suscripcion
+      {loading && <Spinner size={18} />}
+      {loading ? 'Abriendo portal...' : 'Gestionar suscripcion'}
     </button>
   )
 }
