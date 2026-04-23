@@ -1,45 +1,58 @@
-import Link from 'next/link'
-import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
+import Link from "next/link";
+import { createSupabaseServerClient } from "@/shared/infra/supabase/server";
+import { NavMenu } from "./components/nav-menu";
+import { AdminBell } from "./components/admin-bell";
+import { BrandMark } from "./components/brand-mark";
 
 export async function Navbar() {
-  const supabase = await createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let isAdmin = false;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .maybeSingle();
+    isAdmin = Boolean(profile?.is_admin);
+  }
 
   return (
     <nav className="px-4 py-3 flex items-center justify-between border-b border-white/10">
       <div className="flex items-center gap-6">
-        <Link href="/" className="font-bold text-lg text-white">
-          Workout
+        <Link href="/" className="text-white" aria-label="ATHLEX training">
+          <BrandMark className="h-8 w-auto" />
         </Link>
-        <Link href="/entrenamiento" className="text-sm text-muted hover:text-white transition-colors">
-          Entrenamiento
+        <Link
+          href="/entrenamiento"
+          className="text-sm text-muted hover:text-white transition-colors"
+        >
+          Programación
         </Link>
       </div>
 
       <div className="flex items-center gap-4">
         {user ? (
-          <Link href="/perfil" className="block w-8 h-8 rounded-full overflow-hidden glass">
-            {user.user_metadata?.avatar_url ? (
-              <img
-                src={user.user_metadata.avatar_url}
-                alt="Avatar"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-muted text-sm font-medium">
-                {(user.email?.[0] || '?').toUpperCase()}
-              </div>
-            )}
-          </Link>
+          <>
+            {isAdmin && <AdminBell />}
+            <NavMenu
+              avatarUrl={user.user_metadata?.avatar_url ?? null}
+              emailInitial={user.email?.[0] ?? "?"}
+              isAdmin={isAdmin}
+            />
+          </>
         ) : (
           <Link
             href="/login"
-            className="text-sm px-4 py-1.5 rounded-lg btn-gradient"
+            className="text-sm px-4 py-2.5 rounded-lg btn-gradient"
           >
             Entrar
           </Link>
         )}
       </div>
     </nav>
-  )
+  );
 }

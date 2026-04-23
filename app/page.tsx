@@ -17,7 +17,7 @@ export default function Home() {
         <div className="hero-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            ATHX Coaching
+            ATHX™ Traning by ATHLEX
           </span>
 
           <h1 className="hero-title">
@@ -29,8 +29,9 @@ export default function Home() {
           </h1>
 
           <p className="hero-sub">
-            Programa de 6 semanas para llegar al pico justo en{" "}
-            <strong>ATHX Games 2026</strong>.
+            Programa de entrenamiento y seguimiento para competir al máximo
+            nivel en
+            <strong> ATHX</strong>.
           </p>
 
           <Link href="/login" className="hero-cta-primary">
@@ -51,6 +52,7 @@ export default function Home() {
               />
             </svg>
           </Link>
+          <p className="hero-cta-fineprint">Primera semana gratis</p>
         </div>
 
         <a href="#programa" className="hero-scroll-cue">
@@ -61,43 +63,108 @@ export default function Home() {
         </a>
       </section>
 
-      {/* Social proof */}
-      <section className="proof-shell">
-        <div className="proof-bg" aria-hidden="true" />
+      {/* Tools — phone mockups */}
+      <section className="tools-shell">
+        <Reveal className="tools-intro">
+          <p className="tools-intro-tag">Herramientas</p>
+          <h2 className="tools-intro-title">
+            Todo lo que necesitas.
+            <br />
+            <em className="tools-intro-em">En tu bolsillo.</em>
+          </h2>
+        </Reveal>
 
-        <Reveal className="proof-eyebrow-row">
-          <div className="proof-stars">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <svg
-                key={i}
-                className="proof-star"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M12 2l2.9 7h7.1l-5.7 4.3 2.2 7-6.5-4.7L5.5 20.3l2.2-7L2 9h7.1z" />
-              </svg>
-            ))}
-            <span className="proof-rating">4.9 · +1.200 atletas</span>
+        <Reveal delay={0.1}>
+          <div className="tool-row">
+            <div className="tool-copy">
+              <span className="tool-tag">Chat directo</span>
+              <h3 className="tool-title">Tu coach a un mensaje</h3>
+              <p className="tool-body">
+                Dudas de técnica, escalas, dolores — pregunta sin límites y
+                recibe respuesta del equipo ATHLEX en el día.
+              </p>
+            </div>
+            <div className="phone-frame" aria-hidden="true">
+              <div className="phone-notch" />
+              <div className="phone-screen phone-screen--chat">
+                <div className="phone-chat-head">
+                  <div className="phone-chat-avatar">A</div>
+                  <div>
+                    <p className="phone-chat-name">ATHLEX</p>
+                    <p className="phone-chat-status">en línea</p>
+                  </div>
+                </div>
+                <div className="phone-chat-body">
+                  <div className="phone-bubble phone-bubble--theirs">
+                    ¿Cómo fue el Back Squat hoy?
+                  </div>
+                  <div className="phone-bubble phone-bubble--mine">
+                    5×5 a 110 kg, RPE 7. Me sobró uno.
+                  </div>
+                  <div className="phone-bubble phone-bubble--theirs">
+                    Perfecto. Mañana subimos a 115. 🔥
+                  </div>
+                  <div className="phone-bubble phone-bubble--mine">
+                    Vamos!
+                  </div>
+                </div>
+                <div className="phone-chat-input">
+                  <span>Escribe un mensaje…</span>
+                  <span className="phone-send">→</span>
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h2 className="proof-headline">
-            Atletas que <em>compiten de verdad</em> confían en ATHX.
-          </h2>
-        </Reveal>
-
-        <Reveal className="proof-stats" delay={0.2}>
-          {[
-            { stat: "91%", label: "Completan el ciclo" },
-            { stat: "88%", label: "Mejoran su PR" },
-            { stat: "83%", label: "Repiten el plan" },
-          ].map((s) => (
-            <div key={s.stat} className="proof-stat">
-              <span className="proof-stat-num">{s.stat}</span>
-              <span className="proof-stat-label">{s.label}</span>
+          <div className="tool-row tool-row--reverse">
+            <div className="tool-copy">
+              <span className="tool-tag">Cronómetro integrado</span>
+              <h3 className="tool-title">AMRAP, EMOM, For Time</h3>
+              <p className="tool-body">
+                Modos de competición listos en 2 toques. Beeps por round,
+                pantalla siempre despierta y control con una mano.
+              </p>
             </div>
-          ))}
+            <div className="phone-frame" aria-hidden="true">
+              <div className="phone-notch" />
+              <div className="phone-screen phone-screen--timer">
+                <p className="phone-timer-mode">FOR TIME</p>
+                <div className="phone-timer-ring">
+                  <svg viewBox="0 0 120 120">
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="54"
+                      stroke="rgba(255,255,255,0.08)"
+                      strokeWidth="6"
+                      fill="none"
+                    />
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="54"
+                      stroke="var(--accent-green)"
+                      strokeWidth="6"
+                      fill="none"
+                      strokeDasharray="339"
+                      strokeDashoffset="100"
+                      strokeLinecap="round"
+                      transform="rotate(-90 60 60)"
+                    />
+                  </svg>
+                  <div className="phone-timer-time">
+                    <span className="phone-timer-big">07:42</span>
+                    <span className="phone-timer-small">Round 3 / 4</span>
+                  </div>
+                </div>
+                <div className="phone-timer-ctrl">
+                  <span>▐▐</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </Reveal>
       </section>
 
@@ -118,7 +185,7 @@ export default function Home() {
               num: "01",
               tag: "ATHX Specific",
               title: "Pensado para ATHX Games",
-              body: "Cada sesión está alineada con los 3 eventos de la competición: Strength, Endurance y MetCon X. Sin relleno.",
+              body: "Cada semana y ciclo están pensados para los 3 eventos: Strength, Endurance y MetCon X. Sin relleno.",
               icon: (
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M9 18h6" />
@@ -147,7 +214,7 @@ export default function Home() {
             {
               num: "03",
               tag: "Día clave",
-              title: "Llegas afilado al pico",
+              title: "Mejor que el resto",
               body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
               icon: (
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -212,10 +279,10 @@ export default function Home() {
 
             <div>
               {[
-                "Ciclo completo de 6 semanas",
+                "Programación y seguimiento individual",
                 "2 categorías: ATHX y ATHX PRO",
                 "Plan semanal de lunes a domingo",
-                "Warmup, fuerza y WOD por día",
+                "Warmup, fuerza y Metcon por día",
                 "Primera semana gratis",
               ].map((b) => (
                 <div key={b} className="pricing-feature">
@@ -230,9 +297,9 @@ export default function Home() {
             </div>
 
             <Link href="/login" className="pricing-cta">
-              Empezar ahora
+              Suscríbete
             </Link>
-            <p className="pricing-fineprint">Sin tarjeta. Sin compromiso.</p>
+            <p className="pricing-fineprint">Cancela cuando quieras</p>
           </div>
         </Reveal>
       </section>
@@ -242,16 +309,16 @@ export default function Home() {
         <div className="max-w-md mx-auto space-y-8">
           <Reveal>
             <h2 className="text-3xl font-bold leading-tight text-center">
-              Por qué ATHX Coaching
+              Por qué ATHLEX Training
             </h2>
           </Reveal>
           <ul className="space-y-5">
             {[
-              "Estructura clara: nunca te preguntas qué tocaba hoy.",
+              "Estructura clara y adaptada a ti",
               "Progresión real: las cargas suben, los tiempos bajan.",
               "Movimientos de competición desde la semana 1.",
-              "Diseñado para móvil: planifica desde el box.",
-              "Sin contratos. Suscripción mensual.",
+              "Planificada desde la experiencia",
+              "Registro y leaderboard para medir tu progreso",
             ].map((why, i) => (
               <Reveal key={why} delay={i * 0.08} y={24}>
                 <li className="flex items-start gap-3 border-l-2 border-accent/40 pl-4">
@@ -273,19 +340,19 @@ export default function Home() {
             {[
               {
                 q: "¿Necesito experiencia previa?",
-                a: "Sí, recomendado nivel intermedio en CrossFit. El programa asume dominio básico de barra, gimnásticos y monoestructurales.",
+                a: "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
               },
               {
                 q: "¿Qué material necesito?",
-                a: "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo. ATHX PRO añade peso adicional.",
+                a: "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
               },
               {
                 q: "¿Cuánto dura cada sesión?",
-                a: "Entre 60 y 90 minutos. Días de fuerza más metcon. Jueves y domingo son recuperación.",
+                a: "Entre 60 y 90 minutos.",
               },
               {
                 q: "¿Diferencia ATHX vs ATHX PRO?",
-                a: "PRO trabaja con cargas mayores (sandbag 70/50, DB 22.5/15), dual dumbbell y switches de 1000m en endurance.",
+                a: "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
               },
               {
                 q: "¿Cómo cancelo?",
@@ -322,11 +389,9 @@ export default function Home() {
             href="/login"
             className="inline-block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
           >
-            Empezar ahora
+            Comienza ahora
           </Link>
-          <p className="text-muted text-xs">
-            Primera semana gratis · Sin tarjeta
-          </p>
+          <p className="text-muted text-xs">Primera semana gratis</p>
         </Reveal>
       </section>
     </div>
