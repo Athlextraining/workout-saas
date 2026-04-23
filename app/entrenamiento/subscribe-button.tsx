@@ -21,6 +21,7 @@ export function SubscribeButton({
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
       const data = await res.json()
       if (data.url) {
+        window.dispatchEvent(new Event('nav-progress:start'))
         window.location.href = data.url
         return
       }

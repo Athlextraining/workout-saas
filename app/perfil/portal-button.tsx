@@ -13,6 +13,7 @@ export function PortalButton() {
       const res = await fetch('/api/stripe/portal', { method: 'POST' })
       const { url } = await res.json()
       if (url) {
+        window.dispatchEvent(new Event('nav-progress:start'))
         window.location.href = url
         return
       }

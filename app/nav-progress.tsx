@@ -45,8 +45,16 @@ export function NavProgress() {
       start()
     }
 
+    function handleStartEvent() {
+      start()
+    }
+
     document.addEventListener('click', handleClick, { capture: true })
-    return () => document.removeEventListener('click', handleClick, { capture: true })
+    window.addEventListener('nav-progress:start', handleStartEvent)
+    return () => {
+      document.removeEventListener('click', handleClick, { capture: true })
+      window.removeEventListener('nav-progress:start', handleStartEvent)
+    }
   }, [])
 
   useEffect(() => {
