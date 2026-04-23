@@ -122,7 +122,7 @@ app/
 │  ├─ page.tsx                   ─→ support.{require-admin, list-all-threads, ui.thread-list}
 │  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
-├─ bienvenida/page.tsx           ─→ (UI only, no deps)
+├─ bienvenida/page.tsx           ─→ motion + components.reveal  (post-checkout cinematic tour)
 └─ api/stripe/
    ├─ checkout/route.ts          ─→ billing.create-checkout-session
    ├─ portal/route.ts            ─→ billing.create-portal-session
