@@ -106,7 +106,21 @@ app/
 ├─ entrenamiento/subscribe-button.tsx ─→ POST /api/stripe/checkout
 ├─ perfil/page.tsx               ─→ identity.{get-current-user, sign-out} + billing.get-active-subscription
 ├─ perfil/portal-button.tsx      ─→ POST /api/stripe/portal
-├─ navbar.tsx                    ─→ shared.supabase.server
+├─ navbar.tsx                    ─→ shared.supabase.server + components.{nav-menu, admin-bell}
+├─ components/nav-menu.tsx       ─→ vaul + identity.sign-out
+├─ components/admin-bell.tsx     ─→ vaul + components.chat-panel + /api/support/poll
+├─ components/chat-bubble-server.tsx ─→ shared.supabase.server + components.chat-bubble
+├─ components/chat-bubble.tsx    ─→ vaul + components.chat-panel + /api/support/poll
+├─ components/chat-panel.tsx     ─→ support.{send-new-message, reply-to-thread, mark-thread-read, validators}
+├─ api/support/poll/route.ts     ─→ identity.{get-current-user, get-current-profile}
+│                                  + support.{list-user-threads, list-all-threads, get-thread, get-unread-count}
+├─ preguntanos/
+│  ├─ page.tsx                   ─→ identity.get-current-user + support.{list-user-threads, ui.thread-list}
+│  ├─ nuevo/page.tsx             ─→ identity.get-current-user + support.ui.contact-form
+│  └─ [id]/page.tsx              ─→ identity.get-current-user + support.{get-thread, ui.message-bubble, ui.reply-form}
+├─ admin/mensajes/
+│  ├─ page.tsx                   ─→ support.{require-admin, list-all-threads, ui.thread-list}
+│  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
 ├─ bienvenida/page.tsx           ─→ (UI only, no deps)
 └─ api/stripe/
@@ -136,27 +150,56 @@ src/modules/
 ├─ training/
 │  ├─ domain/
 │  │  ├─ cycle.ts                ─→ shared.dates.getMondayOf   (getUserCycleWeek, isFreeWeek)
-│  │  └─ workout.ts              ─→ identity.profile.Category  (DayWorkout, WeekContent, WorkoutTemplate)
+│  │  ├─ workout.ts              ─→ identity.profile.Category  (DayWorkout, WeekContent, WorkoutTemplate)
+│  │  └─ timer.ts                (TimerConfig, TimerMode, TimerSnapshot, formatMs, modeLabel)
 │  ├─ infra/template-repository.ts ─→ shared.supabase.server + training.workout (getTemplate)
-│  └─ application/get-current-week-workout.ts
-│       ─→ identity.{get-current-user, profile-repository} + training.{cycle, template-repository, workout}
+│  ├─ application/get-current-week-workout.ts
+│  │    ─→ identity.{get-current-user, profile-repository} + training.{cycle, template-repository, workout}
+│  └─ ui/
+│     ├─ timer-audio.ts          (Web Audio beeps + vibrate + wake-lock helpers)
+│     ├─ use-timer.ts            ─→ training.domain.timer + training.ui.timer-audio
+│     ├─ timer-modal.tsx         ─→ vaul + training.domain.timer
+│     └─ workout-timer.tsx       ─→ motion + training.{domain.timer, ui.use-timer, ui.timer-modal}
 │
-└─ billing/
+├─ billing/
+│  ├─ infra/
+│  │  ├─ stripe-client.ts        (Stripe SDK init)
+│  │  └─ subscription-repository.ts ─→ shared.supabase.{server, admin}
+│  └─ application/
+│     ├─ get-subscription-status.ts ─→ billing.subscription-repository
+│     ├─ create-checkout-session.ts ─→ shared.supabase.server + billing.stripe-client
+│     ├─ create-portal-session.ts   ─→ shared.supabase.server + billing.stripe-client
+│     └─ handle-webhook.ts          ─→ shared.supabase.admin + billing.{stripe-client, subscription-repository}
+│
+└─ support/
+   ├─ domain/
+   │  ├─ thread.ts               (SupportThread, SupportMessage, ThreadStatus, MessageAuthor)
+   │  └─ validators.ts           (validateSubject, validateBody)
    ├─ infra/
-   │  ├─ stripe-client.ts        (Stripe SDK init)
-   │  └─ subscription-repository.ts ─→ shared.supabase.{server, admin}
-   └─ application/
-      ├─ get-subscription-status.ts ─→ billing.subscription-repository
-      ├─ create-checkout-session.ts ─→ shared.supabase.server + billing.stripe-client
-      ├─ create-portal-session.ts   ─→ shared.supabase.server + billing.stripe-client
-      └─ handle-webhook.ts          ─→ shared.supabase.admin + billing.{stripe-client, subscription-repository}
+   │  ├─ thread-repository.ts    ─→ shared.supabase.{server, admin} (CRUD threads + messages)
+   │  └─ email-client.ts         ─→ resend (sendNewMessageToAdmin, sendReplyToUser, sendUserReplyToAdmin)
+   ├─ application/
+   │  ├─ require-admin.ts        ─→ identity.get-current-profile  (requireAdmin, isCurrentUserAdmin)
+   │  ├─ send-new-message.ts     ─→ identity.get-current-user + support.{thread-repo, email-client, validators}
+   │  ├─ reply-to-thread.ts      ─→ identity.{get-current-user, get-current-profile} + support.{thread-repo, email-client, validators}
+   │  ├─ list-user-threads.ts    ─→ identity.get-current-user + support.thread-repo
+   │  ├─ list-all-threads.ts     ─→ support.{require-admin.isCurrentUserAdmin, thread-repo}
+   │  ├─ get-thread.ts           ─→ identity.{get-current-user, get-current-profile} + support.thread-repo
+   │  ├─ mark-thread-read.ts     ─→ identity.{get-current-user, get-current-profile} + shared.supabase.server
+   │  ├─ get-unread-count.ts     ─→ identity.{get-current-user, get-current-profile} + shared.supabase.server
+   │  └─ toggle-thread-status.ts ─→ support.{require-admin, thread-repo}
+   └─ ui/
+      ├─ contact-form.tsx        ─→ support.{send-new-message, validators}
+      ├─ reply-form.tsx          ─→ support.{reply-to-thread, validators}
+      ├─ thread-list.tsx         (list rendering)
+      └─ message-bubble.tsx      ─→ support.domain.thread
 
 src/shared/
 ├─ infra/supabase/{client,server,admin}.ts
 └─ utils/dates.ts                (getMondayOf, formatLocalDate, getWeekStartDate)
 ```
 
-DB tables: `profiles`, `subscriptions`, `workout_templates` (unique on category+week_number, 12 rows = 6 weeks × 2 categories).
+DB tables: `profiles` (incl. `is_admin`), `subscriptions`, `workout_templates` (unique on category+week_number, 12 rows = 6 weeks × 2 categories), `support_threads` (incl. `last_read_by_user`, `last_read_by_admin`), `support_messages`.
 
 When adding new code:
 1. Pick the bounded context. New context only if truly new domain.

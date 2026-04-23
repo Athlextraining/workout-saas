@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "./navbar";
 import { NavbarSkeleton } from "./navbar-skeleton";
 import { NavProgress } from "./nav-progress";
+import { ChatBubbleServer } from "./components/chat-bubble-server";
 
 const league_spartan = League_Spartan({
   variable: "--font-league-spartan",
@@ -13,7 +14,7 @@ const league_spartan = League_Spartan({
 });
 
 export const metadata: Metadata = {
-  title: "ATHX Coaching",
+  title: "ATHLEX Trainging",
   description:
     "Programa de entrenamiento para preparar ATHX 2026. Diseñado por atletas, ejecutado por ti.",
 };
@@ -31,6 +32,9 @@ export default function RootLayout({
           <Navbar />
         </Suspense>
         <main className="flex-1 flex flex-col">{children}</main>
+        <Suspense fallback={null}>
+          <ChatBubbleServer />
+        </Suspense>
       </body>
     </html>
   );
