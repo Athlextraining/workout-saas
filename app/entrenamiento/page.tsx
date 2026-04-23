@@ -1,10 +1,27 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
+import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
 import { getCurrentWeekWorkout } from "@/modules/training/application/get-current-week-workout";
-import { isFreeWeek as isFreeCycleWeek } from "@/modules/training/domain/cycle";
+import {
+  isFreeWeek as isFreeCycleWeek,
+  getCyclePhase,
+} from "@/modules/training/domain/cycle";
+import type { WeekContent } from "@/modules/training/domain/workout";
 import { Reveal } from "../reveal";
 import { SubscribeButton } from "./subscribe-button";
+import { WeekView } from "./week-view";
+import { WorkoutTimer } from "@/modules/training/ui/workout-timer";
+
+const DAY_KEYS: (keyof WeekContent)[] = [
+  "domingo",
+  "lunes",
+  "martes",
+  "miercoles",
+  "jueves",
+  "viernes",
+  "sabado",
+];
 
 export default async function EntrenamientoPage() {
   const user = await getCurrentUser();
@@ -38,8 +55,8 @@ export default async function EntrenamientoPage() {
 
           <Reveal delay={0.2}>
             <p className="train-cta-sub">
-              Ciclo de <strong>6 semanas</strong> adaptado a tu categoria.
-              Regístrate y empieza el lunes.
+              Entrenamiento y seguimiento adaptado a tu categoria. Regístrate en
+              5 minutos y empieza.
             </p>
           </Reveal>
 
@@ -72,18 +89,11 @@ export default async function EntrenamientoPage() {
     );
   }
 
-  const subscribed = await isUserSubscribed(user.id);
-  const workout = await getCurrentWeekWorkout();
-
-  const days = [
-    "Lunes",
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-    "Sabado",
-    "Domingo",
-  ];
+  const [subscribed, workout, profile] = await Promise.all([
+    isUserSubscribed(user.id),
+    getCurrentWeekWorkout(),
+    getCurrentProfile(),
+  ]);
 
   if (!workout) {
     return (
@@ -111,10 +121,10 @@ export default async function EntrenamientoPage() {
         <div className="glass rounded-xl p-8 text-center space-y-6">
           <div className="text-5xl">🔒</div>
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold">Continua tu ciclo</h1>
+            <h1 className="text-2xl font-bold">Continua tu progreso</h1>
             <p className="text-muted text-sm">
               Has completado tu primera semana gratuita. Suscribete para acceder
-              al resto del ciclo de 6 semanas.
+              al resto.
             </p>
           </div>
           <SubscribeButton
@@ -126,139 +136,43 @@ export default async function EntrenamientoPage() {
     );
   }
 
-  const content = workout.content;
+  const phase = getCyclePhase(weekNumber);
+  const todayKey = DAY_KEYS[new Date().getDay()];
+  const maxes = {
+    strictPress: profile?.rm_strict_press ?? null,
+    backSquat: profile?.rm_back_squat ?? null,
+    deadlift: profile?.rm_deadlift ?? null,
+  };
 
   return (
-    <div className="max-w-lg mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-2">Entrenamiento semanal</h1>
-      <p className="text-muted text-sm mb-6">
-        Semana {weekNumber} / 6 — Ciclo {cycleNumber}
-      </p>
+    <div className="train-page">
+      <header className="train-header">
+        <div className="train-header-bg" aria-hidden="true">
+          <div className="hero-grid" />
+          <div className="train-header-fade" />
+        </div>
+        <div className="train-header-content">
+          <div className="train-header-row">
+            <span
+              className={`badge badge--pill badge--glass phase-${phase.code.toLowerCase()}`}
+            >
+              <span className="badge-dot phase-chip-dot" />
+              {profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"} · Semana{" "}
+              {weekNumber}
+            </span>
+            <WorkoutTimer compact />
+          </div>
+        </div>
+      </header>
 
-      <div className="space-y-4">
-        {days.map((day) => {
-          const dayKey = day.toLowerCase() as keyof typeof content;
-          const dayContent = content[dayKey];
-
-          return (
-            <div key={day} className="glass rounded-xl p-4">
-              <h2 className="font-semibold">{day}</h2>
-              {dayContent?.titulo && (
-                <p className="text-accent text-xs mt-0.5">
-                  {dayContent.titulo}
-                </p>
-              )}
-
-              {dayContent?.recuperacion ? (
-                <p className="text-muted text-sm mt-2">
-                  {dayContent.recuperacion}
-                </p>
-              ) : dayContent ? (
-                <div className="mt-3 space-y-4">
-                  {/* Warm-up */}
-                  {dayContent.warmup && dayContent.warmup.length > 0 && (
-                    <div>
-                      <p className="text-xs font-semibold text-accent-green uppercase tracking-wider mb-1.5">
-                        Warm-up
-                      </p>
-                      <div className="space-y-1">
-                        {dayContent.warmup.map((ex, i) => (
-                          <div key={i} className="flex justify-between text-sm">
-                            <span>{ex.nombre}</span>
-                            <span className="text-muted text-xs">
-                              {ex.repeticiones}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Fuerza */}
-                  {dayContent.fuerza && dayContent.fuerza.length > 0 && (
-                    <div>
-                      <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1.5">
-                        Fuerza
-                      </p>
-                      <div className="space-y-2">
-                        {dayContent.fuerza.map((ex, i) => (
-                          <div
-                            key={i}
-                            className="py-1.5 border-t border-white/5 first:border-0 first:pt-0"
-                          >
-                            <div className="flex items-start justify-between gap-2">
-                              <p className="text-sm font-medium">{ex.nombre}</p>
-                              <div className="text-right shrink-0">
-                                <p className="text-xs text-muted">
-                                  {ex.series}x{ex.repeticiones}
-                                </p>
-                                {ex.peso && (
-                                  <p className="text-xs text-muted">
-                                    {ex.peso}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                            {ex.tempo && (
-                              <p className="text-muted text-xs mt-0.5">
-                                {ex.tempo}
-                              </p>
-                            )}
-                            {ex.notas && (
-                              <p className="text-muted text-xs mt-0.5">
-                                {ex.notas}
-                              </p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* WOD */}
-                  {dayContent.wod && (
-                    <div>
-                      <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1.5">
-                        WOD
-                      </p>
-                      <p className="text-sm font-medium mb-2">
-                        {dayContent.wod.descripcion}
-                      </p>
-                      <div className="space-y-1.5">
-                        {dayContent.wod.ejercicios.map((ex, i) => (
-                          <div key={i} className="flex justify-between text-sm">
-                            <div className="min-w-0">
-                              <span>
-                                {ex.repeticiones} {ex.nombre}
-                              </span>
-                              {ex.notas && (
-                                <span className="text-muted text-xs ml-1">
-                                  ({ex.notas})
-                                </span>
-                              )}
-                            </div>
-                            {ex.peso && (
-                              <span className="text-muted text-xs shrink-0">
-                                {ex.peso}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      {dayContent.wod.notas && (
-                        <p className="text-muted text-xs mt-2 italic">
-                          {dayContent.wod.notas}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="text-muted text-sm mt-2">Descanso</p>
-              )}
-            </div>
-          );
-        })}
+      <div className="w-full max-w-md mx-auto px-6 pb-12 -mt-6 relative z-10">
+        <WeekView
+          content={workout.content}
+          todayKey={todayKey}
+          cycleNumber={cycleNumber}
+          weekNumber={weekNumber}
+          maxes={maxes}
+        />
       </div>
     </div>
   );

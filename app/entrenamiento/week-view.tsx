@@ -1,0 +1,321 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import type { WeekContent, DayWorkout } from '@/modules/training/domain/workout'
+
+type DayKey = keyof WeekContent
+
+const DAY_KEYS: DayKey[] = [
+  'lunes',
+  'martes',
+  'miercoles',
+  'jueves',
+  'viernes',
+  'sabado',
+  'domingo',
+]
+
+const DAY_SHORT: Record<DayKey, string> = {
+  lunes: 'Lun',
+  martes: 'Mar',
+  miercoles: 'Mié',
+  jueves: 'Jue',
+  viernes: 'Vie',
+  sabado: 'Sáb',
+  domingo: 'Dom',
+}
+
+const DAY_FULL: Record<DayKey, string> = {
+  lunes: 'Lunes',
+  martes: 'Martes',
+  miercoles: 'Miércoles',
+  jueves: 'Jueves',
+  viernes: 'Viernes',
+  sabado: 'Sábado',
+  domingo: 'Domingo',
+}
+
+interface UserMaxes {
+  strictPress: number | null
+  backSquat: number | null
+  deadlift: number | null
+}
+
+interface Props {
+  content: WeekContent
+  todayKey: DayKey
+  cycleNumber: number
+  weekNumber: number
+  maxes: UserMaxes
+}
+
+export function WeekView({
+  content,
+  todayKey,
+  cycleNumber,
+  weekNumber,
+  maxes,
+}: Props) {
+  const [active, setActive] = useState<DayKey>(todayKey)
+  const [done, setDone] = useState<Record<DayKey, boolean>>({
+    lunes: false, martes: false, miercoles: false, jueves: false,
+    viernes: false, sabado: false, domingo: false,
+  })
+
+  const storageKey = `done:c${cycleNumber}:w${weekNumber}`
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(storageKey)
+      if (raw) setDone(JSON.parse(raw))
+    } catch {}
+  }, [storageKey])
+
+  function toggleDone(day: DayKey) {
+    setDone((prev) => {
+      const next = { ...prev, [day]: !prev[day] }
+      try { localStorage.setItem(storageKey, JSON.stringify(next)) } catch {}
+      return next
+    })
+  }
+
+  // Auto-scroll active tab into view
+  const tabsRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = tabsRef.current?.querySelector<HTMLButtonElement>(`[data-day="${active}"]`)
+    el?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+  }, [active])
+
+  const dayContent = content[active]
+
+  return (
+    <div className="space-y-4">
+      <div ref={tabsRef} className="day-tabs">
+        {DAY_KEYS.map((day) => {
+          const isActive = day === active
+          const isToday = day === todayKey
+          const isDone = done[day]
+          return (
+            <button
+              key={day}
+              data-day={day}
+              onClick={() => setActive(day)}
+              className={`day-pill ${isActive ? 'is-active' : ''} ${isToday ? 'is-today' : ''} ${isDone ? 'is-done' : ''}`}
+            >
+              <span className="day-pill-label">{DAY_SHORT[day]}</span>
+              {isDone && (
+                <span className="day-pill-check" aria-hidden>
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                    <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={active}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <DayCard
+            dayKey={active}
+            day={dayContent}
+            done={done[active]}
+            onToggleDone={() => toggleDone(active)}
+            maxes={maxes}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function DayCard({
+  dayKey,
+  day,
+  done,
+  onToggleDone,
+  maxes,
+}: {
+  dayKey: DayKey
+  day: DayWorkout | undefined
+  done: boolean
+  onToggleDone: () => void
+  maxes: UserMaxes
+}) {
+  return (
+    <article className="glass rounded-2xl p-5 space-y-5">
+      <header className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="text-lg font-semibold leading-tight">{DAY_FULL[dayKey]}</h2>
+          {day?.titulo && (
+            <p className="text-accent text-xs mt-1">{day.titulo}</p>
+          )}
+        </div>
+        <button
+          type="button"
+          onClick={onToggleDone}
+          className={`done-toggle ${done ? 'is-done' : ''}`}
+          aria-label={done ? 'Marcar como no hecho' : 'Marcar como hecho'}
+        >
+          {done ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ) : (
+            <span className="text-[10px] uppercase tracking-wider pl-[0.05em]">Hecho</span>
+          )}
+        </button>
+      </header>
+
+      {day?.recuperacion ? (
+        <p className="text-muted text-sm">{day.recuperacion}</p>
+      ) : !day ? (
+        <p className="text-muted text-sm">Descanso</p>
+      ) : (
+        <div className="space-y-5">
+          {day.warmup && day.warmup.length > 0 && (
+            <Section title="Warm-up">
+              <div className="space-y-1.5">
+                {day.warmup.map((ex, i) => (
+                  <Row key={i} left={ex.nombre} right={ex.repeticiones} />
+                ))}
+              </div>
+            </Section>
+          )}
+
+          {day.fuerza && day.fuerza.length > 0 && (
+            <Section title="Fuerza" chip={day.fuerza[0].tempo} chipVariant="muted">
+              <div className="divide-y divide-white/5">
+                {day.fuerza.map((ex, i) => {
+                  const calc = calcWeightFromPct(ex.nombre, ex.pct_1rm, maxes)
+                  return (
+                    <div key={i} className="py-2.5 first:pt-0 last:pb-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-sm font-medium leading-snug min-w-0 break-words">{ex.nombre}</p>
+                        <div className="text-right shrink-0">
+                          <p className="text-xs text-muted">
+                            {ex.series}×{ex.repeticiones}
+                          </p>
+                          {(ex.peso || calc) && (
+                            <p className="text-xs text-muted mt-0.5">
+                              {ex.peso}
+                              {calc && (
+                                <span className="text-accent"> ({calc} kg)</span>
+                              )}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Section>
+          )}
+
+          {day.wod && (
+            <Section
+              title="WOD"
+              chip={day.wod.tipo}
+              chipMeta={day.wod.cap}
+              chipVariant="green"
+            >
+              <p className="text-sm font-medium mb-2">{day.wod.descripcion}</p>
+              <div className="space-y-1.5">
+                {day.wod.ejercicios.map((ex, i) => (
+                  <Row
+                    key={i}
+                    left={
+                      <>
+                        {ex.repeticiones} {ex.nombre}
+                        {ex.notas && (
+                          <span className="text-muted text-xs ml-1">({ex.notas})</span>
+                        )}
+                      </>
+                    }
+                    right={ex.peso}
+                  />
+                ))}
+              </div>
+              {day.wod.notas && (
+                <p className="text-muted text-xs mt-3 italic">{day.wod.notas}</p>
+              )}
+            </Section>
+          )}
+        </div>
+      )}
+    </article>
+  )
+}
+
+function Section({
+  title,
+  chip,
+  chipMeta,
+  chipVariant = 'muted',
+  children,
+}: {
+  title: string
+  chip?: string
+  chipMeta?: string
+  chipVariant?: 'green' | 'muted'
+  children: React.ReactNode
+}) {
+  return (
+    <section>
+      <div className="flex items-center gap-2 mb-2">
+        <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.18em]">
+          {title}
+        </p>
+        {chip && (
+          <span className={`badge badge--${chipVariant}`}>
+            {chip}
+            {chipMeta && <span className="opacity-60"> · {chipMeta}</span>}
+          </span>
+        )}
+      </div>
+      {children}
+    </section>
+  )
+}
+
+function Row({ left, right }: { left: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <div className="flex justify-between gap-3 text-sm">
+      <span className="min-w-0 break-words">{left}</span>
+      {right && <span className="text-muted text-xs shrink-0 self-center">{right}</span>}
+    </div>
+  )
+}
+
+const RM_KEYWORDS: Array<[string, keyof UserMaxes]> = [
+  ['strict press', 'strictPress'],
+  ['back squat', 'backSquat'],
+  ['deadlift', 'deadlift'],
+]
+
+function calcWeightFromPct(
+  name: string,
+  pct: number | undefined,
+  maxes: UserMaxes,
+): number | null {
+  if (!pct) return null
+  const key = name.toLowerCase()
+  for (const [needle, field] of RM_KEYWORDS) {
+    if (key.includes(needle)) {
+      const rm = maxes[field]
+      if (!rm) return null
+      const raw = (rm * pct) / 100
+      return Math.round(raw / 2.5) * 2.5
+    }
+  }
+  return null
+}

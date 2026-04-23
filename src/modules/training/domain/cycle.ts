@@ -33,3 +33,17 @@ export function getUserCycleWeek(cycleStartDate: string | Date): UserCycleWeek {
 export function isFreeWeek(cycle: UserCycleWeek): boolean {
   return cycle.cycleNumber === 1 && cycle.weekNumber === 1
 }
+
+export type PhaseCode = 'BASE' | 'BUILD' | 'PEAK' | 'DELOAD'
+
+export interface CyclePhase {
+  code: PhaseCode
+  label: string
+}
+
+export function getCyclePhase(weekNumber: number): CyclePhase {
+  if (weekNumber <= 2) return { code: 'BASE', label: 'Base' }
+  if (weekNumber <= 4) return { code: 'BUILD', label: 'Build' }
+  if (weekNumber === 5) return { code: 'PEAK', label: 'Peak' }
+  return { code: 'DELOAD', label: 'Deload' }
+}
