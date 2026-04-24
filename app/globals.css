@@ -2098,11 +2098,11 @@ a,
 
 .chat-drawer {
   position: fixed;
-  bottom: 0;
+  bottom: var(--chat-drawer-bottom, 0);
   left: 0;
   right: 0;
-  max-height: 88vh;
-  min-height: 70vh;
+  height: var(--chat-drawer-h, 88vh);
+  max-height: var(--chat-drawer-h, 88vh);
   z-index: 80;
   background: var(--bg-primary);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -2115,7 +2115,8 @@ a,
 
 @media (min-width: 768px) {
   .chat-drawer {
-    max-height: 82vh;
+    height: var(--chat-drawer-h, 82vh);
+    max-height: var(--chat-drawer-h, 82vh);
     min-height: 60vh;
   }
 }
@@ -2506,10 +2507,13 @@ a,
 /* Composer */
 .chat-composer {
   padding: 0.75rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
+  flex-shrink: 0;
+  background: var(--bg-primary);
 }
 
 .chat-composer-input {

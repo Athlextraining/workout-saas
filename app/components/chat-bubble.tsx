@@ -28,6 +28,39 @@ export function ChatBubble({ initialMode }: Props) {
     return () => clearInterval(id)
   }, [open, fetchUnread])
 
+  // Track real viewport (accounts for mobile keyboard on iOS + Android).
+  useEffect(() => {
+    if (!open) {
+      document.documentElement.style.removeProperty('--chat-drawer-h')
+      document.documentElement.style.removeProperty('--chat-drawer-bottom')
+      return
+    }
+    const vv = window.visualViewport
+    function update() {
+      if (!vv) return
+      const keyboardOpen = window.innerHeight - vv.height > 80
+      if (keyboardOpen) {
+        const bottom = Math.max(0, window.innerHeight - (vv.height + vv.offsetTop))
+        document.documentElement.style.setProperty('--chat-drawer-h', `${vv.height}px`)
+        document.documentElement.style.setProperty('--chat-drawer-bottom', `${bottom}px`)
+      } else {
+        document.documentElement.style.removeProperty('--chat-drawer-h')
+        document.documentElement.style.removeProperty('--chat-drawer-bottom')
+      }
+    }
+    update()
+    vv?.addEventListener('resize', update)
+    vv?.addEventListener('scroll', update)
+    window.addEventListener('resize', update)
+    return () => {
+      vv?.removeEventListener('resize', update)
+      vv?.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+      document.documentElement.style.removeProperty('--chat-drawer-h')
+      document.documentElement.style.removeProperty('--chat-drawer-bottom')
+    }
+  }, [open])
+
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>
       <Drawer.Trigger asChild>
