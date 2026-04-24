@@ -6,6 +6,13 @@ const resend = key ? new Resend(key) : null
 const FROM = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
 const ADMIN = process.env.ADMIN_EMAIL || ''
 
+console.log('[email-client] env check', {
+  hasKey: !!key,
+  keyPrefix: key ? key.slice(0, 6) : null,
+  from: FROM,
+  adminSet: !!ADMIN,
+})
+
 interface NewMessageInput {
   threadId: string
   subject: string

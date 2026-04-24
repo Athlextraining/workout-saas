@@ -936,8 +936,8 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
       <div className="glass rounded-xl p-5 space-y-4">
         {[
           "Plan semanal completo (lunes a domingo)",
-          "Ciclos de 6 semanas: BASE, BUILD, PEAK, DELOAD",
-          "Metodologia ATHX 2026",
+          "Ciclos estructurados: BASE, BUILD, PEAK, DELOAD",
+          "Metodología ATHX 2026",
           "Cancela cuando quieras",
         ].map((item) => (
           <div key={item} className="flex items-center gap-3">
