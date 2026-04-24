@@ -479,6 +479,12 @@ function Composer({
           rows={3}
           placeholder="Escribe un mensaje…"
           className="chat-composer-input"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="sentences"
+          spellCheck={false}
+          inputMode="text"
+          name="chat-message"
         />
         <button
           type="submit"
