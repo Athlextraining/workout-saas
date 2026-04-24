@@ -1,9 +1,39 @@
 import Link from "next/link";
 import { Reveal } from "./reveal";
+import { JsonLd, softwareApplicationLd, faqPageLd } from "@/shared/seo/jsonld";
+
+const FAQ_ITEMS = [
+  {
+    question: "¿Necesito experiencia previa?",
+    answer:
+      "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
+  },
+  {
+    question: "¿Qué material necesito?",
+    answer:
+      "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
+  },
+  {
+    question: "¿Cuánto dura cada sesión?",
+    answer: "Entre 60 y 90 minutos.",
+  },
+  {
+    question: "¿Diferencia ATHX vs ATHX PRO?",
+    answer:
+      "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
+  },
+  {
+    question: "¿Cómo cancelo?",
+    answer:
+      "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
+  },
+];
 
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <JsonLd data={softwareApplicationLd()} />
+      <JsonLd data={faqPageLd(FAQ_ITEMS)} />
       {/* Hero */}
       <section className="hero-shell">
         <p className="sr-only">
@@ -339,38 +369,17 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center">FAQ</h2>
           </Reveal>
           <div className="space-y-3">
-            {[
-              {
-                q: "¿Necesito experiencia previa?",
-                a: "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
-              },
-              {
-                q: "¿Qué material necesito?",
-                a: "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
-              },
-              {
-                q: "¿Cuánto dura cada sesión?",
-                a: "Entre 60 y 90 minutos.",
-              },
-              {
-                q: "¿Diferencia ATHX vs ATHX PRO?",
-                a: "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
-              },
-              {
-                q: "¿Cómo cancelo?",
-                a: "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.q} delay={i * 0.06} y={20}>
+            {FAQ_ITEMS.map((item, i) => (
+              <Reveal key={item.question} delay={i * 0.06} y={20}>
                 <details className="glass rounded-xl px-5 py-4 group">
                   <summary className="text-sm font-medium list-none flex items-center justify-between cursor-pointer">
-                    <span>{item.q}</span>
+                    <span>{item.question}</span>
                     <span className="text-accent transition-transform group-open:rotate-45">
                       +
                     </span>
                   </summary>
                   <p className="text-muted text-sm mt-3 leading-relaxed">
-                    {item.a}
+                    {item.answer}
                   </p>
                 </details>
               </Reveal>

@@ -9,6 +9,7 @@ import {
   LOCALE_PRIMARY,
   LOCALE_ALTERNATES,
 } from "@/shared/seo/site";
+import { JsonLd, organizationLd, webSiteLd } from "@/shared/seo/jsonld";
 import "./globals.css";
 import { Navbar } from "./navbar";
 import { NavbarSkeleton } from "./navbar-skeleton";
@@ -88,6 +89,8 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${league_spartan.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <JsonLd data={organizationLd()} />
+        <JsonLd data={webSiteLd()} />
         <NavProgress />
         <Suspense fallback={<NavbarSkeleton />}>
           <Navbar />
