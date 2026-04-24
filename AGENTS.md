@@ -123,6 +123,8 @@ app/
 │  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
 ├─ bienvenida/page.tsx           ─→ motion + components.reveal  (post-checkout cinematic tour)
+├─ privacidad/page.tsx           ─→ (legal, no deps — required by Google OAuth consent)
+├─ terminos/page.tsx             ─→ (legal, no deps — required by Google OAuth consent)
 └─ api/stripe/
    ├─ checkout/route.ts          ─→ billing.create-checkout-session
    ├─ portal/route.ts            ─→ billing.create-portal-session
