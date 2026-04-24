@@ -566,7 +566,7 @@ function StepInput({
       <button
         onClick={onNext}
         disabled={!canProceed}
-        className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+        className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
         Siguiente
       </button>
@@ -629,7 +629,7 @@ function StepSex({
       <button
         onClick={onNext}
         disabled={!canProceed || loading}
-        className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+        className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
         {loading ? "Guardando..." : "Siguiente"}
       </button>
@@ -695,7 +695,7 @@ function StepCategory({
       <button
         onClick={onNext}
         disabled={!canProceed || loading}
-        className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+        className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
         {loading ? "Guardando..." : "Siguiente"}
       </button>
@@ -763,7 +763,7 @@ function StepRM({
         <button
           onClick={onNext}
           disabled={!hasAny || loading}
-          className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+          className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
           {loading ? "Guardando..." : "Siguiente"}
         </button>
@@ -905,7 +905,7 @@ function StepAvatar({
           type="button"
           onClick={handleNext}
           disabled={uploading}
-          className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+          className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
           {uploading ? "Subiendo..." : "Siguiente"}
         </button>
@@ -950,7 +950,7 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
       <div className="space-y-3">
         <button
           onClick={onSubscribe}
-          className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+          className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
           Suscribirse
         </button>
