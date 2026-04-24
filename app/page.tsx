@@ -268,7 +268,7 @@ export default function Home() {
 
             <div className="pricing-price-row">
               <span className="pricing-price">
-                18
+                14
                 <sup className="text-sm align-super">,90</sup>€
               </span>
               <span className="pricing-price-unit">/mes</span>
