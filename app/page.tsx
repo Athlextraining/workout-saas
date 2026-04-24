@@ -32,6 +32,12 @@ const FAQ_ITEMS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <link
+        rel="preload"
+        as="image"
+        href="/backgroundhero.webp"
+        fetchPriority="high"
+      />
       <JsonLd data={softwareApplicationLd()} />
       <JsonLd data={faqPageLd(FAQ_ITEMS)} />
       {/* Hero */}

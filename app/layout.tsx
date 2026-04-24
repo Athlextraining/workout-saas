@@ -20,7 +20,7 @@ import { Analytics } from "@/shared/analytics/analytics";
 const league_spartan = League_Spartan({
   variable: "--font-league-spartan",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // Ajusta los pesos según lo necesario
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
