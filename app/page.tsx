@@ -6,6 +6,10 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero */}
       <section className="hero-shell">
+        <p className="sr-only">
+          ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas
+          preparando ATHX 2026 en España y Latinoamérica.
+        </p>
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-image" />
           <div className="hero-vignette" />
@@ -17,21 +21,19 @@ export default function Home() {
         <div className="hero-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            ATHX™ Traning by ATHLEX
+            ATHX Training by ATHLEX
           </span>
 
           <h1 className="hero-title">
-            ENTRENA
+            ENTRENAMIENTO
             <br />
-            MEJORA
-            <br />
-            <span className="hero-title-accent font-extrabold">COMPITE.</span>
+            <span className="hero-title-accent font-extrabold">ATHX.</span>
           </h1>
 
           <p className="hero-sub">
-            Programa de entrenamiento y seguimiento para competir al máximo
-            nivel en
-            <strong> ATHX</strong>.
+            Programación ATHX oficial: plan semanal de entrenamiento para
+            preparar <strong>ATHX 2026</strong>, con seguimiento y chat directo
+            con tu coach. Para atletas de España y Latinoamérica.
           </p>
 
           <Link href="/login" className="hero-cta-primary">
@@ -173,9 +175,9 @@ export default function Home() {
         <Reveal className="features-intro">
           <p className="features-intro-tag">El programa</p>
           <h2 className="features-intro-title">
-            Tres pilares.
+            Programación ATHX:
             <br />
-            Cero relleno.
+            tres pilares, cero relleno.
           </h2>
         </Reveal>
 
@@ -309,7 +311,7 @@ export default function Home() {
         <div className="max-w-md mx-auto space-y-8">
           <Reveal>
             <h2 className="text-3xl font-bold leading-tight text-center">
-              Por qué ATHLEX Training
+              Por qué elegir ATHLEX para tu entrenamiento ATHX
             </h2>
           </Reveal>
           <ul className="space-y-5">
