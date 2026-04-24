@@ -469,7 +469,7 @@ function Composer({
   return (
     <>
       {error && <p className="chat-err chat-err-inline">{error}</p>}
-      <form onSubmit={onSubmit} className="chat-composer">
+      <form onSubmit={onSubmit} className="chat-composer" autoComplete="off">
         <textarea
           ref={inputRef}
           value={body}
@@ -484,7 +484,10 @@ function Composer({
           autoCapitalize="sentences"
           spellCheck={false}
           inputMode="text"
+          enterKeyHint="send"
           name="chat-message"
+          data-1p-ignore
+          data-lpignore="true"
         />
         <button
           type="submit"
