@@ -30,7 +30,7 @@ export function PortalButton() {
       className="w-full py-3 rounded-xl glass hover:bg-white/10 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
     >
       {loading && <Spinner size={18} />}
-      {loading ? 'Abriendo portal...' : 'Gestionar suscripcion'}
+      {loading ? 'Abriendo portal...' : 'Gestionar suscripción'}
     </button>
   )
 }

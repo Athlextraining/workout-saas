@@ -8,7 +8,7 @@ export async function saveCategory(category: string) {
   const user = await getCurrentUser()
   if (!user) return { error: 'No autenticado' }
 
-  if (!isCategory(category)) return { error: 'Categoria invalida' }
+  if (!isCategory(category)) return { error: 'Categoría inválida' }
 
   const result = await updateProfile(user.id, { category })
   if (result.error) return result

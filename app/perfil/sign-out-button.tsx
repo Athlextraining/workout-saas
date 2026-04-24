@@ -12,7 +12,7 @@ export function SignOutButton() {
       className="w-full py-3 rounded-xl text-red-400 glass hover:bg-white/10 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
     >
       {pending && <Spinner size={18} />}
-      {pending ? 'Cerrando sesion...' : 'Cerrar sesion'}
+      {pending ? 'Cerrando sesión...' : 'Cerrar sesión'}
     </button>
   )
 }

@@ -23,11 +23,11 @@ const STEPS: Step[] = [
     eyebrow: "Sesiones",
     title: "60 a 90 minutos",
     description:
-      "Entrenamientos densos, sin relleno. Cada ejercicio, cada rep, tiene un proposito.",
+      "Entrenamientos densos, sin relleno. Cada ejercicio, cada rep, tiene un propósito.",
   },
   {
     bg: "/deadliftbackground.webp",
-    eyebrow: "Progresion",
+    eyebrow: "Progresión",
     title: "Cargas que escalan",
     description:
       "Empieza con lo que puedas manejar. El plan se ajusta semana a semana para que progreses lo máximo posible.",
@@ -126,7 +126,7 @@ export default function BienvenidaPage() {
         <div className="flex items-center justify-between h-14">
           {step > 0 && !isFinal ? (
             <button onClick={goBack} className="text-sm text-muted">
-              Atras
+              Atrás
             </button>
           ) : (
             <div />
@@ -181,7 +181,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
       <Reveal delay={0}>
         <span className="hero-eyebrow">
           <span className="hero-dot" />
-          Suscripcion activa
+          Suscripción activa
         </span>
       </Reveal>
 
@@ -195,7 +195,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
 
       <Reveal delay={0.18}>
         <p className="hero-sub">
-          Bienvenido. En 3 pantallas te contamos <strong>como funciona</strong>{" "}
+          Bienvenido. En 3 pantallas te contamos <strong>cómo funciona</strong>{" "}
           tu programación.
         </p>
       </Reveal>

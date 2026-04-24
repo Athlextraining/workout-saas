@@ -14,7 +14,7 @@ const league_spartan = League_Spartan({
 });
 
 export const metadata: Metadata = {
-  title: "ATHLEX Trainging",
+  title: "ATHLEX Training",
   description:
     "Programa de entrenamiento para preparar ATHX 2026. Diseñado por atletas, ejecutado por ti.",
   verification: {

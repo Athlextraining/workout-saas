@@ -47,7 +47,7 @@ export default function LoginPage() {
     <div className="flex-1 flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-6">
         <h1 className="text-2xl font-bold text-center">
-          {isSignUp ? 'Crear cuenta' : 'Iniciar sesion'}
+          {isSignUp ? 'Crear cuenta' : 'Iniciar sesión'}
         </h1>
 
         {error && (
@@ -98,7 +98,7 @@ export default function LoginPage() {
           <input
             name="password"
             type="password"
-            placeholder="Contrasena"
+            placeholder="Contraseña"
             required
             minLength={6}
             className="w-full px-4 py-3 rounded-xl text-base input-glass"
@@ -123,8 +123,8 @@ export default function LoginPage() {
           className="w-full text-sm text-muted hover:text-white transition-colors"
         >
           {isSignUp
-            ? 'Ya tienes cuenta? Inicia sesion'
-            : 'No tienes cuenta? Registrate'}
+            ? '¿Ya tienes cuenta? Inicia sesión'
+            : '¿No tienes cuenta? Regístrate'}
         </button>
       </div>
     </div>

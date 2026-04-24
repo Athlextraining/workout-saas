@@ -170,11 +170,11 @@ export default function OnboardingPage() {
         window.location.href = data.url;
       } else {
         console.error("Checkout error:", data.error);
-        alert(data.error || "Error al crear la sesion de pago");
+        alert(data.error || "Error al crear la sesión de pago");
       }
     } catch (err) {
       console.error("Fetch error:", err);
-      alert("Error de conexion");
+      alert("Error de conexión");
     }
   }
 
@@ -345,7 +345,7 @@ export default function OnboardingPage() {
         <div className="flex items-center justify-between h-14">
           {step > 0 && step < TOTAL_STEPS - 1 ? (
             <button onClick={goBack} className="text-sm text-muted">
-              Atras
+              Atrás
             </button>
           ) : (
             <div />
@@ -373,8 +373,8 @@ export default function OnboardingPage() {
             {step === 0 && <StepWelcome onNext={goNext} />}
             {step === 1 && (
               <StepInput
-                label="Como te llamas?"
-                subtitle="Asi podremos personalizar tu experiencia"
+                label="¿Cómo te llamas?"
+                subtitle="Así podremos personalizar tu experiencia"
                 type="text"
                 placeholder="Tu nombre completo"
                 value={data.fullName}
@@ -385,7 +385,7 @@ export default function OnboardingPage() {
             )}
             {step === 2 && (
               <StepInput
-                label="Cuantos anos tienes?"
+                label="¿Cuántos años tienes?"
                 subtitle="Adaptaremos la intensidad a tu edad"
                 type="number"
                 placeholder="25"
@@ -399,7 +399,7 @@ export default function OnboardingPage() {
             )}
             {step === 3 && (
               <StepInput
-                label="Cual es tu peso?"
+                label="¿Cuál es tu peso?"
                 subtitle="En kilogramos, para calibrar los ejercicios"
                 type="number"
                 placeholder="75"
@@ -597,7 +597,7 @@ function StepSex({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Cual es tu sexo?</h2>
+        <h2 className="text-2xl font-bold">¿Cuál es tu sexo?</h2>
         <p className="text-muted text-sm">
           Para ajustar los ejercicios y cargas
         </p>
@@ -653,7 +653,7 @@ function StepCategory({
   error: string | null;
 }) {
   const options = [
-    { value: "athx", label: "ATHX", desc: "Categoria estandar" },
+    { value: "athx", label: "ATHX", desc: "Categoría estándar" },
     {
       value: "athx_pro",
       label: "ATHX PRO",
@@ -664,8 +664,8 @@ function StepCategory({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tu categoria</h2>
-        <p className="text-muted text-sm">En que categoria vas a competir?</p>
+        <h2 className="text-2xl font-bold">Tu categoría</h2>
+        <p className="text-muted text-sm">¿En qué categoría vas a competir?</p>
       </div>
 
       {error && <p className="text-red-400 text-sm text-center">{error}</p>}
@@ -729,7 +729,7 @@ function StepRM({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tus maximos de fuerza</h2>
+        <h2 className="text-2xl font-bold">Tus máximos de fuerza</h2>
         <p className="text-muted text-sm">
           Opcional — para personalizar las cargas
         </p>
@@ -858,7 +858,7 @@ function StepAvatar({
     <div className="space-y-8 text-center">
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Tu foto de perfil</h2>
-        <p className="text-muted text-sm">Opcional — puedes añadirla despues</p>
+        <p className="text-muted text-sm">Opcional — puedes añadirla después</p>
       </div>
 
       {error && <p className="text-red-400 text-sm">{error}</p>}
@@ -927,7 +927,7 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
   return (
     <div className="space-y-8">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold">Ultimo paso</h2>
+        <h2 className="text-2xl font-bold">Último paso</h2>
         <p className="text-muted text-sm">
           Accede a todos los entrenamientos semanales
         </p>
@@ -958,7 +958,7 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
           href="/entrenamiento"
           className="block w-full py-3 text-center text-sm text-muted hover:text-white transition-colors"
         >
-          Continuar sin suscripcion
+          Continuar sin suscripción
         </a>
       </div>
     </div>

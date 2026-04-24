@@ -23,7 +23,7 @@ export default async function PerfilPage() {
         </p>
         <div className="border-t border-white/10" />
         <p>
-          <span className="text-muted text-sm">Suscripcion</span>
+          <span className="text-muted text-sm">Suscripción</span>
           <br />
           {subscription ? (
             <span className="text-green-400">Activa</span>
@@ -35,7 +35,7 @@ export default async function PerfilPage() {
           <>
             <div className="border-t border-white/10" />
             <p>
-              <span className="text-muted text-sm">Siguiente renovacion</span>
+              <span className="text-muted text-sm">Siguiente renovación</span>
               <br />
               {subscription.current_period_end
                 ? new Date(subscription.current_period_end).toLocaleDateString('es-ES')

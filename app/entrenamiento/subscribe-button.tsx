@@ -26,10 +26,10 @@ export function SubscribeButton({
         return
       }
       console.error('Checkout error:', data.error)
-      alert(data.error || 'Error al crear la sesion de pago')
+      alert(data.error || 'Error al crear la sesión de pago')
     } catch (err) {
       console.error('Fetch error:', err)
-      alert('Error de conexion')
+      alert('Error de conexión')
     }
     setLoading(false)
   }

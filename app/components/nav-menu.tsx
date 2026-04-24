@@ -69,7 +69,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
               <MenuLink
                 href="/preguntanos"
                 onNavigate={() => setOpen(false)}
-                label="Preguntanos"
+                label="Pregúntanos"
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path

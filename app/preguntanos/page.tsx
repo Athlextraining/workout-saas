@@ -14,7 +14,7 @@ export default async function PreguntanosPage() {
     <div className="max-w-lg mx-auto py-12 px-4 space-y-6">
       <header className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Preguntanos</h1>
+          <h1 className="text-2xl font-bold">Pregúntanos</h1>
           <p className="text-muted text-sm mt-1">
             Cualquier duda, te contestamos por aquí.
           </p>

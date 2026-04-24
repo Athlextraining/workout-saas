@@ -55,7 +55,7 @@ export default async function EntrenamientoPage() {
 
           <Reveal delay={0.2}>
             <p className="train-cta-sub">
-              Entrenamiento y seguimiento adaptado a tu categoria. Regístrate en
+              Entrenamiento y seguimiento adaptado a tu categoría. Regístrate en
               5 minutos y empieza.
             </p>
           </Reveal>
@@ -123,7 +123,7 @@ export default async function EntrenamientoPage() {
           <div className="space-y-2">
             <h1 className="text-2xl font-bold">Continua tu progreso</h1>
             <p className="text-muted text-sm">
-              Has completado tu primera semana gratuita. Suscribete para acceder
+              Has completado tu primera semana gratuita. Suscríbete para acceder
               al resto.
             </p>
           </div>
