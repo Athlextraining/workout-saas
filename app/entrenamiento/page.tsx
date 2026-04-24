@@ -1,8 +1,18 @@
+import type { Metadata } from 'next'
 import Link from "next/link";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
 import { getCurrentWeekWorkout } from "@/modules/training/application/get-current-week-workout";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: { index: false, follow: false },
+  },
+};
 import {
   isFreeWeek as isFreeCycleWeek,
   getCyclePhase,
