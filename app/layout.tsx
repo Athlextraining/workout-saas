@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "ATHLEX Trainging",
   description:
     "Programa de entrenamiento para preparar ATHX 2026. Diseñado por atletas, ejecutado por ti.",
+  verification: {
+    google: "0I3Tszx3upfC4WQEetpiTU2wA1xGH8AnShOiRiSpULo",
+  },
 };
 
 export default function RootLayout({
