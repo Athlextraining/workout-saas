@@ -15,6 +15,7 @@ import { Navbar } from "./navbar";
 import { NavbarSkeleton } from "./navbar-skeleton";
 import { NavProgress } from "./nav-progress";
 import { ChatBubbleServer } from "./components/chat-bubble-server";
+import { Analytics } from "@/shared/analytics/analytics";
 
 const league_spartan = League_Spartan({
   variable: "--font-league-spartan",
@@ -99,6 +100,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <ChatBubbleServer />
         </Suspense>
+        <Analytics />
       </body>
     </html>
   );

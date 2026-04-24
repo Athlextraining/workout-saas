@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Spinner } from '../spinner'
+import { trackEvent } from '@/shared/analytics/analytics'
 
 interface SubscribeButtonProps {
   className?: string
@@ -17,6 +18,7 @@ export function SubscribeButton({
   async function handleSubscribe() {
     if (loading) return
     setLoading(true)
+    trackEvent('begin_checkout', { currency: 'EUR', value: 14.9 })
     try {
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
       const data = await res.json()
