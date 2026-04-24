@@ -42,8 +42,8 @@ function ProgressDots({ current, total }: { current: number; total: number }) {
             i === current
               ? "w-8 bg-accent"
               : i < current
-              ? "w-2 bg-accent/50"
-              : "w-2 bg-white/20"
+                ? "w-2 bg-accent/50"
+                : "w-2 bg-white/20"
           }`}
         />
       ))}
@@ -481,7 +481,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
 
       <Reveal delay={0.15}>
         <p className="hero-sub">
-          Tu programa para<strong>ATHX</strong> te espera.
+          Tu programa para <strong>ATHX</strong> te espera.
         </p>
       </Reveal>
 
