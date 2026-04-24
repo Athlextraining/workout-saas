@@ -359,6 +359,13 @@ export default function Home() {
               </Reveal>
             ))}
           </ul>
+          <p className="text-center text-sm text-muted">
+            ¿Nuevo en la competición?{" "}
+            <Link href="/que-es-athx" className="text-accent underline">
+              Empieza por qué es ATHX
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
