@@ -394,6 +394,27 @@ export default function Home() {
           <p className="text-muted text-xs">Primera semana gratis</p>
         </Reveal>
       </section>
+
+      {/* Legal footer */}
+      <footer className="px-6 pt-6 pb-10 border-t border-white/5">
+        <div className="max-w-md mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted">
+          <Link href="/privacidad" className="hover:text-white transition-colors">
+            Privacidad
+          </Link>
+          <Link href="/terminos" className="hover:text-white transition-colors">
+            Términos
+          </Link>
+          <a
+            href="mailto:soporte@athlextraining.com"
+            className="hover:text-white transition-colors"
+          >
+            Soporte
+          </a>
+          <span className="w-full text-center text-[10px] uppercase tracking-widest opacity-60 mt-2">
+            © ATHLEX Training
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }
