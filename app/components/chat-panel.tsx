@@ -476,7 +476,7 @@ function Composer({
           onChange={(e) => setBody(e.target.value)}
           onKeyDown={onKey}
           maxLength={BODY_MAX}
-          rows={1}
+          rows={3}
           placeholder="Escribe un mensaje…"
           className="chat-composer-input"
           autoComplete="off"

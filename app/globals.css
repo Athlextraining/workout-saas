@@ -2529,8 +2529,8 @@ a,
   resize: none;
   outline: none;
   font-family: inherit;
-  min-height: 2.5rem;
-  max-height: 120px;
+  min-height: 4.5rem;
+  max-height: 140px;
 }
 
 .chat-composer-input:focus {
