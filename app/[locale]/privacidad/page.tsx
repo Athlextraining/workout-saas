@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { SITE_URL } from '@/shared/seo/site'
 import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 
@@ -30,108 +31,68 @@ export async function generateMetadata({
   }
 }
 
-const LAST_UPDATED = '24 de abril de 2026'
-
-export default function PrivacidadPage() {
+export default async function PrivacidadPage() {
+  const t = await getTranslations('privacy')
   return (
     <div className="min-h-screen px-5 py-12 sm:py-16">
       <article className="mx-auto w-full max-w-2xl space-y-8 text-sm leading-relaxed text-[var(--text-secondary)]">
         <header className="space-y-2">
-          <h1 className="text-2xl font-bold text-white">Política de Privacidad</h1>
+          <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
           <p className="text-xs uppercase tracking-wider opacity-70">
-            Última actualización: {LAST_UPDATED}
+            {t('lastUpdatedLabel')}: {t('lastUpdated')}
           </p>
         </header>
 
-        <Section title="1. Responsable del tratamiento">
-          <p>
-            El responsable del tratamiento de los datos es ATHLEX Training
-            («nosotros»). Para cualquier consulta relacionada con esta política
-            puedes escribir a{' '}
-            <a
-              href="mailto:soporte@athlextraining.com"
-              className="text-[var(--accent-green)] underline"
-            >
-              soporte@athlextraining.com
-            </a>
-            .
-          </p>
+        <Section title={t('sections.responsible.title')}>
+          <p>{t('sections.responsible.body')}</p>
         </Section>
 
-        <Section title="2. Datos que recogemos">
+        <Section title={t('sections.dataCollected.title')}>
           <ul className="list-disc space-y-1 pl-5">
-            <li>Datos de registro: nombre, correo electrónico, contraseña (hasheada).</li>
-            <li>Datos del perfil deportivo: edad, peso, sexo, categoría, fotos de perfil y máximos de fuerza opcionales.</li>
-            <li>Datos de suscripción: identificadores de cliente y estado de pago gestionados por Stripe.</li>
-            <li>Datos técnicos: dirección IP, navegador, sistema operativo y logs básicos.</li>
+            <li>{t('sections.dataCollected.itemRegistration')}</li>
+            <li>{t('sections.dataCollected.itemProfile')}</li>
+            <li>{t('sections.dataCollected.itemSubscription')}</li>
+            <li>{t('sections.dataCollected.itemTechnical')}</li>
           </ul>
         </Section>
 
-        <Section title="3. Finalidades">
+        <Section title={t('sections.purposes.title')}>
           <ul className="list-disc space-y-1 pl-5">
-            <li>Prestarte el servicio de entrenamiento y personalizar los planes.</li>
-            <li>Gestionar la autenticación (email o Google), la suscripción y el soporte.</li>
-            <li>Enviar comunicaciones operativas (confirmaciones, avisos de soporte, cambios de suscripción).</li>
+            <li>{t('sections.purposes.itemTraining')}</li>
+            <li>{t('sections.purposes.itemManage')}</li>
+            <li>{t('sections.purposes.itemCommunicate')}</li>
           </ul>
         </Section>
 
-        <Section title="4. Base legal">
-          <p>
-            Tratamos tus datos para ejecutar el contrato (acceso al servicio), cumplir
-            obligaciones legales (facturación), y en tu consentimiento cuando aplica
-            (p.ej. inicio de sesión con Google).
-          </p>
+        <Section title={t('sections.legalBasis.title')}>
+          <p>{t('sections.legalBasis.body')}</p>
         </Section>
 
-        <Section title="5. Proveedores que procesan tus datos">
+        <Section title={t('sections.providers.title')}>
           <ul className="list-disc space-y-1 pl-5">
-            <li><strong>Supabase</strong> — autenticación, base de datos y almacenamiento de avatares.</li>
-            <li><strong>Stripe</strong> — procesamiento de pagos y suscripciones.</li>
-            <li><strong>Resend</strong> — envío de emails transaccionales.</li>
-            <li><strong>Vercel</strong> — hosting de la aplicación.</li>
-            <li><strong>Google</strong> — inicio de sesión (si eliges esa opción).</li>
+            <li>{t('sections.providers.itemSupabase')}</li>
+            <li>{t('sections.providers.itemStripe')}</li>
+            <li>{t('sections.providers.itemResend')}</li>
+            <li>{t('sections.providers.itemVercel')}</li>
+            <li>{t('sections.providers.itemGoogle')}</li>
           </ul>
-          <p className="mt-2">
-            Estos proveedores actúan como encargados del tratamiento y aplican sus
-            propias garantías de seguridad y cumplimiento.
-          </p>
+          <p className="mt-2">{t('sections.providers.footer')}</p>
         </Section>
 
-        <Section title="6. Conservación">
-          <p>
-            Conservamos tus datos mientras mantengas la cuenta activa. Al eliminar la
-            cuenta borramos tu perfil en un plazo máximo de 30 días, salvo los datos
-            que la ley obliga a conservar (facturación, fiscal).
-          </p>
+        <Section title={t('sections.retention.title')}>
+          <p>{t('sections.retention.body')}</p>
         </Section>
 
-        <Section title="7. Tus derechos">
-          <p>
-            Puedes ejercer los derechos de acceso, rectificación, supresión, oposición,
-            limitación y portabilidad escribiendo a{' '}
-            <a
-              href="mailto:soporte@athlextraining.com"
-              className="text-[var(--accent-green)] underline"
-            >
-              soporte@athlextraining.com
-            </a>
-            . También puedes reclamar ante la autoridad de control competente (en
-            España, la AEPD).
-          </p>
+        <Section title={t('sections.rights.title')}>
+          <p>{t('sections.rights.body')}</p>
         </Section>
 
-        <Section title="8. Cookies">
-          <p>
-            Usamos cookies técnicas necesarias para mantener la sesión iniciada. No
-            usamos cookies publicitarias ni de análisis de terceros.
-          </p>
+        <Section title={t('sections.cookies.title')}>
+          <p>{t('sections.cookies.body')}</p>
         </Section>
 
-        <Section title="9. Cambios">
-          <p>
-            Podemos actualizar esta política. Si hay cambios sustanciales te lo
-            notificaremos por email o desde la app.
-          </p>
+        <Section title={t('sections.changes.title')}>
+          <p>{t('sections.changes.body')}</p>
         </Section>
       </article>
       <div className="mx-auto w-full max-w-2xl mt-12 pt-6 border-t border-white/10 flex justify-center">

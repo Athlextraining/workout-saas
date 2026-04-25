@@ -58,6 +58,59 @@
       "button": "Start now"
     }
   },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdated": "April 24, 2026",
+    "sections": {
+      "responsible": {
+        "title": "1. Controller of data processing",
+        "body": "The controller of data processing is ATHLEX Training (\"we\"). For any questions related to this policy you can write to soporte@athlextraining.com."
+      },
+      "dataCollected": {
+        "title": "2. Data we collect",
+        "itemRegistration": "Registration data: name, email, password (hashed).",
+        "itemProfile": "Sports profile data: age, weight, sex, category, profile photos, and optional strength maxes.",
+        "itemSubscription": "Subscription data: customer identifiers and payment status managed by Stripe.",
+        "itemTechnical": "Technical data: IP address, browser, operating system, and basic logs."
+      },
+      "purposes": {
+        "title": "3. Purposes",
+        "itemTraining": "Provide you with training service and personalize plans.",
+        "itemManage": "Manage authentication (email or Google), subscription, and support.",
+        "itemCommunicate": "Send operational communications (confirmations, support notices, subscription changes)."
+      },
+      "legalBasis": {
+        "title": "4. Legal basis",
+        "body": "We process your data to execute the contract (access to the service), comply with legal obligations (billing), and with your consent when applicable (e.g., Google sign-in)."
+      },
+      "providers": {
+        "title": "5. Providers that process your data",
+        "itemSupabase": "Supabase — authentication, database, and avatar storage.",
+        "itemStripe": "Stripe — payment processing and subscriptions.",
+        "itemResend": "Resend — transactional email delivery.",
+        "itemVercel": "Vercel — application hosting.",
+        "itemGoogle": "Google — sign-in (if you choose that option).",
+        "footer": "These providers act as data processors and apply their own security and compliance guarantees."
+      },
+      "retention": {
+        "title": "6. Retention",
+        "body": "We retain your data while you maintain an active account. When you delete your account, we delete your profile within a maximum of 30 days, except for data required by law to retain (billing, tax)."
+      },
+      "rights": {
+        "title": "7. Your rights",
+        "body": "You can exercise your rights to access, rectification, erasure, objection, restriction, and portability by writing to soporte@athlextraining.com. You can also lodge a complaint with the competent supervisory authority (in Spain, the AEPD (Spanish DPA))."
+      },
+      "cookies": {
+        "title": "8. Cookies",
+        "body": "We use technical cookies necessary to maintain your login session. We do not use advertising or third-party analytics cookies."
+      },
+      "changes": {
+        "title": "9. Changes",
+        "body": "We may update this policy. If there are material changes, we will notify you by email or from the app."
+      }
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",

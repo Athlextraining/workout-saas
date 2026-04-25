@@ -58,6 +58,59 @@
       "button": "Comienza ahora"
     }
   },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdatedLabel": "Última actualización",
+    "lastUpdated": "24 de abril de 2026",
+    "sections": {
+      "responsible": {
+        "title": "1. Responsable del tratamiento",
+        "body": "El responsable del tratamiento de los datos es ATHLEX Training («nosotros»). Para cualquier consulta relacionada con esta política puedes escribir a soporte@athlextraining.com."
+      },
+      "dataCollected": {
+        "title": "2. Datos que recogemos",
+        "itemRegistration": "Datos de registro: nombre, correo electrónico, contraseña (hasheada).",
+        "itemProfile": "Datos del perfil deportivo: edad, peso, sexo, categoría, fotos de perfil y máximos de fuerza opcionales.",
+        "itemSubscription": "Datos de suscripción: identificadores de cliente y estado de pago gestionados por Stripe.",
+        "itemTechnical": "Datos técnicos: dirección IP, navegador, sistema operativo y logs básicos."
+      },
+      "purposes": {
+        "title": "3. Finalidades",
+        "itemTraining": "Prestarte el servicio de entrenamiento y personalizar los planes.",
+        "itemManage": "Gestionar la autenticación (email o Google), la suscripción y el soporte.",
+        "itemCommunicate": "Enviar comunicaciones operativas (confirmaciones, avisos de soporte, cambios de suscripción)."
+      },
+      "legalBasis": {
+        "title": "4. Base legal",
+        "body": "Tratamos tus datos para ejecutar el contrato (acceso al servicio), cumplir obligaciones legales (facturación), y en tu consentimiento cuando aplica (p.ej. inicio de sesión con Google)."
+      },
+      "providers": {
+        "title": "5. Proveedores que procesan tus datos",
+        "itemSupabase": "Supabase — autenticación, base de datos y almacenamiento de avatares.",
+        "itemStripe": "Stripe — procesamiento de pagos y suscripciones.",
+        "itemResend": "Resend — envío de emails transaccionales.",
+        "itemVercel": "Vercel — hosting de la aplicación.",
+        "itemGoogle": "Google — inicio de sesión (si eliges esa opción).",
+        "footer": "Estos proveedores actúan como encargados del tratamiento y aplican sus propias garantías de seguridad y cumplimiento."
+      },
+      "retention": {
+        "title": "6. Conservación",
+        "body": "Conservamos tus datos mientras mantengas la cuenta activa. Al eliminar la cuenta borramos tu perfil en un plazo máximo de 30 días, salvo los datos que la ley obliga a conservar (facturación, fiscal)."
+      },
+      "rights": {
+        "title": "7. Tus derechos",
+        "body": "Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a soporte@athlextraining.com. También puedes reclamar ante la autoridad de control competente (en España, la AEPD)."
+      },
+      "cookies": {
+        "title": "8. Cookies",
+        "body": "Usamos cookies técnicas necesarias para mantener la sesión iniciada. No usamos cookies publicitarias ni de análisis de terceros."
+      },
+      "changes": {
+        "title": "9. Cambios",
+        "body": "Podemos actualizar esta política. Si hay cambios sustanciales te lo notificaremos por email o desde la app."
+      }
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",
