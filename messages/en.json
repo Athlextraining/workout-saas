@@ -111,6 +111,66 @@
       }
     }
   },
+  "terms": {
+    "title": "Terms and Conditions",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdated": "April 24, 2026",
+    "sections": {
+      "whoWeAre": {
+        "title": "1. Who we are",
+        "body": "ATHLEX Training (\"the service\", \"we\") is an online training platform. Contact: soporte@athlextraining.com."
+      },
+      "acceptance": {
+        "title": "2. Acceptance",
+        "bodyPrefix": "By creating an account or subscribing, you accept these terms and our ",
+        "policyLinkText": "Privacy Policy",
+        "bodySuffix": ". If you do not agree, do not use the service."
+      },
+      "minimumAge": {
+        "title": "3. Minimum age",
+        "body": "You must be at least 14 years old to use the service. If you are under 18, you need consent from your parent, guardian, or legal representative."
+      },
+      "subscriptionPayment": {
+        "title": "4. Subscription and payment",
+        "item1": "Access to full content requires an active subscription, managed through Stripe.",
+        "item2": "Billing occurs on a recurring basis according to your chosen plan.",
+        "item3": "You can cancel at any time from your profile. Cancellation takes effect at the end of your paid period.",
+        "item4": "Prorated refunds for partially used periods are not provided, except as required by law."
+      },
+      "contentUsage": {
+        "title": "5. Content usage",
+        "body": "Content (routines, methods, texts, images, videos) is owned by ATHLEX Training. We grant you a personal, non-exclusive, non-transferable license for your individual use. Redistribution, republishing, or commercial use without authorization is prohibited."
+      },
+      "trainingRisks": {
+        "title": "6. Physical training risks",
+        "body": "Physical training carries inherent risks. Consult a doctor before starting any program if you have pre-existing medical conditions, are pregnant, or are recovering from an injury. We are not liable for injuries resulting from content use; you assume all risk and responsibility."
+      },
+      "userConduct": {
+        "title": "7. User conduct",
+        "body": "You agree not to share your account, attempt to access other accounts, reverse-engineer the service, or upload illegal, offensive, or third-party infringing content."
+      },
+      "suspensionCancellation": {
+        "title": "8. Suspension and cancellation",
+        "body": "We may suspend or cancel your account if you breach these terms, if we detect fraudulent activity, or if you stop paying your subscription."
+      },
+      "availability": {
+        "title": "9. Availability",
+        "body": "We make reasonable efforts to keep the service available, but we do not guarantee 100% uptime. We may perform routine maintenance."
+      },
+      "limitationLiability": {
+        "title": "10. Limitation of liability",
+        "body": "The service is provided \"as is\". To the extent permitted by law, we are not liable for indirect damages, lost profits, or data loss resulting from service use."
+      },
+      "termsChanges": {
+        "title": "11. Changes to terms",
+        "body": "We may update these terms. We will notify you of material changes with reasonable advance notice. Continued use after notification constitutes your acceptance."
+      },
+      "applicableLaw": {
+        "title": "12. Applicable law",
+        "body": "These terms are governed by Spanish law. For any disputes, the courts of your domicile as a consumer have jurisdiction."
+      }
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
