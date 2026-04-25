@@ -25,7 +25,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("home");
   // Build FAQ items from translations
   const faqKeys = ["q1", "q2", "q3", "q4", "q5"] as const;
@@ -42,8 +47,8 @@ export default async function Home() {
         href="/backgroundhero.webp"
         fetchPriority="high"
       />
-      <JsonLd data={softwareApplicationLd()} />
-      <JsonLd data={faqPageLd(faqItems)} />
+      <JsonLd data={softwareApplicationLd(locale as 'es' | 'en')} />
+      <JsonLd data={faqPageLd(faqItems, locale as 'es' | 'en')} />
       {/* Hero */}
       <section className="hero-shell">
         <p className="sr-only">{t("hero.srOnlyDesc")}</p>

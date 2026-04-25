@@ -71,7 +71,7 @@ export default async function Page({
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 space-y-10">
-      <JsonLd data={faqPageLd(faqItems)} />
+      <JsonLd data={faqPageLd(faqItems, locale as 'es' | 'en')} />
 
       <header className="space-y-4">
         <p className="text-sm uppercase tracking-widest text-accent">{t("eyebrow")}</p>

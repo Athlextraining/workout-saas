@@ -116,8 +116,8 @@ export default async function RootLayout({
     <html lang={locale} className={`${league_spartan.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <NextIntlClientProvider>
-          <JsonLd data={organizationLd()} />
-          <JsonLd data={webSiteLd()} />
+          <JsonLd data={organizationLd(locale as 'es' | 'en')} />
+          <JsonLd data={webSiteLd(locale as 'es' | 'en')} />
           <NavProgress />
           <Suspense fallback={<NavbarSkeleton />}>
             <Navbar />
