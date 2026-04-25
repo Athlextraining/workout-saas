@@ -1,5 +1,11 @@
 {
   "common": {
     "appName": "ATHLEX Training"
+  },
+  "language": {
+    "label": "Idioma",
+    "spanish": "Español",
+    "english": "English",
+    "switchTo": "Cambiar a {lang}"
   }
 }

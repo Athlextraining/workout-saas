@@ -1,5 +1,6 @@
 import { Link } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infra/supabase/server";
+import { LanguageSwitcher } from "@/shared/i18n/components/language-switcher";
 import { NavMenu } from "./components/nav-menu";
 import { AdminBell } from "./components/admin-bell";
 import { BrandMark } from "./components/brand-mark";
@@ -35,6 +36,9 @@ export async function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
+        <div className="hidden sm:block">
+          <LanguageSwitcher variant="inline" />
+        </div>
         {user ? (
           <>
             {isAdmin && <AdminBell />}

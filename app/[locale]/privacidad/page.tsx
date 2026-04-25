@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/shared/seo/site'
+import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 
 export async function generateMetadata({
   params,
@@ -133,6 +134,9 @@ export default function PrivacidadPage() {
           </p>
         </Section>
       </article>
+      <div className="mx-auto w-full max-w-2xl mt-12 pt-6 border-t border-white/10 flex justify-center">
+        <LanguageSwitcher variant="footer" />
+      </div>
     </div>
   )
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Link } from '@/shared/i18n/routing'
 import { Drawer } from 'vaul'
+import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 import { signOut } from '@/modules/identity/application/sign-out'
 
 interface Props {
@@ -50,6 +51,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
             </div>
 
             <nav className="flex flex-col">
+              <LanguageSwitcher variant="menu-row" />
               <MenuLink
                 href="/perfil"
                 onNavigate={() => setOpen(false)}
