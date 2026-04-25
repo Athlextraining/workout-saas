@@ -252,6 +252,50 @@
     },
     "done": "Done"
   },
+  "preguntanos": {
+    "list": {
+      "title": "Contact",
+      "subtitle": "Any questions? We'll answer you here.",
+      "newButton": "New"
+    },
+    "new": {
+      "title": "New message",
+      "subtitle": "We'll reply as soon as possible by email and here.",
+      "backLink": "← Back"
+    },
+    "thread": {
+      "backLink": "← Back",
+      "statusOpen": "Open",
+      "statusClosed": "Closed"
+    }
+  },
+  "support": {
+    "form": {
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "What would you like to ask us?",
+      "bodyLabel": "Message",
+      "bodyPlaceholder": "Tell us in detail...",
+      "submitNew": "Send",
+      "submitNewSending": "Sending…",
+      "submitReply": "Send reply",
+      "submitReplySending": "Sending…"
+    },
+    "threadList": {
+      "empty": "No messages yet.",
+      "newBadge": "New",
+      "statusOpen": "Open",
+      "statusClosed": "Closed",
+      "adminPrefix": "ATHLEX: "
+    },
+    "replyForm": {
+      "closedNotice": "This thread is closed. Open a new one if you need anything else.",
+      "placeholder": "Type your reply…"
+    },
+    "bubble": {
+      "you": "You",
+      "admin": "ATHLEX"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",

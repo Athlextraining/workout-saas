@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from '@/shared/i18n/routing'
 import { replyToThread } from '../application/reply-to-thread'
 import { BODY_MAX } from '../domain/validators'
 
 export function ReplyForm({ threadId, closed }: { threadId: string; closed?: boolean }) {
+  const t = useTranslations()
   const [body, setBody] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
@@ -28,7 +30,7 @@ export function ReplyForm({ threadId, closed }: { threadId: string; closed?: boo
   if (closed) {
     return (
       <p className="text-sm text-muted text-center italic">
-        Este hilo está cerrado. Abre uno nuevo si necesitas algo más.
+        {t('support.replyForm.closedNotice')}
       </p>
     )
   }
@@ -41,7 +43,7 @@ export function ReplyForm({ threadId, closed }: { threadId: string; closed?: boo
         required
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        placeholder="Escribe tu respuesta…"
+        placeholder={t('support.replyForm.placeholder')}
         className="input-glass w-full px-4 py-3 rounded-xl text-sm resize-y"
       />
       {error && (
@@ -54,7 +56,7 @@ export function ReplyForm({ threadId, closed }: { threadId: string; closed?: boo
         disabled={pending || !body.trim()}
         className="w-full py-3 rounded-xl text-sm font-semibold btn-gradient disabled:opacity-50"
       >
-        {pending ? 'Enviando…' : 'Enviar respuesta'}
+        {pending ? t('support.form.submitReplySending') : t('support.form.submitReply')}
       </button>
     </form>
   )
