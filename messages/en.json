@@ -296,6 +296,86 @@
       "admin": "ATHLEX"
     }
   },
+  "onboarding": {
+    "header": {
+      "back": "Back",
+      "progress": "{step}/{total}"
+    },
+    "steps": {
+      "welcome": {
+        "title": "WELCOME",
+        "titleAccent": "TO ATHLEX.",
+        "subtitle": "Your ATHX program is waiting.",
+        "button": "START"
+      },
+      "basicInfo": {
+        "nameLabel": "What's your name?",
+        "nameSubtitle": "So we can personalize your experience",
+        "namePlaceholder": "Your full name",
+        "ageLabel": "How old are you?",
+        "ageSubtitle": "We'll calibrate intensity to your age",
+        "agePlaceholder": "25",
+        "weightLabel": "What's your weight?",
+        "weightSubtitle": "In kilograms, to calibrate your loads",
+        "weightPlaceholder": "75",
+        "weightSuffix": "kg"
+      },
+      "sex": {
+        "label": "What's your sex?",
+        "subtitle": "To adjust exercises and loads",
+        "male": "Male",
+        "female": "Female"
+      },
+      "category": {
+        "label": "Your category",
+        "subtitle": "Which category will you compete in?",
+        "athx": {
+          "label": "ATHX",
+          "desc": "Standard category"
+        },
+        "athxPro": {
+          "label": "ATHX PRO",
+          "desc": "Advanced — heavier loads and dual dumbbell"
+        }
+      },
+      "fitness": {
+        "label": "Your strength maxes",
+        "subtitle": "Optional — to personalize your loads",
+        "strictPress": "Strict Press",
+        "backSquat": "Back Squat",
+        "deadlift": "Deadlift",
+        "unitSuffix": "kg"
+      },
+      "avatar": {
+        "label": "Your profile photo",
+        "subtitle": "Optional — you can add it later",
+        "altText": "Avatar"
+      },
+      "payment": {
+        "label": "Last step",
+        "subtitle": "Access all weekly training",
+        "feature1": "Complete weekly plan (Monday through Sunday)",
+        "feature2": "Structured cycles: BASE, BUILD, PEAK, DELOAD",
+        "feature3": "ATHX 2026 methodology",
+        "feature4": "Cancel anytime",
+        "subscribe": "Subscribe",
+        "skipLink": "Continue without subscription"
+      }
+    },
+    "buttons": {
+      "next": "Next",
+      "nextSaving": "Saving...",
+      "skip": "Skip",
+      "uploading": "Uploading..."
+    },
+    "errors": {
+      "selectImage": "Select an image",
+      "maxFileSize": "Max 5MB",
+      "notAuthenticated": "Not authenticated",
+      "checkoutError": "Error creating checkout session",
+      "connectionError": "Connection error"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",

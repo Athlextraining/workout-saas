@@ -296,6 +296,86 @@
       "admin": "ATHLEX"
     }
   },
+  "onboarding": {
+    "header": {
+      "back": "Atrás",
+      "progress": "{step}/{total}"
+    },
+    "steps": {
+      "welcome": {
+        "title": "BIENVENIDO",
+        "titleAccent": "A ATHLEX.",
+        "subtitle": "Tu programa para ATHX te espera.",
+        "button": "EMPEZAR"
+      },
+      "basicInfo": {
+        "nameLabel": "¿Cómo te llamas?",
+        "nameSubtitle": "Así podremos personalizar tu experiencia",
+        "namePlaceholder": "Tu nombre completo",
+        "ageLabel": "¿Cuántos años tienes?",
+        "ageSubtitle": "Adaptaremos la intensidad a tu edad",
+        "agePlaceholder": "25",
+        "weightLabel": "¿Cuál es tu peso?",
+        "weightSubtitle": "En kilogramos, para calibrar los ejercicios",
+        "weightPlaceholder": "75",
+        "weightSuffix": "kg"
+      },
+      "sex": {
+        "label": "¿Cuál es tu sexo?",
+        "subtitle": "Para ajustar los ejercicios y cargas",
+        "male": "Hombre",
+        "female": "Mujer"
+      },
+      "category": {
+        "label": "Tu categoría",
+        "subtitle": "¿En qué categoría vas a competir?",
+        "athx": {
+          "label": "ATHX",
+          "desc": "Categoría estándar"
+        },
+        "athxPro": {
+          "label": "ATHX PRO",
+          "desc": "Avanzada — pesos mayores y dual dumbbell"
+        }
+      },
+      "fitness": {
+        "label": "Tus máximos de fuerza",
+        "subtitle": "Opcional — para personalizar las cargas",
+        "strictPress": "Strict Press",
+        "backSquat": "Back Squat",
+        "deadlift": "Deadlift",
+        "unitSuffix": "kg"
+      },
+      "avatar": {
+        "label": "Tu foto de perfil",
+        "subtitle": "Opcional — puedes añadirla después",
+        "altText": "Avatar"
+      },
+      "payment": {
+        "label": "Último paso",
+        "subtitle": "Accede a todos los entrenamientos semanales",
+        "feature1": "Plan semanal completo (lunes a domingo)",
+        "feature2": "Ciclos estructurados: BASE, BUILD, PEAK, DELOAD",
+        "feature3": "Metodología ATHX 2026",
+        "feature4": "Cancela cuando quieras",
+        "subscribe": "Suscribirse",
+        "skipLink": "Continuar sin suscripción"
+      }
+    },
+    "buttons": {
+      "next": "Siguiente",
+      "nextSaving": "Guardando...",
+      "skip": "Omitir",
+      "uploading": "Subiendo..."
+    },
+    "errors": {
+      "selectImage": "Selecciona una imagen",
+      "maxFileSize": "Maximo 5MB",
+      "notAuthenticated": "No autenticado",
+      "checkoutError": "Error al crear la sesión de pago",
+      "connectionError": "Error de conexión"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",
