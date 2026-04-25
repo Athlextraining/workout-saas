@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { League_Spartan } from "next/font/google";
 import { Suspense } from "react";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 import {
   SITE_NAME,
   SITE_URL,
@@ -10,7 +13,8 @@ import {
   LOCALE_ALTERNATES,
 } from "@/shared/seo/site";
 import { JsonLd, organizationLd, webSiteLd } from "@/shared/seo/jsonld";
-import "./globals.css";
+import { routing } from "@/shared/i18n/routing";
+import "../globals.css";
 import { Navbar } from "./navbar";
 import { NavbarSkeleton } from "./navbar-skeleton";
 import { NavProgress } from "./nav-progress";
@@ -23,57 +27,72 @@ const league_spartan = League_Spartan({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_NAME} — Programación y entrenamiento ATHX`,
-    template: `%s · ${SITE_NAME}`,
-  },
-  description: DEFAULT_DESCRIPTION,
-  keywords: DEFAULT_KEYWORDS,
-  applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
-  creator: SITE_NAME,
-  publisher: SITE_NAME,
-  alternates: {
-    canonical: "/",
-    languages: {
-      "es-ES": "/",
-      "es-419": "/",
-      "x-default": "/",
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: `${SITE_NAME} — Programación y entrenamiento ATHX`,
+      template: `%s · ${SITE_NAME}`,
     },
-  },
-  openGraph: {
-    type: "website",
-    siteName: SITE_NAME,
-    title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
     description: DEFAULT_DESCRIPTION,
-    url: SITE_URL,
-    locale: LOCALE_PRIMARY,
-    alternateLocale: LOCALE_ALTERNATES,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
-    description: DEFAULT_DESCRIPTION,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
+    keywords: DEFAULT_KEYWORDS,
+    applicationName: SITE_NAME,
+    authors: [{ name: SITE_NAME, url: SITE_URL }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
+    alternates: {
+      canonical: isEn ? "/en" : "/",
+      languages: {
+        es: "/",
+        en: "/en",
+        "x-default": "/",
+      },
     },
-  },
-  formatDetection: { telephone: false, email: false, address: false },
-  verification: {
-    google: "0I3Tszx3upfC4WQEetpiTU2wA1xGH8AnShOiRiSpULo",
-  },
-  category: "fitness",
-};
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
+      description: DEFAULT_DESCRIPTION,
+      url: isEn ? `${SITE_URL}/en` : SITE_URL,
+      locale: isEn ? "en_US" : LOCALE_PRIMARY,
+      alternateLocale: isEn ? [LOCALE_PRIMARY] : LOCALE_ALTERNATES,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
+      description: DEFAULT_DESCRIPTION,
+    },
+    robots: isEn
+      ? { index: false, follow: false }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
+    formatDetection: { telephone: false, email: false, address: false },
+    verification: {
+      google: "0I3Tszx3upfC4WQEetpiTU2wA1xGH8AnShOiRiSpULo",
+    },
+    category: "fitness",
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#000000",
@@ -82,25 +101,33 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
   return (
-    <html lang="es" className={`${league_spartan.variable} h-full antialiased`}>
+    <html lang={locale} className={`${league_spartan.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
-        <JsonLd data={organizationLd()} />
-        <JsonLd data={webSiteLd()} />
-        <NavProgress />
-        <Suspense fallback={<NavbarSkeleton />}>
-          <Navbar />
-        </Suspense>
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Suspense fallback={null}>
-          <ChatBubbleServer />
-        </Suspense>
-        <Analytics />
+        <NextIntlClientProvider>
+          <JsonLd data={organizationLd()} />
+          <JsonLd data={webSiteLd()} />
+          <NavProgress />
+          <Suspense fallback={<NavbarSkeleton />}>
+            <Navbar />
+          </Suspense>
+          <main className="flex-1 flex flex-col">{children}</main>
+          <Suspense fallback={null}>
+            <ChatBubbleServer />
+          </Suspense>
+          <Analytics />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
