@@ -1,5 +1,601 @@
 {
   "common": {
     "appName": "ATHLEX Training"
+  },
+  "language": {
+    "label": "Language",
+    "spanish": "Spanish",
+    "english": "English",
+    "switchTo": "Switch to {lang}"
+  },
+  "queEsAthx": {
+    "pageTitle": "What is ATHX: athlete guide for 2026",
+    "pageDescription": "ATHX is ATHLEX's fitness competition. Learn what ATHX is, the 3 events (Strength, Endurance, MetCon X), ATHX and ATHX PRO categories, and how to prepare for ATHX 2026 with official programming.",
+    "ogTitle": "What is ATHX: athlete guide for 2026",
+    "ogDescription": "What ATHX is, competition format, categories, and how to prepare.",
+    "eyebrow": "ATHX Guide",
+    "title": "What is ATHX and how to prepare for ATHX 2026",
+    "intro": "ATHX is ATHLEX's fitness competition. This guide explains the format, categories (ATHX and ATHX PRO), and how to build an <strong>ATHX programming plan</strong> that gets you to the podium.",
+    "sections": {
+      "format": {
+        "title": "The ATHX format",
+        "body": "ATHX combines three blocks: <strong>Strength</strong>, <strong>Endurance</strong>, and <strong>MetCon X</strong>. Each block measures a different capacity and is scored independently. The winner is who performs most balanced across all three."
+      },
+      "programming": {
+        "title": "What serious ATHX programming looks like",
+        "body1": "Well-designed <strong>ATHX programming</strong> periodizes into 4 phases: BASE, BUILD, PEAK, and DELOAD. Load increases progressively by RPE and % 1RM, with unload weeks to arrive fresh at competition.",
+        "body2": "<strong>ATHX training</strong> must include the year's movements from week 1 — if you arrive at competition with questionable technique, you won't compensate with volume."
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions about ATHX",
+      "items": {
+        "q1": {
+          "question": "What is ATHX?",
+          "answer": "ATHX is the fitness competition organized by ATHLEX. It brings together strength tests, endurance events, and mixed competitions (MetCon X) in a 3-day format. It's open to athletes from Spain and Latin America."
+        },
+        "q2": {
+          "question": "What are the ATHX events?",
+          "answer": "ATHX is divided into three blocks: Strength (max strength), Endurance (endurance), and MetCon X (mixed events with weighted and gymnastics movements). The cycle culminates in a simulation of all 3 blocks."
+        },
+        "q3": {
+          "question": "Difference between ATHX and ATHX PRO?",
+          "answer": "ATHX is the open category. ATHX PRO increases volume and intensity for competitive athletes: longer sessions, higher loads, and stricter movement standards."
+        },
+        "q4": {
+          "question": "How do I prepare for ATHX?",
+          "answer": "With sport-specific ATHX programming: periodization in BASE, BUILD, PEAK, and DELOAD, calibrated by RPE and % 1RM. ATHLEX Training delivers a weekly plan Monday through Sunday, warm-up, strength and MetCon each day, plus direct chat with coach."
+        },
+        "q5": {
+          "question": "When is ATHX 2026?",
+          "answer": "Official ATHX 2026 dates are announced on ATHLEX's official channel. Our programming is aligned to the competition calendar."
+        }
+      }
+    },
+    "cta": {
+      "title": "Start today",
+      "body": "ATHLEX Training delivers official ATHX programming with weekly plan, tracking, and direct chat with coach. First week free.",
+      "button": "Start now"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdated": "April 24, 2026",
+    "sections": {
+      "responsible": {
+        "title": "1. Controller of data processing",
+        "body": "The controller of data processing is ATHLEX Training (\"we\"). For any questions related to this policy you can write to soporte@athlextraining.com."
+      },
+      "dataCollected": {
+        "title": "2. Data we collect",
+        "itemRegistration": "Registration data: name, email, password (hashed).",
+        "itemProfile": "Sports profile data: age, weight, sex, category, profile photos, and optional strength maxes.",
+        "itemSubscription": "Subscription data: customer identifiers and payment status managed by Stripe.",
+        "itemTechnical": "Technical data: IP address, browser, operating system, and basic logs."
+      },
+      "purposes": {
+        "title": "3. Purposes",
+        "itemTraining": "Provide you with training service and personalize plans.",
+        "itemManage": "Manage authentication (email or Google), subscription, and support.",
+        "itemCommunicate": "Send operational communications (confirmations, support notices, subscription changes)."
+      },
+      "legalBasis": {
+        "title": "4. Legal basis",
+        "body": "We process your data to execute the contract (access to the service), comply with legal obligations (billing), and with your consent when applicable (e.g., Google sign-in)."
+      },
+      "providers": {
+        "title": "5. Providers that process your data",
+        "itemSupabase": "Supabase — authentication, database, and avatar storage.",
+        "itemStripe": "Stripe — payment processing and subscriptions.",
+        "itemResend": "Resend — transactional email delivery.",
+        "itemVercel": "Vercel — application hosting.",
+        "itemGoogle": "Google — sign-in (if you choose that option).",
+        "footer": "These providers act as data processors and apply their own security and compliance guarantees."
+      },
+      "retention": {
+        "title": "6. Retention",
+        "body": "We retain your data while you maintain an active account. When you delete your account, we delete your profile within a maximum of 30 days, except for data required by law to retain (billing, tax)."
+      },
+      "rights": {
+        "title": "7. Your rights",
+        "body": "You can exercise your rights to access, rectification, erasure, objection, restriction, and portability by writing to soporte@athlextraining.com. You can also lodge a complaint with the competent supervisory authority (in Spain, the AEPD (Spanish DPA))."
+      },
+      "cookies": {
+        "title": "8. Cookies",
+        "body": "We use technical cookies necessary to maintain your login session. We do not use advertising or third-party analytics cookies."
+      },
+      "changes": {
+        "title": "9. Changes",
+        "body": "We may update this policy. If there are material changes, we will notify you by email or from the app."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "lastUpdatedLabel": "Last updated",
+    "lastUpdated": "April 24, 2026",
+    "sections": {
+      "whoWeAre": {
+        "title": "1. Who we are",
+        "body": "ATHLEX Training (\"the service\", \"we\") is an online training platform. Contact: soporte@athlextraining.com."
+      },
+      "acceptance": {
+        "title": "2. Acceptance",
+        "bodyPrefix": "By creating an account or subscribing, you accept these terms and our ",
+        "policyLinkText": "Privacy Policy",
+        "bodySuffix": ". If you do not agree, do not use the service."
+      },
+      "minimumAge": {
+        "title": "3. Minimum age",
+        "body": "You must be at least 14 years old to use the service. If you are under 18, you need consent from your parent, guardian, or legal representative."
+      },
+      "subscriptionPayment": {
+        "title": "4. Subscription and payment",
+        "item1": "Access to full content requires an active subscription, managed through Stripe.",
+        "item2": "Billing occurs on a recurring basis according to your chosen plan.",
+        "item3": "You can cancel at any time from your profile. Cancellation takes effect at the end of your paid period.",
+        "item4": "Prorated refunds for partially used periods are not provided, except as required by law."
+      },
+      "contentUsage": {
+        "title": "5. Content usage",
+        "body": "Content (routines, methods, texts, images, videos) is owned by ATHLEX Training. We grant you a personal, non-exclusive, non-transferable license for your individual use. Redistribution, republishing, or commercial use without authorization is prohibited."
+      },
+      "trainingRisks": {
+        "title": "6. Physical training risks",
+        "body": "Physical training carries inherent risks. Consult a doctor before starting any program if you have pre-existing medical conditions, are pregnant, or are recovering from an injury. We are not liable for injuries resulting from content use; you assume all risk and responsibility."
+      },
+      "userConduct": {
+        "title": "7. User conduct",
+        "body": "You agree not to share your account, attempt to access other accounts, reverse-engineer the service, or upload illegal, offensive, or third-party infringing content."
+      },
+      "suspensionCancellation": {
+        "title": "8. Suspension and cancellation",
+        "body": "We may suspend or cancel your account if you breach these terms, if we detect fraudulent activity, or if you stop paying your subscription."
+      },
+      "availability": {
+        "title": "9. Availability",
+        "body": "We make reasonable efforts to keep the service available, but we do not guarantee 100% uptime. We may perform routine maintenance."
+      },
+      "limitationLiability": {
+        "title": "10. Limitation of liability",
+        "body": "The service is provided \"as is\". To the extent permitted by law, we are not liable for indirect damages, lost profits, or data loss resulting from service use."
+      },
+      "termsChanges": {
+        "title": "11. Changes to terms",
+        "body": "We may update these terms. We will notify you of material changes with reasonable advance notice. Continued use after notification constitutes your acceptance."
+      },
+      "applicableLaw": {
+        "title": "12. Applicable law",
+        "body": "These terms are governed by Spanish law. For any disputes, the courts of your domicile as a consumer have jurisdiction."
+      }
+    }
+  },
+  "login": {
+    "title": {
+      "signIn": "Sign in",
+      "signUp": "Create account"
+    },
+    "form": {
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "fullNamePlaceholder": "Full name"
+    },
+    "submit": {
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "signingIn": "Signing in...",
+      "signingUp": "Creating account..."
+    },
+    "toggle": {
+      "toSignUp": "Don't have an account? Sign up",
+      "toSignIn": "Already have an account? Sign in"
+    },
+    "divider": "or",
+    "google": {
+      "button": "Continue with Google",
+      "loading": "Connecting..."
+    }
+  },
+  "perfil": {
+    "title": "Profile",
+    "fields": {
+      "email": "Email",
+      "subscription": "Subscription",
+      "status": "Status",
+      "nextRenewal": "Next renewal"
+    },
+    "status": {
+      "active": "Active",
+      "none": "No subscription"
+    },
+    "actions": {
+      "managePortal": "Manage subscription",
+      "managingPortal": "Opening portal...",
+      "signOut": "Sign out",
+      "signingOut": "Signing out..."
+    }
+  },
+  "entrenamiento": {
+    "title": "Weekly Training",
+    "subtitle": "Your training is being prepared. Check back shortly.",
+    "ctaUnregistered": {
+      "eyebrow": "Exclusive Access",
+      "title": "YOUR PLAN\nAWAITS.",
+      "subtitle": "Training and tracking built for your category. Sign up in 5 minutes and start.",
+      "button": "START NOW",
+      "fineprint": "First week free"
+    },
+    "paywall": {
+      "title": "Keep Your Progress",
+      "subtitle": "You've completed your free first week. Subscribe to access the rest.",
+      "button": "Subscribe"
+    },
+    "subscribe": {
+      "button": "Subscribe",
+      "redirecting": "Redirecting...",
+      "errorGeneral": "Error creating checkout session",
+      "errorConnection": "Connection error"
+    },
+    "week": {
+      "phase": "Week"
+    },
+    "day": {
+      "rest": "Rest",
+      "markDone": "Mark as done",
+      "markUndone": "Mark as undone"
+    },
+    "sections": {
+      "warmup": "Warm-up",
+      "strength": "Strength",
+      "wod": "WOD"
+    },
+    "done": "Done"
+  },
+  "preguntanos": {
+    "list": {
+      "title": "Contact",
+      "subtitle": "Any questions? We'll answer you here.",
+      "newButton": "New"
+    },
+    "new": {
+      "title": "New message",
+      "subtitle": "We'll reply as soon as possible by email and here.",
+      "backLink": "← Back"
+    },
+    "thread": {
+      "backLink": "← Back",
+      "statusOpen": "Open",
+      "statusClosed": "Closed"
+    }
+  },
+  "support": {
+    "form": {
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "What would you like to ask us?",
+      "bodyLabel": "Message",
+      "bodyPlaceholder": "Tell us in detail...",
+      "submitNew": "Send",
+      "submitNewSending": "Sending…",
+      "submitReply": "Send reply",
+      "submitReplySending": "Sending…"
+    },
+    "threadList": {
+      "empty": "No messages yet.",
+      "newBadge": "New",
+      "statusOpen": "Open",
+      "statusClosed": "Closed",
+      "adminPrefix": "ATHLEX: "
+    },
+    "replyForm": {
+      "closedNotice": "This thread is closed. Open a new one if you need anything else.",
+      "placeholder": "Type your reply…"
+    },
+    "bubble": {
+      "you": "You",
+      "admin": "ATHLEX"
+    },
+    "chat": {
+      "anonTitle": "Train with full tracking",
+      "anonDesc": "Chat directly with the ATHLEX team, get feedback on your sessions, and access the full program.",
+      "anonBullet1": "Direct chat with your coach",
+      "anonBullet2": "Customized workouts ATHX / ATHX PRO",
+      "anonBullet3": "1RM tracking and progress monitoring",
+      "anonCta": "Start now",
+      "anonFineprint": "First week free.",
+      "userStatus": "Replies in ~24h",
+      "welcomeMsg": "Hi! Tell us what you need — technique questions, scaling, pain, anything. We'll get back to you as soon as possible.",
+      "placeholder": "Type a message…",
+      "sendAriaLabel": "Send",
+      "loading": "Loading…",
+      "threadClosed": "This thread is closed.",
+      "reopenBtn": "Start new inquiry",
+      "adminClosedMsg": "Thread closed.",
+      "adminBackBtn": "Back",
+      "inboxTitle": "Inbox",
+      "inboxSubSingular": "1 thread",
+      "inboxSubPlural": "{count} threads",
+      "inboxEmpty": "No threads yet.",
+      "adminTuLabel": "You: "
+    }
+  },
+  "onboarding": {
+    "header": {
+      "back": "Back",
+      "progress": "{step}/{total}"
+    },
+    "steps": {
+      "welcome": {
+        "title": "WELCOME",
+        "titleAccent": "TO ATHLEX.",
+        "subtitle": "Your ATHX program is waiting.",
+        "button": "START"
+      },
+      "basicInfo": {
+        "nameLabel": "What's your name?",
+        "nameSubtitle": "So we can personalize your experience",
+        "namePlaceholder": "Your full name",
+        "ageLabel": "How old are you?",
+        "ageSubtitle": "We'll calibrate intensity to your age",
+        "agePlaceholder": "25",
+        "weightLabel": "What's your weight?",
+        "weightSubtitle": "In kilograms, to calibrate your loads",
+        "weightPlaceholder": "75",
+        "weightSuffix": "kg"
+      },
+      "sex": {
+        "label": "What's your sex?",
+        "subtitle": "To adjust exercises and loads",
+        "male": "Male",
+        "female": "Female"
+      },
+      "category": {
+        "label": "Your category",
+        "subtitle": "Which category will you compete in?",
+        "athx": {
+          "label": "ATHX",
+          "desc": "Standard category"
+        },
+        "athxPro": {
+          "label": "ATHX PRO",
+          "desc": "Advanced — heavier loads and dual dumbbell"
+        }
+      },
+      "fitness": {
+        "label": "Your strength maxes",
+        "subtitle": "Optional — to personalize your loads",
+        "strictPress": "Strict Press",
+        "backSquat": "Back Squat",
+        "deadlift": "Deadlift",
+        "unitSuffix": "kg"
+      },
+      "avatar": {
+        "label": "Your profile photo",
+        "subtitle": "Optional — you can add it later",
+        "altText": "Avatar"
+      },
+      "payment": {
+        "label": "Last step",
+        "subtitle": "Access all weekly training",
+        "feature1": "Complete weekly plan (Monday through Sunday)",
+        "feature2": "Structured cycles: BASE, BUILD, PEAK, DELOAD",
+        "feature3": "ATHX 2026 methodology",
+        "feature4": "Cancel anytime",
+        "subscribe": "Subscribe",
+        "skipLink": "Continue without subscription"
+      }
+    },
+    "buttons": {
+      "next": "Next",
+      "nextSaving": "Saving...",
+      "skip": "Skip",
+      "uploading": "Uploading..."
+    },
+    "errors": {
+      "selectImage": "Select an image",
+      "maxFileSize": "Max 5MB",
+      "notAuthenticated": "Not authenticated",
+      "checkoutError": "Error creating checkout session",
+      "connectionError": "Connection error"
+    }
+  },
+  "nav": {
+    "brandAriaLabel": "ATHLEX training",
+    "programLink": "Programming",
+    "signInButton": "Sign in",
+    "menu": {
+      "ariaLabel": "Menu",
+      "title": "Menu",
+      "profileLink": "Profile",
+      "contactLink": "Contact",
+      "adminLink": "Admin · Messages",
+      "signOut": "Sign out"
+    },
+    "adminBell": {
+      "ariaLabel": "Messages",
+      "inboxTitle": "Message inbox"
+    }
+  },
+  "bienvenida": {
+    "steps": {
+      "methodology": {
+        "eyebrow": "Methodology",
+        "title": "Science, not luck",
+        "description": "Each week follows calculated periodization and progression."
+      },
+      "sessions": {
+        "eyebrow": "Sessions",
+        "title": "60 to 90 minutes",
+        "description": "Dense training, no filler. Every exercise, every rep, has a purpose."
+      },
+      "progression": {
+        "eyebrow": "Progression",
+        "title": "Loads that scale",
+        "description": "Start with what you can handle. The plan adjusts week by week so you progress as much as possible."
+      }
+    },
+    "welcome": {
+      "badge": "Subscription active",
+      "title": "YOU'RE NOW",
+      "titleAccent": "ATHLEX.",
+      "subtitle": "Welcome. In 3 screens we'll show you how your programming works.",
+      "button": "Let's go"
+    },
+    "final": {
+      "badge": "All set",
+      "title": "YOUR PLAN",
+      "titleAccent": "AWAITS.",
+      "subtitle": "Each Monday, the next week unlocks.",
+      "button": "VIEW MY TRAINING"
+    },
+    "header": {
+      "back": "Back"
+    }
+  },
+  "admin": {
+    "threads": {
+      "title": "Inbox · Admin",
+      "summaryOpen": "{count, plural, =0 {No open} =1 {1 open} other {# open}}",
+      "summaryTotal": "total"
+    },
+    "thread": {
+      "backLink": "← Inbox",
+      "statusOpen": "Open",
+      "statusClosed": "Closed",
+      "closeButton": "Close thread",
+      "reopenButton": "Reopen thread",
+      "closing": "…",
+      "reopening": "…"
+    }
+  },
+  "timer": {
+    "launch": "Start timer",
+    "decrease": "Decrease",
+    "increase": "Increase",
+    "close": "Close",
+    "stop": "Stop"
+  },
+  "home": {
+    "hero": {
+      "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
+      "eyebrow": "ATHX™ Training by ATHLEX",
+      "title": "TRAIN\nGROW\nCOMPETE.",
+      "titleAccent": "COMPETE.",
+      "subtitle": "ATHX Programming™: weekly training plan to prepare for ATHX 2026. Progress tracking and direct chat with your coach.",
+      "ctaPrimary": "START NOW",
+      "fineprint": "First week free",
+      "scrollCue": "Program"
+    },
+    "tools": {
+      "intro": "Tools",
+      "title": "Everything you need.",
+      "titleEm": "In your pocket.",
+      "chat": {
+        "tag": "Direct messaging",
+        "title": "Your coach one message away",
+        "body": "Questions about technique, scaling, pain — ask freely and get answers from the ATHLEX team the same day.",
+        "coachName": "ATHLEX",
+        "coachStatus": "online",
+        "bubble1": "How was your Back Squat today?",
+        "bubble2": "5×5 at 110 kg, RPE 7. Had one left.",
+        "bubble3": "Perfect. We'll go to 115 tomorrow. 🔥",
+        "bubble4": "Let's go!",
+        "inputPlaceholder": "Type a message…"
+      },
+      "timer": {
+        "tag": "Built-in timer",
+        "title": "AMRAP, EMOM, For Time",
+        "body": "Competition modes ready in 2 taps. Beeps per round, screen always awake, and one-handed control.",
+        "mode": "FOR TIME",
+        "time": "07:42",
+        "round": "Round 3 / 4"
+      }
+    },
+    "features": {
+      "intro": "The program",
+      "title": "ATHX Programming:\nthree pillars, zero filler.",
+      "items": [
+        {
+          "tag": "ATHX Specific",
+          "title": "Built for ATHX Games",
+          "body": "Every week and cycle targets the 3 events: Strength, Endurance, and MetCon X. No fluff."
+        },
+        {
+          "tag": "Pro methodology",
+          "title": "4-phase periodization",
+          "body": "BASE, BUILD, PEAK, and DELOAD. Progressive load calibrated by RPE and % 1RM. Science does the work."
+        },
+        {
+          "tag": "Key day",
+          "title": "Better than the rest",
+          "body": "The cycle ends with full-event simulations. Initial and final testing to measure real progress."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Simple pricing",
+      "headline": "One program.\nOne price.",
+      "badge": "Popular",
+      "tag": "ATHX 2026 Program",
+      "price": "14",
+      "priceDecimal": ".90",
+      "unit": "/month",
+      "sub": "Cancel anytime.",
+      "features": [
+        "Programming and individual tracking",
+        "2 categories: ATHX and ATHX PRO",
+        "Weekly plan Monday through Sunday",
+        "Warm-up, strength, and MetCon each day",
+        "First week free"
+      ],
+      "cta": "Subscribe",
+      "fineprint": "Cancel anytime"
+    },
+    "whyChoose": {
+      "title": "Why choose ATHLEX for your ATHX training",
+      "intro": "New to competition?",
+      "introLink": "Start with what is ATHX",
+      "items": [
+        "Clear structure built for you",
+        "Real progression: loads go up, times come down.",
+        "Competition movements from week 1.",
+        "Designed from experience",
+        "Logging and leaderboard to track your progress"
+      ]
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": {
+        "q1": {
+          "question": "Do I need prior experience?",
+          "answer": "Yes, prior knowledge is recommended. The program assumes mastery of the movements included this year."
+        },
+        "q2": {
+          "question": "What equipment do I need?",
+          "answer": "Standard box: Olympic barbell, dumbbells, sandbag, box jump, ski-erg, or rowing machine."
+        },
+        "q3": {
+          "question": "How long is each session?",
+          "answer": "Between 60 and 90 minutes."
+        },
+        "q4": {
+          "question": "What's the difference between ATHX and ATHX PRO?",
+          "answer": "PRO has higher work capacity and workouts tend to run a bit longer."
+        },
+        "q5": {
+          "question": "How do I cancel?",
+          "answer": "From your profile, one click. Cancel anytime. You keep access until the end of your paid period."
+        }
+      }
+    },
+    "footer": {
+      "cta": "Your next PR\nstarts Monday.",
+      "ctaButton": "Start now",
+      "ctaFineprint": "First week free",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "support": "Support",
+      "copyright": "© ATHLEX Training"
+    }
   }
 }

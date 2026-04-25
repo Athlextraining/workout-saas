@@ -9,7 +9,7 @@ export function JsonLd({ data }: { data: object }) {
   );
 }
 
-export function organizationLd() {
+export function organizationLd(locale?: 'es' | 'en') {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -18,20 +18,21 @@ export function organizationLd() {
     logo: `${SITE_URL}/icon`,
     email: "soporte@athlextraining.com",
     sameAs: [] as string[],
+    inLanguage: locale ?? 'es',
   };
 }
 
-export function webSiteLd() {
+export function webSiteLd(locale?: 'es' | 'en') {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
-    inLanguage: "es",
+    inLanguage: locale ?? 'es',
   };
 }
 
-export function softwareApplicationLd() {
+export function softwareApplicationLd(locale?: 'es' | 'en') {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -47,10 +48,11 @@ export function softwareApplicationLd() {
       availability: "https://schema.org/InStock",
       url: `${SITE_URL}/login`,
     },
+    inLanguage: locale ?? 'es',
   };
 }
 
-export function faqPageLd(items: { question: string; answer: string }[]) {
+export function faqPageLd(items: { question: string; answer: string }[], locale?: 'es' | 'en') {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -59,5 +61,6 @@ export function faqPageLd(items: { question: string; answer: string }[]) {
       name: question,
       acceptedAnswer: { "@type": "Answer", text: answer },
     })),
+    inLanguage: locale ?? 'es',
   };
 }

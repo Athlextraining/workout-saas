@@ -7,6 +7,7 @@ import {
   useTransition,
   ViewTransition,
 } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "motion/react";
 import { Link } from "@/shared/i18n/routing";
 import { saveBasicInfo } from "@/modules/onboarding/application/save-basic-info";
@@ -53,6 +54,7 @@ function ProgressDots({ current, total }: { current: number; total: number }) {
 }
 
 export default function OnboardingPage() {
+  const t = useTranslations("onboarding");
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState<"forward" | "back">("forward");
   const [, startTransition] = useTransition();
@@ -162,7 +164,7 @@ export default function OnboardingPage() {
     goNext();
   }
 
-  async function handleSubscribe() {
+  async function handleSubscribe(t: any) {
     try {
       const res = await fetch("/api/stripe/checkout", { method: "POST" });
       const data = await res.json();
@@ -171,11 +173,11 @@ export default function OnboardingPage() {
         window.location.href = data.url;
       } else {
         console.error("Checkout error:", data.error);
-        alert(data.error || "Error al crear la sesión de pago");
+        alert(data.error || t("errors.checkoutError"));
       }
     } catch (err) {
       console.error("Fetch error:", err);
-      alert("Error de conexión");
+      alert(t("errors.connectionError"));
     }
   }
 
@@ -346,14 +348,14 @@ export default function OnboardingPage() {
         <div className="flex items-center justify-between h-14">
           {step > 0 && step < TOTAL_STEPS - 1 ? (
             <button onClick={goBack} className="text-sm text-muted">
-              Atrás
+              {t("header.back")}
             </button>
           ) : (
             <div />
           )}
           {step > 0 && step < TOTAL_STEPS - 1 && (
             <span className="text-sm text-muted">
-              {step}/{TOTAL_STEPS - 2}
+              {t("header.progress", { step, total: TOTAL_STEPS - 2 })}
             </span>
           )}
         </div>
@@ -371,39 +373,41 @@ export default function OnboardingPage() {
           default="none"
         >
           <div className="w-full max-w-sm">
-            {step === 0 && <StepWelcome onNext={goNext} />}
+            {step === 0 && <StepWelcome onNext={goNext} t={t} />}
             {step === 1 && (
               <StepInput
-                label="¿Cómo te llamas?"
-                subtitle="Así podremos personalizar tu experiencia"
+                label={t("steps.basicInfo.nameLabel")}
+                subtitle={t("steps.basicInfo.nameSubtitle")}
                 type="text"
-                placeholder="Tu nombre completo"
+                placeholder={t("steps.basicInfo.namePlaceholder")}
                 value={data.fullName}
                 onChange={(v) => updateField("fullName", v)}
                 onNext={goNext}
                 canProceed={canProceed()}
+                t={t}
               />
             )}
             {step === 2 && (
               <StepInput
-                label="¿Cuántos años tienes?"
-                subtitle="Adaptaremos la intensidad a tu edad"
+                label={t("steps.basicInfo.ageLabel")}
+                subtitle={t("steps.basicInfo.ageSubtitle")}
                 type="number"
-                placeholder="25"
+                placeholder={t("steps.basicInfo.agePlaceholder")}
                 value={data.age}
                 onChange={(v) => updateField("age", v)}
                 onNext={goNext}
                 canProceed={canProceed()}
                 min={14}
                 max={100}
+                t={t}
               />
             )}
             {step === 3 && (
               <StepInput
-                label="¿Cuál es tu peso?"
-                subtitle="En kilogramos, para calibrar los ejercicios"
+                label={t("steps.basicInfo.weightLabel")}
+                subtitle={t("steps.basicInfo.weightSubtitle")}
                 type="number"
-                placeholder="75"
+                placeholder={t("steps.basicInfo.weightPlaceholder")}
                 value={data.weight}
                 onChange={(v) => updateField("weight", v)}
                 onNext={goNext}
@@ -411,7 +415,8 @@ export default function OnboardingPage() {
                 min={30}
                 max={300}
                 step={0.1}
-                suffix="kg"
+                suffix={t("steps.basicInfo.weightSuffix")}
+                t={t}
               />
             )}
             {step === 4 && (
@@ -422,6 +427,7 @@ export default function OnboardingPage() {
                 canProceed={canProceed()}
                 loading={loading}
                 error={error}
+                t={t}
               />
             )}
             {step === 5 && (
@@ -432,6 +438,7 @@ export default function OnboardingPage() {
                 canProceed={canProceed()}
                 loading={loading}
                 error={error}
+                t={t}
               />
             )}
             {step === 6 && (
@@ -453,10 +460,16 @@ export default function OnboardingPage() {
                 onNext={handleSaveFitness}
                 onSkip={handleSaveFitness}
                 loading={loading}
+                t={t}
               />
             )}
-            {step === 7 && <StepAvatar onNext={goNext} onSkip={goNext} />}
-            {step === 8 && <StepPayment onSubscribe={handleSubscribe} />}
+            {step === 7 && <StepAvatar onNext={goNext} onSkip={goNext} t={t} />}
+            {step === 8 && (
+              <StepPayment
+                onSubscribe={() => handleSubscribe(t)}
+                t={t}
+              />
+            )}
           </div>
         </ViewTransition>
       </div>
@@ -464,7 +477,7 @@ export default function OnboardingPage() {
   );
 }
 
-function StepWelcome({ onNext }: { onNext: () => void }) {
+function StepWelcome({ onNext, t }: { onNext: () => void; t: any }) {
   return (
     <div className="flex flex-col items-center text-center gap-7">
       <span className="hero-eyebrow">
@@ -474,21 +487,23 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
 
       <Reveal delay={0.05}>
         <h1 className="onboarding-welcome-title">
-          BIENVENIDO
+          {t("steps.welcome.title")}
           <br />
-          <span className="hero-title-accent font-extrabold">A ATHLEX.</span>
+          <span className="hero-title-accent font-extrabold">
+            {t("steps.welcome.titleAccent")}
+          </span>
         </h1>
       </Reveal>
 
       <Reveal delay={0.15}>
         <p className="hero-sub">
-          Tu programa para <strong>ATHX</strong> te espera.
+          {t("steps.welcome.subtitle")}
         </p>
       </Reveal>
 
       <Reveal delay={0.25} className="w-full">
         <button onClick={onNext} className="hero-cta-primary">
-          EMPEZAR
+          {t("steps.welcome.button")}
           <svg
             width="18"
             height="18"
@@ -523,6 +538,7 @@ function StepInput({
   max,
   step,
   suffix,
+  t,
 }: {
   label: string;
   subtitle: string;
@@ -536,6 +552,7 @@ function StepInput({
   max?: number;
   step?: number;
   suffix?: string;
+  t: any;
 }) {
   return (
     <div className="space-y-8">
@@ -569,7 +586,7 @@ function StepInput({
         disabled={!canProceed}
         className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
-        Siguiente
+        {t("buttons.next")}
       </button>
     </div>
   );
@@ -582,6 +599,7 @@ function StepSex({
   canProceed,
   loading,
   error,
+  t,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -589,18 +607,19 @@ function StepSex({
   canProceed: boolean;
   loading: boolean;
   error: string | null;
+  t: any;
 }) {
   const options = [
-    { value: "male", label: "Hombre" },
-    { value: "female", label: "Mujer" },
+    { value: "male", label: t("steps.sex.male") },
+    { value: "female", label: t("steps.sex.female") },
   ];
 
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">¿Cuál es tu sexo?</h2>
+        <h2 className="text-2xl font-bold">{t("steps.sex.label")}</h2>
         <p className="text-muted text-sm">
-          Para ajustar los ejercicios y cargas
+          {t("steps.sex.subtitle")}
         </p>
       </div>
 
@@ -632,7 +651,7 @@ function StepSex({
         disabled={!canProceed || loading}
         className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
-        {loading ? "Guardando..." : "Siguiente"}
+        {loading ? t("buttons.nextSaving") : t("buttons.next")}
       </button>
     </div>
   );
@@ -645,6 +664,7 @@ function StepCategory({
   canProceed,
   loading,
   error,
+  t,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -652,21 +672,26 @@ function StepCategory({
   canProceed: boolean;
   loading: boolean;
   error: string | null;
+  t: any;
 }) {
   const options = [
-    { value: "athx", label: "ATHX", desc: "Categoría estándar" },
+    {
+      value: "athx",
+      label: t("steps.category.athx.label"),
+      desc: t("steps.category.athx.desc"),
+    },
     {
       value: "athx_pro",
-      label: "ATHX PRO",
-      desc: "Avanzada — pesos mayores y dual dumbbell",
+      label: t("steps.category.athxPro.label"),
+      desc: t("steps.category.athxPro.desc"),
     },
   ];
 
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tu categoría</h2>
-        <p className="text-muted text-sm">¿En qué categoría vas a competir?</p>
+        <h2 className="text-2xl font-bold">{t("steps.category.label")}</h2>
+        <p className="text-muted text-sm">{t("steps.category.subtitle")}</p>
       </div>
 
       {error && <p className="text-red-400 text-sm text-center">{error}</p>}
@@ -698,7 +723,7 @@ function StepCategory({
         disabled={!canProceed || loading}
         className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
       >
-        {loading ? "Guardando..." : "Siguiente"}
+        {loading ? t("buttons.nextSaving") : t("buttons.next")}
       </button>
     </div>
   );
@@ -711,6 +736,7 @@ function StepRM({
   onNext,
   onSkip,
   loading,
+  t,
 }: {
   values: { strictPress: string; backSquat: string; deadlift: string };
   onChange: (field: string, v: string) => void;
@@ -718,11 +744,12 @@ function StepRM({
   onNext: () => void;
   onSkip: () => void;
   loading: boolean;
+  t: any;
 }) {
   const fields: { key: RMField; label: string }[] = [
-    { key: "strictPress", label: "Strict Press" },
-    { key: "backSquat", label: "Back Squat" },
-    { key: "deadlift", label: "Deadlift" },
+    { key: "strictPress", label: t("steps.fitness.strictPress") },
+    { key: "backSquat", label: t("steps.fitness.backSquat") },
+    { key: "deadlift", label: t("steps.fitness.deadlift") },
   ];
 
   const hasAny = Object.values(values).some((v) => v !== "");
@@ -730,9 +757,9 @@ function StepRM({
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tus máximos de fuerza</h2>
+        <h2 className="text-2xl font-bold">{t("steps.fitness.label")}</h2>
         <p className="text-muted text-sm">
-          Opcional — para personalizar las cargas
+          {t("steps.fitness.subtitle")}
         </p>
       </div>
 
@@ -753,7 +780,7 @@ function StepRM({
                 className="w-full px-4 py-3.5 rounded-xl text-base input-glass"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted text-sm">
-                kg
+                {t("steps.fitness.unitSuffix")}
               </span>
             </div>
           </div>
@@ -766,14 +793,14 @@ function StepRM({
           disabled={!hasAny || loading}
           className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
-          {loading ? "Guardando..." : "Siguiente"}
+          {loading ? t("buttons.nextSaving") : t("buttons.next")}
         </button>
         <button
           onClick={onSkip}
           disabled={loading}
           className="w-full py-3 text-sm text-muted hover:text-white transition-colors"
         >
-          Omitir
+          {t("buttons.skip")}
         </button>
       </div>
     </div>
@@ -783,9 +810,11 @@ function StepRM({
 function StepAvatar({
   onNext,
   onSkip,
+  t,
 }: {
   onNext: () => void;
   onSkip: () => void;
+  t: any;
 }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -795,11 +824,11 @@ function StepAvatar({
 
   async function handleFile(file: File) {
     if (!file.type.startsWith("image/")) {
-      setError("Selecciona una imagen");
+      setError(t("errors.selectImage"));
       return;
     }
     if (file.size > 5 * 1024 * 1024) {
-      setError("Maximo 5MB");
+      setError(t("errors.maxFileSize"));
       return;
     }
 
@@ -812,7 +841,7 @@ function StepAvatar({
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) {
-      setError("No autenticado");
+      setError(t("errors.notAuthenticated"));
       setUploading(false);
       return;
     }
@@ -858,8 +887,8 @@ function StepAvatar({
   return (
     <div className="space-y-8 text-center">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Tu foto de perfil</h2>
-        <p className="text-muted text-sm">Opcional — puedes añadirla después</p>
+        <h2 className="text-2xl font-bold">{t("steps.avatar.label")}</h2>
+        <p className="text-muted text-sm">{t("steps.avatar.subtitle")}</p>
       </div>
 
       {error && <p className="text-red-400 text-sm">{error}</p>}
@@ -873,7 +902,7 @@ function StepAvatar({
           {preview ? (
             <img
               src={preview}
-              alt="Avatar"
+              alt={t("steps.avatar.altText")}
               className="w-full h-full object-cover"
             />
           ) : (
@@ -908,7 +937,7 @@ function StepAvatar({
           disabled={uploading}
           className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
-          {uploading ? "Subiendo..." : "Siguiente"}
+          {uploading ? t("buttons.uploading") : t("buttons.next")}
         </button>
         {!uploaded && (
           <button
@@ -916,7 +945,7 @@ function StepAvatar({
             onClick={handleSkip}
             className="w-full py-3 text-sm text-muted hover:text-white transition-colors"
           >
-            Omitir
+            {t("buttons.skip")}
           </button>
         )}
       </div>
@@ -924,23 +953,31 @@ function StepAvatar({
   );
 }
 
-function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
+function StepPayment({
+  onSubscribe,
+  t,
+}: {
+  onSubscribe: () => void;
+  t: any;
+}) {
+  const features = [
+    t("steps.payment.feature1"),
+    t("steps.payment.feature2"),
+    t("steps.payment.feature3"),
+    t("steps.payment.feature4"),
+  ];
+
   return (
     <div className="space-y-8">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold">Último paso</h2>
+        <h2 className="text-2xl font-bold">{t("steps.payment.label")}</h2>
         <p className="text-muted text-sm">
-          Accede a todos los entrenamientos semanales
+          {t("steps.payment.subtitle")}
         </p>
       </div>
 
       <div className="glass rounded-xl p-5 space-y-4">
-        {[
-          "Plan semanal completo (lunes a domingo)",
-          "Ciclos estructurados: BASE, BUILD, PEAK, DELOAD",
-          "Metodología ATHX 2026",
-          "Cancela cuando quieras",
-        ].map((item) => (
+        {features.map((item) => (
           <div key={item} className="flex items-center gap-3">
             <span className="text-accent text-sm">✓</span>
             <span className="text-sm">{item}</span>
@@ -953,13 +990,13 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
           onClick={onSubscribe}
           className="w-full h-[60px] rounded-xl text-base font-semibold btn-gradient"
         >
-          Suscribirse
+          {t("steps.payment.subscribe")}
         </button>
         <Link
           href="/entrenamiento"
           className="block w-full py-3 text-center text-sm text-muted hover:text-white transition-colors"
         >
-          Continuar sin suscripción
+          {t("steps.payment.skipLink")}
         </Link>
       </div>
     </div>

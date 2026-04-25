@@ -35,10 +35,15 @@
       "Bash(git --no-pager diff app/onboarding/page.tsx)",
       "Read(//tmp/**)",
       "Bash(grep -rn --include=\"*.tsx\" --include=\"*.ts\" -E \"\\(Menu\\\\\"|Menu'|'Menú'|title=\\\\\"Menu|anadir|Anadir|anade|Anade|unico|Unico|dificil|Dificil|facil|Facil|compania|Compania|Ordenacion|sincronizar|cuenta ya|adivina|cumple|sigues|reportar|automatico|sintoma|fin\\\\?|inicio\\\\?|ver\\\\?|cuando\\\\?|esta\\\\s[a-z]{3,}\\\\?\\)\" app/ src/)",
-      "Bash(mkdir -p \"app/[locale]\")",
+      "Bash(git merge *)",
+      "Bash(git stash *)",
+      "Bash(git restore *)",
+      "Bash(page\")",
       "Bash(git mv *)",
+      "Bash(python3 *)",
+      "Bash(cd C:\\\\\\\\Users\\\\\\\\Patricio\\\\\\\\workout-saas)",
       "Bash(tasklist)",
-      "Bash(git stash *)"
+      "PowerShell(Stop-Process *)"
     ]
   }
 }

@@ -38,15 +38,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
+  const titleDefault = isEn
+    ? `${SITE_NAME} — ATHX training and programming`
+    : `${SITE_NAME} — Programación y entrenamiento ATHX`;
+  const description = isEn
+    ? "ATHX™ programming and training for athletes. Weekly plan, progress tracking, and direct chat with your coach. First week free."
+    : DEFAULT_DESCRIPTION;
+  const keywords = isEn
+    ? ["ATHX", "ATHX programming", "ATHX training", "ATHLEX Training", "ATHX prep", "ATHX 2026", "functional fitness training", "competition training"]
+    : DEFAULT_KEYWORDS;
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${SITE_NAME} — Programación y entrenamiento ATHX`,
+      default: titleDefault,
       template: `%s · ${SITE_NAME}`,
     },
-    description: DEFAULT_DESCRIPTION,
-    keywords: DEFAULT_KEYWORDS,
+    description,
+    keywords,
     applicationName: SITE_NAME,
     authors: [{ name: SITE_NAME, url: SITE_URL }],
     creator: SITE_NAME,
@@ -62,16 +71,16 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       siteName: SITE_NAME,
-      title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
-      description: DEFAULT_DESCRIPTION,
+      title: titleDefault,
+      description,
       url: isEn ? `${SITE_URL}/en` : SITE_URL,
       locale: isEn ? "en_US" : LOCALE_PRIMARY,
       alternateLocale: isEn ? [LOCALE_PRIMARY] : LOCALE_ALTERNATES,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${SITE_NAME} — Programación y entrenamiento ATHX`,
-      description: DEFAULT_DESCRIPTION,
+      title: titleDefault,
+      description,
     },
     robots: isEn
       ? { index: false, follow: false }
@@ -116,8 +125,8 @@ export default async function RootLayout({
     <html lang={locale} className={`${league_spartan.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <NextIntlClientProvider>
-          <JsonLd data={organizationLd()} />
-          <JsonLd data={webSiteLd()} />
+          <JsonLd data={organizationLd(locale as 'es' | 'en')} />
+          <JsonLd data={webSiteLd(locale as 'es' | 'en')} />
           <NavProgress />
           <Suspense fallback={<NavbarSkeleton />}>
             <Navbar />

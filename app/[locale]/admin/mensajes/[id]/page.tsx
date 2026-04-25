@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { Link } from '@/shared/i18n/routing'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/modules/support/application/require-admin'
@@ -18,12 +19,13 @@ export default async function AdminThreadPage({
   if (!data) notFound()
 
   const { thread, messages, user_email } = data
+  const t = useTranslations('admin')
 
   return (
     <div className="max-w-lg mx-auto py-12 px-4 space-y-6">
       <div className="flex items-center justify-between gap-3">
         <Link href="/admin/mensajes" className="text-xs text-muted hover:text-white">
-          ← Bandeja
+          {t('thread.backLink')}
         </Link>
         <StatusToggle threadId={thread.id} status={thread.status} />
       </div>
@@ -35,7 +37,7 @@ export default async function AdminThreadPage({
               thread.status === 'open' ? 'badge--green' : 'badge--muted'
             }`}
           >
-            {thread.status === 'open' ? 'Abierto' : 'Cerrado'}
+            {thread.status === 'open' ? t('thread.statusOpen') : t('thread.statusClosed')}
           </span>
         </div>
         <h1 className="text-2xl font-bold leading-tight">{thread.subject}</h1>

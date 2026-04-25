@@ -1,3 +1,4 @@
+import { useFormatter, useTranslations } from 'next-intl'
 import type { SupportMessage } from '../domain/thread'
 
 interface Props {
@@ -6,7 +7,10 @@ interface Props {
 }
 
 export function MessageBubble({ message, viewerIsAuthor }: Props) {
-  const date = new Date(message.created_at).toLocaleString('es-ES', {
+  const t = useTranslations()
+  const format = useFormatter()
+
+  const date = format.dateTime(new Date(message.created_at), {
     day: '2-digit',
     month: 'short',
     hour: '2-digit',
@@ -27,7 +31,7 @@ export function MessageBubble({ message, viewerIsAuthor }: Props) {
         {message.body}
       </div>
       <span className="text-[10px] text-muted mt-1 px-1">
-        {message.author === 'admin' ? 'ATHLEX' : 'Tú'} · {date}
+        {message.author === 'admin' ? t('support.bubble.admin') : t('support.bubble.you')} · {date}
       </span>
     </div>
   )

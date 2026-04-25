@@ -1,10 +1,13 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infra/supabase/server";
+import { LanguageSwitcher } from "@/shared/i18n/components/language-switcher";
 import { NavMenu } from "./components/nav-menu";
 import { AdminBell } from "./components/admin-bell";
 import { BrandMark } from "./components/brand-mark";
 
 export async function Navbar() {
+  const t = await getTranslations("nav");
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
@@ -23,18 +26,21 @@ export async function Navbar() {
   return (
     <nav className="px-4 py-3 flex items-center justify-between border-b border-white/10">
       <div className="flex items-center gap-6">
-        <Link href="/" className="text-white" aria-label="ATHLEX training">
+        <Link href="/" className="text-white" aria-label={t("brandAriaLabel")}>
           <BrandMark className="h-8 w-auto" />
         </Link>
         <Link
           href="/entrenamiento"
           className="text-sm text-muted hover:text-white transition-colors"
         >
-          Programación
+          {t("programLink")}
         </Link>
       </div>
 
       <div className="flex items-center gap-4">
+        <div className="hidden sm:block">
+          <LanguageSwitcher variant="inline" />
+        </div>
         {user ? (
           <>
             {isAdmin && <AdminBell />}
@@ -49,7 +55,7 @@ export async function Navbar() {
             href="/login"
             className="text-sm px-4 py-2.5 rounded-lg btn-gradient"
           >
-            Entrar
+            {t("signInButton")}
           </Link>
         )}
       </div>

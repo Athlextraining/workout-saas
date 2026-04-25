@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Link } from '@/shared/i18n/routing'
 import { Drawer } from 'vaul'
+import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 import { signOut } from '@/modules/identity/application/sign-out'
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 }
 
 export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
+  const t = useTranslations('nav.menu')
   const [open, setOpen] = useState(false)
 
   return (
@@ -20,7 +23,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
         <button
           type="button"
           className="nav-hamburger"
-          aria-label="Menú"
+          aria-label={t('ariaLabel')}
         >
           <span className="nav-hamburger-avatar">
             {avatarUrl ? (
@@ -41,19 +44,20 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70]" />
         <Drawer.Content className="nav-drawer">
-          <Drawer.Title className="sr-only">Menú</Drawer.Title>
+          <Drawer.Title className="sr-only">{t('title')}</Drawer.Title>
           <div className="nav-drawer-body">
             <div className="nav-drawer-head">
               <span className="text-xs uppercase tracking-[0.18em] text-muted">
-                Menú
+                {t('title')}
               </span>
             </div>
 
             <nav className="flex flex-col">
+              <LanguageSwitcher variant="menu-row" />
               <MenuLink
                 href="/perfil"
                 onNavigate={() => setOpen(false)}
-                label="Perfil"
+                label={t('profileLink')}
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2" />
@@ -69,7 +73,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
               <MenuLink
                 href="/preguntanos"
                 onNavigate={() => setOpen(false)}
-                label="Pregúntanos"
+                label={t('contactLink')}
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                     <path
@@ -85,7 +89,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
                 <MenuLink
                   href="/admin/mensajes"
                   onNavigate={() => setOpen(false)}
-                  label="Admin · Mensajes"
+                  label={t('adminLink')}
                   icon={
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                       <path
@@ -115,7 +119,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  Cerrar sesión
+                  {t('signOut')}
                 </button>
               </form>
             </div>

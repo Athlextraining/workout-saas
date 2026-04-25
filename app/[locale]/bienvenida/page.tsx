@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition, ViewTransition } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "motion/react";
 import { Link } from "@/shared/i18n/routing";
 import { Reveal } from "../reveal";
@@ -12,30 +13,25 @@ type Step = {
   description: string;
 };
 
-const STEPS: Step[] = [
-  {
-    bg: "/backsquatbackground.webp",
-    eyebrow: "Metodología",
-    title: "Ciencia, no azar",
-    description: "Cada semana sigue periodización y progresión calculados.",
-  },
-  {
-    bg: "/strictpressbackground.webp",
-    eyebrow: "Sesiones",
-    title: "60 a 90 minutos",
-    description:
-      "Entrenamientos densos, sin relleno. Cada ejercicio, cada rep, tiene un propósito.",
-  },
-  {
-    bg: "/deadliftbackground.webp",
-    eyebrow: "Progresión",
-    title: "Cargas que escalan",
-    description:
-      "Empieza con lo que puedas manejar. El plan se ajusta semana a semana para que progreses lo máximo posible.",
-  },
-];
+const STEP_KEYS = ["methodology", "sessions", "progression"] as const;
+
+const bgMap: Record<(typeof STEP_KEYS)[number], string> = {
+  methodology: "/backsquatbackground.webp",
+  sessions: "/strictpressbackground.webp",
+  progression: "/deadliftbackground.webp",
+};
 
 export default function BienvenidaPage() {
+  const t = useTranslations("bienvenida");
+
+  // Derive STEPS array from translations
+  const STEPS: Step[] = STEP_KEYS.map((k) => ({
+    bg: bgMap[k],
+    eyebrow: t(`steps.${k}.eyebrow`),
+    title: t(`steps.${k}.title`),
+    description: t(`steps.${k}.description`),
+  }));
+
   // step 0 = celebration, 1..STEPS.length = info, STEPS.length+1 = final CTA
   const TOTAL = STEPS.length + 2;
   const [step, setStep] = useState(0);
@@ -53,7 +49,7 @@ export default function BienvenidaPage() {
       const img = new Image();
       img.src = "/backgroundctatraining.webp";
     }
-  }, [step]);
+  }, [step, STEPS]);
 
   function goNext() {
     setDirection("forward");
@@ -124,21 +120,7 @@ export default function BienvenidaPage() {
 
       {/* Header */}
       <div className="px-4 pt-safe-top relative z-10">
-        <div className="flex items-center justify-between h-14">
-          {step > 0 && !isFinal ? (
-            <button onClick={goBack} className="text-sm text-muted">
-              Atrás
-            </button>
-          ) : (
-            <div />
-          )}
-          {!isWelcome && !isFinal && (
-            <span className="text-sm text-muted">
-              {step}/{STEPS.length}
-            </span>
-          )}
-          <div className="w-10" />
-        </div>
+        <HeaderBar step={step} isFinal={isFinal} onBack={goBack} />
         {!isWelcome && !isFinal && (
           <div className="flex gap-2 justify-center">
             {STEPS.map((_, i) => (
@@ -177,33 +159,36 @@ export default function BienvenidaPage() {
 }
 
 function StepWelcome({ onNext }: { onNext: () => void }) {
+  const t = useTranslations("bienvenida");
+
   return (
     <div className="flex flex-col items-center text-center gap-7">
       <Reveal delay={0}>
         <span className="hero-eyebrow">
           <span className="hero-dot" />
-          Suscripción activa
+          {t("welcome.badge")}
         </span>
       </Reveal>
 
       <Reveal delay={0.08}>
         <h1 className="onboarding-welcome-title">
-          YA ERES
+          {t("welcome.title")}
           <br />
-          <span className="hero-title-accent font-extrabold">ATHLEX.</span>
+          <span className="hero-title-accent font-extrabold">
+            {t("welcome.titleAccent")}
+          </span>
         </h1>
       </Reveal>
 
       <Reveal delay={0.18}>
         <p className="hero-sub">
-          Bienvenido. En 3 pantallas te contamos <strong>cómo funciona</strong>{" "}
-          tu programación.
+          {t("welcome.subtitle")}
         </p>
       </Reveal>
 
       <Reveal delay={0.28} className="w-full">
         <button onClick={onNext} className="hero-cta-primary">
-          Adelante
+          {t("welcome.button")}
           <Arrow />
         </button>
       </Reveal>
@@ -242,35 +227,68 @@ function StepInfo({ step, onNext }: { step: Step; onNext: () => void }) {
 }
 
 function StepFinal() {
+  const t = useTranslations("bienvenida");
+
   return (
     <div className="flex flex-col items-center text-center gap-7">
       <Reveal delay={0}>
         <span className="hero-eyebrow">
           <span className="hero-dot" />
-          Todo listo
+          {t("final.badge")}
         </span>
       </Reveal>
 
       <Reveal delay={0.08}>
         <h1 className="onboarding-welcome-title">
-          TU PLAN
+          {t("final.title")}
           <br />
-          <span className="hero-title-accent font-extrabold">TE ESPERA.</span>
+          <span className="hero-title-accent font-extrabold">
+            {t("final.titleAccent")}
+          </span>
         </h1>
       </Reveal>
 
       <Reveal delay={0.18}>
-        <p className="hero-sub">
-          Cada <strong>lunes</strong> se desbloquea la siguiente semana.
-        </p>
+        <p className="hero-sub">{t("final.subtitle")}</p>
       </Reveal>
 
       <Reveal delay={0.28} className="w-full">
         <Link href="/entrenamiento" className="hero-cta-primary">
-          VER MI ENTRENAMIENTO
+          {t("final.button")}
           <Arrow />
         </Link>
       </Reveal>
+    </div>
+  );
+}
+
+function HeaderBar({
+  step,
+  isFinal,
+  onBack,
+}: {
+  step: number;
+  isFinal: boolean;
+  onBack: () => void;
+}) {
+  const t = useTranslations("bienvenida");
+  const isWelcome = step === 0;
+
+  return (
+    <div className="flex items-center justify-between h-14">
+      {step > 0 && !isFinal ? (
+        <button onClick={onBack} className="text-sm text-muted">
+          {t("header.back")}
+        </button>
+      ) : (
+        <div />
+      )}
+      {!isWelcome && !isFinal && (
+        <span className="text-sm text-muted">
+          {step}/3
+        </span>
+      )}
+      <div className="w-10" />
     </div>
   );
 }

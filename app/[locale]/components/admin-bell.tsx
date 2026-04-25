@@ -1,10 +1,12 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Drawer } from 'vaul'
 import { ChatPanel } from './chat-panel'
 
 export function AdminBell() {
+  const t = useTranslations('nav.adminBell')
   const [open, setOpen] = useState(false)
   const [unread, setUnread] = useState(0)
 
@@ -26,7 +28,7 @@ export function AdminBell() {
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>
       <Drawer.Trigger asChild>
-        <button type="button" className="nav-bell" aria-label="Mensajes">
+        <button type="button" className="nav-bell" aria-label={t('ariaLabel')}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path
               d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"
@@ -47,7 +49,7 @@ export function AdminBell() {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70]" />
         <Drawer.Content className="chat-drawer">
-          <Drawer.Title className="sr-only">Bandeja de mensajes</Drawer.Title>
+          <Drawer.Title className="sr-only">{t('inboxTitle')}</Drawer.Title>
           <div className="chat-drawer-handle" />
           <div className="chat-drawer-body">
             <ChatPanel

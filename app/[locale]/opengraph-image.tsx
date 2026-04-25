@@ -1,10 +1,23 @@
 import { ImageResponse } from "next/og";
+import { getTranslations } from "next-intl/server";
 
-export const alt = "ATHLEX Training — Programación y entrenamiento ATHX";
+export const alt = "ATHLEX Training";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OgImage() {
+export default async function OgImage(props: {
+  params: Promise<{ locale: string }>;
+}) {
+  const params = await props.params;
+  const t = await getTranslations({
+    locale: params.locale,
+    namespace: "home.hero",
+  });
+
+  // Extract title and split by newlines (e.g., "TRAIN\nGROW\nCOMPETE.")
+  const titleFull = t("title");
+  const titleLines = titleFull.split("\n");
+
   return new ImageResponse(
     (
       <div
@@ -38,22 +51,25 @@ export default async function OgImage() {
             gap: 8,
           }}
         >
-          <div style={{ fontSize: 110, fontWeight: 800, lineHeight: 1 }}>
-            Entrenamiento
-          </div>
-          <div
-            style={{
-              fontSize: 110,
-              fontWeight: 800,
-              lineHeight: 1,
-              color: "#c7ff3a",
-            }}
-          >
-            ATHX.
-          </div>
+          {titleLines.map((line, idx) => {
+            const isAccent = t("titleAccent").includes(line.trim());
+            return (
+              <div
+                key={idx}
+                style={{
+                  fontSize: 110,
+                  fontWeight: 800,
+                  lineHeight: 1,
+                  color: isAccent ? "#c7ff3a" : "#fff",
+                }}
+              >
+                {line}
+              </div>
+            );
+          })}
         </div>
         <div style={{ fontSize: 30, opacity: 0.8 }}>
-          Plan semanal · Primera semana gratis · athlextraining.com
+          {t("subtitle")}
         </div>
       </div>
     ),

@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Spinner } from '../spinner'
 
 export function PortalButton() {
+  const t = useTranslations('perfil.actions')
   const [loading, setLoading] = useState(false)
 
   async function handlePortal() {
@@ -30,7 +32,7 @@ export function PortalButton() {
       className="w-full py-3 rounded-xl glass hover:bg-white/10 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
     >
       {loading && <Spinner size={18} />}
-      {loading ? 'Abriendo portal...' : 'Gestionar suscripción'}
+      {loading ? t('managingPortal') : t('managePortal')}
     </button>
   )
 }

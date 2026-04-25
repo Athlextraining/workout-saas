@@ -1,6 +1,7 @@
 'use client'
 
 import { useTransition } from 'react'
+import { useTranslations } from 'next-intl'
 import { toggleThreadStatus } from '@/modules/support/application/toggle-thread-status'
 
 export function StatusToggle({
@@ -11,6 +12,7 @@ export function StatusToggle({
   status: 'open' | 'closed'
 }) {
   const [pending, start] = useTransition()
+  const t = useTranslations('admin.thread')
   const next = status === 'open' ? 'closed' : 'open'
 
   return (
@@ -24,7 +26,7 @@ export function StatusToggle({
       disabled={pending}
       className="text-[10px] uppercase tracking-wider text-muted hover:text-white disabled:opacity-50"
     >
-      {pending ? '…' : status === 'open' ? 'Cerrar hilo' : 'Reabrir hilo'}
+      {pending ? '…' : status === 'open' ? t('closeButton') : t('reopenButton')}
     </button>
   )
 }

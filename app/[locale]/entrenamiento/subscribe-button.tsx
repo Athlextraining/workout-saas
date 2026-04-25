@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Spinner } from '../spinner'
 import { trackEvent } from '@/shared/analytics/analytics'
 
@@ -11,9 +12,11 @@ interface SubscribeButtonProps {
 
 export function SubscribeButton({
   className = "mt-2 px-4 py-2 bg-black text-white rounded-md text-sm hover:bg-gray-800",
-  label = "Suscribirse",
+  label,
 }: SubscribeButtonProps) {
+  const t = useTranslations('entrenamiento.subscribe')
   const [loading, setLoading] = useState(false)
+  const displayLabel = label ?? t('button')
 
   async function handleSubscribe() {
     if (loading) return
@@ -28,10 +31,10 @@ export function SubscribeButton({
         return
       }
       console.error('Checkout error:', data.error)
-      alert(data.error || 'Error al crear la sesión de pago')
+      alert(data.error || t('errorGeneral'))
     } catch (err) {
       console.error('Fetch error:', err)
-      alert('Error de conexión')
+      alert(t('errorConnection'))
     }
     setLoading(false)
   }
@@ -43,7 +46,7 @@ export function SubscribeButton({
       className={`${className} disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2`}
     >
       {loading && <Spinner size={18} />}
-      {loading ? 'Redirigiendo...' : label}
+      {loading ? t('redirecting') : displayLabel}
     </button>
   )
 }

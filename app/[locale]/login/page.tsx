@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { signIn } from '@/modules/identity/application/sign-in'
 import { signUp } from '@/modules/identity/application/sign-up'
 import { createSupabaseBrowserClient } from '@/shared/infra/supabase/client'
 import { Spinner } from '../spinner'
 
 export default function LoginPage() {
+  const t = useTranslations('login')
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -47,7 +49,7 @@ export default function LoginPage() {
     <div className="flex-1 flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-6">
         <h1 className="text-2xl font-bold text-center">
-          {isSignUp ? 'Crear cuenta' : 'Iniciar sesión'}
+          {isSignUp ? t('title.signUp') : t('title.signIn')}
         </h1>
 
         {error && (
@@ -69,12 +71,12 @@ export default function LoginPage() {
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
           )}
-          {googleLoading ? 'Conectando...' : 'Continuar con Google'}
+          {googleLoading ? t('google.loading') : t('google.button')}
         </button>
 
         <div className="flex items-center gap-3">
           <div className="flex-1 h-px bg-white/10" />
-          <span className="text-muted text-xs">o</span>
+          <span className="text-muted text-xs">{t('divider')}</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
@@ -83,7 +85,7 @@ export default function LoginPage() {
             <input
               name="fullName"
               type="text"
-              placeholder="Nombre completo"
+              placeholder={t('form.fullNamePlaceholder')}
               required
               className="w-full px-4 py-3 rounded-xl text-base input-glass"
             />
@@ -91,14 +93,14 @@ export default function LoginPage() {
           <input
             name="email"
             type="email"
-            placeholder="Email"
+            placeholder={t('form.emailPlaceholder')}
             required
             className="w-full px-4 py-3 rounded-xl text-base input-glass"
           />
           <input
             name="password"
             type="password"
-            placeholder="Contraseña"
+            placeholder={t('form.passwordPlaceholder')}
             required
             minLength={6}
             className="w-full px-4 py-3 rounded-xl text-base input-glass"
@@ -110,8 +112,8 @@ export default function LoginPage() {
           >
             {submitting && <Spinner size={18} />}
             {submitting
-              ? (isSignUp ? 'Creando cuenta...' : 'Entrando...')
-              : (isSignUp ? 'Registrarse' : 'Entrar')}
+              ? (isSignUp ? t('submit.signingUp') : t('submit.signingIn'))
+              : (isSignUp ? t('submit.signUp') : t('submit.signIn'))}
           </button>
         </form>
 
@@ -123,8 +125,8 @@ export default function LoginPage() {
           className="w-full text-sm text-muted hover:text-white transition-colors"
         >
           {isSignUp
-            ? '¿Ya tienes cuenta? Inicia sesión'
-            : '¿No tienes cuenta? Regístrate'}
+            ? t('toggle.toSignIn')
+            : t('toggle.toSignUp')}
         </button>
       </div>
     </div>

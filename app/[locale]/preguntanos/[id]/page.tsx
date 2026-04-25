@@ -1,4 +1,4 @@
-import { getLocale } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { Link, redirect } from '@/shared/i18n/routing'
 import { notFound } from 'next/navigation'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
@@ -12,6 +12,7 @@ export default async function ThreadPage({
   params: Promise<{ id: string }>
 }) {
   const locale = await getLocale()
+  const t = await getTranslations()
   const user = await getCurrentUser()
   if (!user) redirect({ href: '/login', locale })
 
@@ -24,7 +25,7 @@ export default async function ThreadPage({
   return (
     <div className="max-w-lg mx-auto py-12 px-4 space-y-6">
       <Link href="/preguntanos" className="text-xs text-muted hover:text-white">
-        ← Volver
+        {t('preguntanos.thread.backLink')}
       </Link>
 
       <header className="space-y-2">
@@ -34,7 +35,9 @@ export default async function ThreadPage({
               thread.status === 'open' ? 'badge--green' : 'badge--muted'
             }`}
           >
-            {thread.status === 'open' ? 'Abierto' : 'Cerrado'}
+            {thread.status === 'open'
+              ? t('preguntanos.thread.statusOpen')
+              : t('preguntanos.thread.statusClosed')}
           </span>
         </div>
         <h1 className="text-2xl font-bold leading-tight">{thread.subject}</h1>

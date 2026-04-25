@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from '@/shared/i18n/routing'
 import { sendNewMessage } from '../application/send-new-message'
 import { SUBJECT_MAX, BODY_MAX } from '../domain/validators'
 
 export function ContactForm() {
+  const t = useTranslations()
   const [subject, setSubject] = useState('')
   const [body, setBody] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -30,7 +32,7 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-1.5">
         <label className="text-xs uppercase tracking-wider text-muted" htmlFor="subject">
-          Asunto
+          {t('support.form.subjectLabel')}
         </label>
         <input
           id="subject"
@@ -39,14 +41,14 @@ export function ContactForm() {
           required
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          placeholder="¿Sobre qué nos quieres preguntar?"
+          placeholder={t('support.form.subjectPlaceholder')}
           className="input-glass w-full px-4 py-3 rounded-xl text-sm"
         />
       </div>
 
       <div className="space-y-1.5">
         <label className="text-xs uppercase tracking-wider text-muted" htmlFor="body">
-          Mensaje
+          {t('support.form.bodyLabel')}
         </label>
         <textarea
           id="body"
@@ -55,7 +57,7 @@ export function ContactForm() {
           required
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          placeholder="Cuéntanos con detalle..."
+          placeholder={t('support.form.bodyPlaceholder')}
           className="input-glass w-full px-4 py-3 rounded-xl text-sm resize-y"
         />
         <div className="text-[10px] text-muted text-right">
@@ -74,7 +76,7 @@ export function ContactForm() {
         disabled={pending || !subject.trim() || !body.trim()}
         className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient disabled:opacity-50"
       >
-        {pending ? 'Enviando…' : 'Enviar'}
+        {pending ? t('support.form.submitNewSending') : t('support.form.submitNew')}
       </button>
     </form>
   )

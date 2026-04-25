@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getLocale } from 'next-intl/server'
+import { getLocale, getTranslations, getFormatter } from 'next-intl/server'
 import { redirect } from '@/shared/i18n/routing'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { signOut } from '@/modules/identity/application/sign-out'
@@ -18,6 +18,8 @@ export const metadata: Metadata = {
 
 export default async function PerfilPage() {
   const locale = await getLocale()
+  const t = await getTranslations('perfil')
+  const format = await getFormatter()
   const user = await getCurrentUser()
   if (!user) {
     redirect({ href: '/login', locale })
@@ -28,32 +30,32 @@ export default async function PerfilPage() {
 
   return (
     <div className="max-w-lg mx-auto py-12 px-4 space-y-8">
-      <h1 className="text-2xl font-bold">Perfil</h1>
+      <h1 className="text-2xl font-bold">{t('title')}</h1>
 
       <div className="glass rounded-xl p-5 space-y-3">
         <p>
-          <span className="text-muted text-sm">Email</span>
+          <span className="text-muted text-sm">{t('fields.email')}</span>
           <br />
           {user.email}
         </p>
         <div className="border-t border-white/10" />
         <p>
-          <span className="text-muted text-sm">Suscripción</span>
+          <span className="text-muted text-sm">{t('fields.subscription')}</span>
           <br />
           {subscription ? (
-            <span className="text-green-400">Activa</span>
+            <span className="text-green-400">{t('status.active')}</span>
           ) : (
-            <span className="text-muted">Sin suscripcion</span>
+            <span className="text-muted">{t('status.none')}</span>
           )}
         </p>
         {subscription && (
           <>
             <div className="border-t border-white/10" />
             <p>
-              <span className="text-muted text-sm">Siguiente renovación</span>
+              <span className="text-muted text-sm">{t('fields.nextRenewal')}</span>
               <br />
               {subscription.current_period_end
-                ? new Date(subscription.current_period_end).toLocaleDateString('es-ES')
+                ? format.dateTime(new Date(subscription.current_period_end), { dateStyle: 'long' })
                 : '—'}
             </p>
           </>
