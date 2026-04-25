@@ -7,5 +7,128 @@
     "spanish": "Spanish",
     "english": "English",
     "switchTo": "Switch to {lang}"
+  },
+  "home": {
+    "hero": {
+      "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
+      "eyebrow": "ATHX™ Training by ATHLEX",
+      "title": "TRAIN\nGROW\nCOMPETE.",
+      "titleAccent": "COMPETE.",
+      "subtitle": "ATHX Programming™: weekly training plan to prepare for ATHX 2026. Progress tracking and direct chat with your coach.",
+      "ctaPrimary": "START NOW",
+      "fineprint": "First week free",
+      "scrollCue": "Program"
+    },
+    "tools": {
+      "intro": "Tools",
+      "title": "Everything you need.",
+      "titleEm": "In your pocket.",
+      "chat": {
+        "tag": "Direct messaging",
+        "title": "Your coach one message away",
+        "body": "Questions about technique, scaling, pain — ask freely and get answers from the ATHLEX team the same day.",
+        "coachName": "ATHLEX",
+        "coachStatus": "online",
+        "bubble1": "How was your Back Squat today?",
+        "bubble2": "5×5 at 110 kg, RPE 7. Had one left.",
+        "bubble3": "Perfect. We'll go to 115 tomorrow. 🔥",
+        "bubble4": "Let's go!",
+        "inputPlaceholder": "Type a message…"
+      },
+      "timer": {
+        "tag": "Built-in timer",
+        "title": "AMRAP, EMOM, For Time",
+        "body": "Competition modes ready in 2 taps. Beeps per round, screen always awake, and one-handed control.",
+        "mode": "FOR TIME",
+        "time": "07:42",
+        "round": "Round 3 / 4"
+      }
+    },
+    "features": {
+      "intro": "The program",
+      "title": "ATHX Programming:\nthree pillars, zero filler.",
+      "items": [
+        {
+          "tag": "ATHX Specific",
+          "title": "Built for ATHX Games",
+          "body": "Every week and cycle targets the 3 events: Strength, Endurance, and MetCon X. No fluff."
+        },
+        {
+          "tag": "Pro methodology",
+          "title": "4-phase periodization",
+          "body": "BASE, BUILD, PEAK, and DELOAD. Progressive load calibrated by RPE and % 1RM. Science does the work."
+        },
+        {
+          "tag": "Key day",
+          "title": "Better than the rest",
+          "body": "The cycle ends with full-event simulations. Initial and final testing to measure real progress."
+        }
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Simple pricing",
+      "headline": "One program.\nOne price.",
+      "badge": "Popular",
+      "tag": "ATHX 2026 Program",
+      "price": "14",
+      "priceDecimal": ".90",
+      "unit": "/month",
+      "sub": "Cancel anytime.",
+      "features": [
+        "Programming and individual tracking",
+        "2 categories: ATHX and ATHX PRO",
+        "Weekly plan Monday through Sunday",
+        "Warm-up, strength, and MetCon each day",
+        "First week free"
+      ],
+      "cta": "Subscribe",
+      "fineprint": "Cancel anytime"
+    },
+    "whyChoose": {
+      "title": "Why choose ATHLEX for your ATHX training",
+      "intro": "New to competition?",
+      "introLink": "Start with what is ATHX",
+      "items": [
+        "Clear structure built for you",
+        "Real progression: loads go up, times come down.",
+        "Competition movements from week 1.",
+        "Designed from experience",
+        "Logging and leaderboard to track your progress"
+      ]
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": {
+        "q1": {
+          "question": "Do I need prior experience?",
+          "answer": "Yes, prior knowledge is recommended. The program assumes mastery of the movements included this year."
+        },
+        "q2": {
+          "question": "What equipment do I need?",
+          "answer": "Standard box: Olympic barbell, dumbbells, sandbag, box jump, ski-erg, or rowing machine."
+        },
+        "q3": {
+          "question": "How long is each session?",
+          "answer": "Between 60 and 90 minutes."
+        },
+        "q4": {
+          "question": "What's the difference between ATHX and ATHX PRO?",
+          "answer": "PRO has higher work capacity and workouts tend to run a bit longer."
+        },
+        "q5": {
+          "question": "How do I cancel?",
+          "answer": "From your profile, one click. Cancel anytime. You keep access until the end of your paid period."
+        }
+      }
+    },
+    "footer": {
+      "cta": "Your next PR\nstarts Monday.",
+      "ctaButton": "Start now",
+      "ctaFineprint": "First week free",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "support": "Support",
+      "copyright": "© ATHLEX Training"
+    }
   }
 }

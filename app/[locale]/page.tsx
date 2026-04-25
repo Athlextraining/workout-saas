@@ -1,35 +1,39 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/shared/i18n/routing";
 import { Reveal } from "./reveal";
 import { JsonLd, softwareApplicationLd, faqPageLd } from "@/shared/seo/jsonld";
+import { SITE_URL } from "@/shared/seo/site";
 
-const FAQ_ITEMS = [
-  {
-    question: "¿Necesito experiencia previa?",
-    answer:
-      "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
-  },
-  {
-    question: "¿Qué material necesito?",
-    answer:
-      "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
-  },
-  {
-    question: "¿Cuánto dura cada sesión?",
-    answer: "Entre 60 y 90 minutos.",
-  },
-  {
-    question: "¿Diferencia ATHX vs ATHX PRO?",
-    answer:
-      "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
-  },
-  {
-    question: "¿Cómo cancelo?",
-    answer:
-      "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
-  },
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  return {
+    alternates: {
+      canonical: isEn ? `${SITE_URL}/en` : `${SITE_URL}/`,
+      languages: {
+        es: `${SITE_URL}/`,
+        en: `${SITE_URL}/en`,
+        "x-default": `${SITE_URL}/`,
+      },
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations("home");
+  // Build FAQ items from translations
+  const faqKeys = ["q1", "q2", "q3", "q4", "q5"] as const;
+  const faqItems = faqKeys.map((k) => ({
+    question: t(`faq.items.${k}.question`),
+    answer: t(`faq.items.${k}.answer`),
+  }));
+
   return (
     <div className="flex flex-col">
       <link
@@ -39,13 +43,10 @@ export default function Home() {
         fetchPriority="high"
       />
       <JsonLd data={softwareApplicationLd()} />
-      <JsonLd data={faqPageLd(FAQ_ITEMS)} />
+      <JsonLd data={faqPageLd(faqItems)} />
       {/* Hero */}
       <section className="hero-shell">
-        <p className="sr-only">
-          ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas
-          preparando ATHX 2026 en España y Latinoamérica.
-        </p>
+        <p className="sr-only">{t("hero.srOnlyDesc")}</p>
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-image" />
           <div className="hero-vignette" />
@@ -57,28 +58,32 @@ export default function Home() {
         <div className="hero-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            ATHX™ Training by ATHLEX
+            {t("hero.eyebrow")}
           </span>
 
           <div className="hero-title">
-            ENTRENA
-            <br />
-            MEJORA
-            <br />
-            <span className="hero-title-accent font-extrabold">COMPITE.</span>
+            {t("hero.title")
+              .split("\n")
+              .map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < 2 && <br />}
+                </span>
+              ))}
+            <span className="hero-title-accent font-extrabold">
+              {t("hero.titleAccent")}
+            </span>
           </div>
 
           <div className="hero-sub">
             <h1 className="inline m-0 p-0 [font:inherit]">
               <strong>Programación ATHX</strong>
             </h1>
-            ™: plan semanal de entrenamiento para preparar{" "}
-            <strong>ATHX 2026</strong>. Seguimiento y chat directo con tu
-            entrenador.
+            {t("hero.subtitle")}
           </div>
 
           <Link href="/login" className="hero-cta-primary">
-            COMIENZA AHORA
+            {t("hero.ctaPrimary")}
             <svg
               width="18"
               height="18"
@@ -95,11 +100,11 @@ export default function Home() {
               />
             </svg>
           </Link>
-          <p className="hero-cta-fineprint">Primera semana gratis</p>
+          <p className="hero-cta-fineprint">{t("hero.fineprint")}</p>
         </div>
 
         <a href="#programa" className="hero-scroll-cue">
-          <span>Programa</span>
+          <span>{t("hero.scrollCue")}</span>
           <span className="hero-scroll-arrow" aria-hidden="true">
             ↓
           </span>
@@ -109,23 +114,20 @@ export default function Home() {
       {/* Tools — phone mockups */}
       <section className="tools-shell">
         <Reveal className="tools-intro">
-          <p className="tools-intro-tag">Herramientas</p>
+          <p className="tools-intro-tag">{t("tools.intro")}</p>
           <h2 className="tools-intro-title">
-            Todo lo que necesitas.
+            {t("tools.title")}
             <br />
-            <em className="tools-intro-em">En tu bolsillo.</em>
+            <em className="tools-intro-em">{t("tools.titleEm")}</em>
           </h2>
         </Reveal>
 
         <Reveal delay={0.1}>
           <div className="tool-row">
             <div className="tool-copy">
-              <span className="tool-tag">Chat directo</span>
-              <h3 className="tool-title">Tu coach a un mensaje</h3>
-              <p className="tool-body">
-                Dudas de técnica, escalas, dolores — pregunta sin límites y
-                recibe respuesta del equipo ATHLEX en el día.
-              </p>
+              <span className="tool-tag">{t("tools.chat.tag")}</span>
+              <h3 className="tool-title">{t("tools.chat.title")}</h3>
+              <p className="tool-body">{t("tools.chat.body")}</p>
             </div>
             <div className="phone-frame" aria-hidden="true">
               <div className="phone-notch" />
@@ -133,24 +135,24 @@ export default function Home() {
                 <div className="phone-chat-head">
                   <div className="phone-chat-avatar">A</div>
                   <div>
-                    <p className="phone-chat-name">ATHLEX</p>
-                    <p className="phone-chat-status">en línea</p>
+                    <p className="phone-chat-name">{t("tools.chat.coachName")}</p>
+                    <p className="phone-chat-status">{t("tools.chat.coachStatus")}</p>
                   </div>
                 </div>
                 <div className="phone-chat-body">
                   <div className="phone-bubble phone-bubble--theirs">
-                    ¿Cómo fue el Back Squat hoy?
+                    {t("tools.chat.bubble1")}
                   </div>
                   <div className="phone-bubble phone-bubble--mine">
-                    5×5 a 110 kg, RPE 7. Me sobró uno.
+                    {t("tools.chat.bubble2")}
                   </div>
                   <div className="phone-bubble phone-bubble--theirs">
-                    Perfecto. Mañana subimos a 115. 🔥
+                    {t("tools.chat.bubble3")}
                   </div>
-                  <div className="phone-bubble phone-bubble--mine">Vamos!</div>
+                  <div className="phone-bubble phone-bubble--mine">{t("tools.chat.bubble4")}</div>
                 </div>
                 <div className="phone-chat-input">
-                  <span>Escribe un mensaje…</span>
+                  <span>{t("tools.chat.inputPlaceholder")}</span>
                   <span className="phone-send">→</span>
                 </div>
               </div>
@@ -161,17 +163,14 @@ export default function Home() {
         <Reveal delay={0.1}>
           <div className="tool-row tool-row--reverse">
             <div className="tool-copy">
-              <span className="tool-tag">Cronómetro integrado</span>
-              <h3 className="tool-title">AMRAP, EMOM, For Time</h3>
-              <p className="tool-body">
-                Modos de competición listos en 2 toques. Beeps por round,
-                pantalla siempre despierta y control con una mano.
-              </p>
+              <span className="tool-tag">{t("tools.timer.tag")}</span>
+              <h3 className="tool-title">{t("tools.timer.title")}</h3>
+              <p className="tool-body">{t("tools.timer.body")}</p>
             </div>
             <div className="phone-frame" aria-hidden="true">
               <div className="phone-notch" />
               <div className="phone-screen phone-screen--timer">
-                <p className="phone-timer-mode">FOR TIME</p>
+                <p className="phone-timer-mode">{t("tools.timer.mode")}</p>
                 <div className="phone-timer-ring">
                   <svg viewBox="0 0 120 120">
                     <circle
@@ -196,8 +195,8 @@ export default function Home() {
                     />
                   </svg>
                   <div className="phone-timer-time">
-                    <span className="phone-timer-big">07:42</span>
-                    <span className="phone-timer-small">Round 3 / 4</span>
+                    <span className="phone-timer-big">{t("tools.timer.time")}</span>
+                    <span className="phone-timer-small">{t("tools.timer.round")}</span>
                   </div>
                 </div>
                 <div className="phone-timer-ctrl">
@@ -212,76 +211,61 @@ export default function Home() {
       {/* Features — sticky stack */}
       <section id="programa" className="features-shell">
         <Reveal className="features-intro">
-          <p className="features-intro-tag">El programa</p>
+          <p className="features-intro-tag">{t("features.intro")}</p>
           <h2 className="features-intro-title">
-            Programación ATHX:
-            <br />
-            tres pilares, cero relleno.
+            {t("features.title")
+              .split("\n")
+              .map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
           </h2>
         </Reveal>
 
         <div className="features-stack">
-          {[
-            {
-              num: "01",
-              tag: "ATHX Specific",
-              title: "Pensado para ATHX Games",
-              body: "Cada semana y ciclo están pensados para los 3 eventos: Strength, Endurance y MetCon X. Sin relleno.",
-              icon: (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M9 18h6" />
-                  <path d="M10 21h4" />
-                  <path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1.2 1.5 1.2 2.5h5.6c0-1 .4-1.7 1.2-2.5A6 6 0 0 0 12 3z" />
-                </svg>
-              ),
-              cardClass: "feature-card-1",
-            },
-            {
-              num: "02",
-              tag: "Metodología pro",
-              title: "Periodización en 4 fases",
-              body: "BASE, BUILD, PEAK y DELOAD. Carga progresiva calibrada por RPE y % 1RM. La ciencia hace el trabajo.",
-              icon: (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M3 21h18" />
-                  <path d="M3 17h4v4" />
-                  <path d="M8 13h4v8" />
-                  <path d="M13 9h4v12" />
-                  <path d="M18 4h3v17" />
-                </svg>
-              ),
-              cardClass: "feature-card-2",
-            },
-            {
-              num: "03",
-              tag: "Día clave",
-              title: "Mejor que el resto",
-              body: "El ciclo termina con simulación de eventos completos. Test inicial y final para medir progreso real.",
-              icon: (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" />
-                  <circle cx="12" cy="12" r="5" />
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="1.5"
-                    fill="currentColor"
-                    stroke="none"
-                  />
-                </svg>
-              ),
-              cardClass: "feature-card-3",
-            },
-          ].map((f) => (
-            <article key={f.num} className={`feature-card ${f.cardClass}`}>
+          {t.raw("features.items").map((f: any, idx: number) => (
+            <article
+              key={idx}
+              className={`feature-card feature-card-${idx + 1}`}
+            >
               <div>
-                <div className="feature-num">{f.num} / 03</div>
+                <div className="feature-num">{`0${idx + 1}`} / 03</div>
                 <span className="feature-tag">{f.tag}</span>
                 <h3 className="feature-title">{f.title}</h3>
                 <p className="feature-body">{f.body}</p>
               </div>
               <div className="feature-icon" aria-hidden="true">
-                {f.icon}
+                {idx === 0 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 18h6" />
+                    <path d="M10 21h4" />
+                    <path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1.2 1.5 1.2 2.5h5.6c0-1 .4-1.7 1.2-2.5A6 6 0 0 0 12 3z" />
+                  </svg>
+                )}
+                {idx === 1 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 21h18" />
+                    <path d="M3 17h4v4" />
+                    <path d="M8 13h4v8" />
+                    <path d="M13 9h4v12" />
+                    <path d="M18 4h3v17" />
+                  </svg>
+                )}
+                {idx === 2 && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="1.5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                  </svg>
+                )}
               </div>
             </article>
           ))}
@@ -293,39 +277,41 @@ export default function Home() {
         <div className="pricing-bg" aria-hidden="true" />
 
         <Reveal>
-          <p className="pricing-eyebrow">Precio simple</p>
+          <p className="pricing-eyebrow">{t("pricing.eyebrow")}</p>
           <h2 className="pricing-headline">
-            Un programa.
-            <br />
-            Un precio.
+            {t("pricing.headline")
+              .split("\n")
+              .map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
           </h2>
         </Reveal>
 
         <Reveal delay={0.15}>
           <div className="pricing-card">
-            <span className="pricing-badge">Popular</span>
+            <span className="pricing-badge">{t("pricing.badge")}</span>
 
-            <p className="pricing-tag">Programa ATHX 2026</p>
+            <p className="pricing-tag">{t("pricing.tag")}</p>
 
             <div className="pricing-price-row">
               <span className="pricing-price">
-                14
-                <sup className="text-sm align-super">,90</sup>€
+                {t("pricing.price")}
+                <sup className="text-sm align-super">
+                  {t("pricing.priceDecimal")}
+                </sup>
+                €
               </span>
-              <span className="pricing-price-unit">/mes</span>
+              <span className="pricing-price-unit">{t("pricing.unit")}</span>
             </div>
-            <p className="pricing-sub">Cancela cuando quieras.</p>
+            <p className="pricing-sub">{t("pricing.sub")}</p>
 
             <div className="pricing-divider" />
 
             <div>
-              {[
-                "Programación y seguimiento individual",
-                "2 categorías: ATHX y ATHX PRO",
-                "Plan semanal de lunes a domingo",
-                "Warmup, fuerza y Metcon por día",
-                "Primera semana gratis",
-              ].map((b) => (
+              {t.raw("pricing.features").map((b: string) => (
                 <div key={b} className="pricing-feature">
                   <span className="pricing-check" aria-hidden="true">
                     <svg viewBox="0 0 24 24">
@@ -338,9 +324,9 @@ export default function Home() {
             </div>
 
             <Link href="/login" className="pricing-cta">
-              Suscríbete
+              {t("pricing.cta")}
             </Link>
-            <p className="pricing-fineprint">Cancela cuando quieras</p>
+            <p className="pricing-fineprint">{t("pricing.fineprint")}</p>
           </div>
         </Reveal>
       </section>
@@ -350,17 +336,11 @@ export default function Home() {
         <div className="max-w-md mx-auto space-y-8">
           <Reveal>
             <h2 className="text-3xl font-bold leading-tight text-center">
-              Por qué elegir ATHLEX para tu entrenamiento ATHX
+              {t("whyChoose.title")}
             </h2>
           </Reveal>
           <ul className="space-y-5">
-            {[
-              "Estructura clara y adaptada a ti",
-              "Progresión real: las cargas suben, los tiempos bajan.",
-              "Movimientos de competición desde la semana 1.",
-              "Planificada desde la experiencia",
-              "Registro y leaderboard para medir tu progreso",
-            ].map((why, i) => (
+            {t.raw("whyChoose.items").map((why: string, i: number) => (
               <Reveal key={why} delay={i * 0.08} y={24}>
                 <li className="flex items-start gap-3 border-l-2 border-accent/40 pl-4">
                   <span className="text-base leading-snug">{why}</span>
@@ -369,9 +349,9 @@ export default function Home() {
             ))}
           </ul>
           <p className="text-center text-sm text-muted">
-            ¿Nuevo en la competición?{" "}
+            {t("whyChoose.intro")}{" "}
             <Link href="/que-es-athx" className="text-accent underline">
-              Empieza por qué es ATHX
+              {t("whyChoose.introLink")}
             </Link>
             .
           </p>
@@ -382,10 +362,10 @@ export default function Home() {
       <section className="px-6 py-20">
         <div className="max-w-md mx-auto space-y-6">
           <Reveal>
-            <h2 className="text-3xl font-bold text-center">FAQ</h2>
+            <h2 className="text-3xl font-bold text-center">{t("faq.title")}</h2>
           </Reveal>
           <div className="space-y-3">
-            {FAQ_ITEMS.map((item, i) => (
+            {faqItems.map((item, i) => (
               <Reveal key={item.question} delay={i * 0.06} y={20}>
                 <details className="glass rounded-xl px-5 py-4 group">
                   <summary className="text-sm font-medium list-none flex items-center justify-between cursor-pointer">
@@ -408,17 +388,22 @@ export default function Home() {
       <section className="px-6 py-20">
         <Reveal className="max-w-md mx-auto text-center space-y-6">
           <h2 className="text-4xl font-bold leading-tight">
-            Tu próximo PR
-            <br />
-            empieza el lunes.
+            {t("footer.cta")
+              .split("\n")
+              .map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
           </h2>
           <Link
             href="/login"
             className="inline-block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
           >
-            Comienza ahora
+            {t("footer.ctaButton")}
           </Link>
-          <p className="text-muted text-xs">Primera semana gratis</p>
+          <p className="text-muted text-xs">{t("footer.ctaFineprint")}</p>
         </Reveal>
       </section>
 
@@ -429,19 +414,19 @@ export default function Home() {
             href="/privacidad"
             className="hover:text-white transition-colors"
           >
-            Privacidad
+            {t("footer.privacy")}
           </Link>
           <Link href="/terminos" className="hover:text-white transition-colors">
-            Términos
+            {t("footer.terms")}
           </Link>
           <a
             href="mailto:soporte@athlextraining.com"
             className="hover:text-white transition-colors"
           >
-            Soporte
+            {t("footer.support")}
           </a>
           <span className="w-full text-center text-[10px] uppercase tracking-widest opacity-60 mt-2">
-            © ATHLEX Training
+            {t("footer.copyright")}
           </span>
         </div>
       </footer>
