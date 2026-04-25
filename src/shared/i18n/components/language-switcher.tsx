@@ -4,6 +4,7 @@ import { useTransition } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { useRouter, usePathname } from '@/shared/i18n/routing';
+import { updateProfileLocale } from '@/modules/identity/application/update-profile-locale';
 
 type Variant = 'inline' | 'menu-row' | 'footer';
 
@@ -24,6 +25,8 @@ export function LanguageSwitcher({ variant = 'inline' }: Props) {
   function switchTo(target: 'es' | 'en') {
     if (target === locale) return;
     document.cookie = `NEXT_LOCALE=${target}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    // Fire-and-forget: anonymous users get a no-op response.
+    updateProfileLocale(target).catch(() => {});
     startTransition(() => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       router.replace({ pathname, params } as any, { locale: target });
