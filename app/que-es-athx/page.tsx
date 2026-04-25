@@ -119,7 +119,7 @@ export default function Page() {
         </p>
         <Link
           href="/login"
-          className="inline-block py-3 px-6 rounded-xl text-base font-semibold btn-gradient"
+          className="block w-full text-center py-3.5 rounded-xl text-base font-semibold btn-gradient"
         >
           Comienza ahora
         </Link>
