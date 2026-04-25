@@ -8,6 +8,56 @@
     "english": "English",
     "switchTo": "Switch to {lang}"
   },
+  "queEsAthx": {
+    "pageTitle": "What is ATHX: athlete guide for 2026",
+    "pageDescription": "ATHX is ATHLEX's fitness competition. Learn what ATHX is, the 3 events (Strength, Endurance, MetCon X), ATHX and ATHX PRO categories, and how to prepare for ATHX 2026 with official programming.",
+    "ogTitle": "What is ATHX: athlete guide for 2026",
+    "ogDescription": "What ATHX is, competition format, categories, and how to prepare.",
+    "eyebrow": "ATHX Guide",
+    "title": "What is ATHX and how to prepare for ATHX 2026",
+    "intro": "ATHX is ATHLEX's fitness competition. This guide explains the format, categories (ATHX and ATHX PRO), and how to build an <strong>ATHX programming plan</strong> that gets you to the podium.",
+    "sections": {
+      "format": {
+        "title": "The ATHX format",
+        "body": "ATHX combines three blocks: <strong>Strength</strong>, <strong>Endurance</strong>, and <strong>MetCon X</strong>. Each block measures a different capacity and is scored independently. The winner is who performs most balanced across all three."
+      },
+      "programming": {
+        "title": "What serious ATHX programming looks like",
+        "body1": "Well-designed <strong>ATHX programming</strong> periodizes into 4 phases: BASE, BUILD, PEAK, and DELOAD. Load increases progressively by RPE and % 1RM, with unload weeks to arrive fresh at competition.",
+        "body2": "<strong>ATHX training</strong> must include the year's movements from week 1 — if you arrive at competition with questionable technique, you won't compensate with volume."
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions about ATHX",
+      "items": {
+        "q1": {
+          "question": "What is ATHX?",
+          "answer": "ATHX is the fitness competition organized by ATHLEX. It brings together strength tests, endurance events, and mixed competitions (MetCon X) in a 3-day format. It's open to athletes from Spain and Latin America."
+        },
+        "q2": {
+          "question": "What are the ATHX events?",
+          "answer": "ATHX is divided into three blocks: Strength (max strength), Endurance (endurance), and MetCon X (mixed events with weighted and gymnastics movements). The cycle culminates in a simulation of all 3 blocks."
+        },
+        "q3": {
+          "question": "Difference between ATHX and ATHX PRO?",
+          "answer": "ATHX is the open category. ATHX PRO increases volume and intensity for competitive athletes: longer sessions, higher loads, and stricter movement standards."
+        },
+        "q4": {
+          "question": "How do I prepare for ATHX?",
+          "answer": "With sport-specific ATHX programming: periodization in BASE, BUILD, PEAK, and DELOAD, calibrated by RPE and % 1RM. ATHLEX Training delivers a weekly plan Monday through Sunday, warm-up, strength and MetCon each day, plus direct chat with coach."
+        },
+        "q5": {
+          "question": "When is ATHX 2026?",
+          "answer": "Official ATHX 2026 dates are announced on ATHLEX's official channel. Our programming is aligned to the competition calendar."
+        }
+      }
+    },
+    "cta": {
+      "title": "Start today",
+      "body": "ATHLEX Training delivers official ATHX programming with weekly plan, tracking, and direct chat with coach. First week free.",
+      "button": "Start now"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
