@@ -52,7 +52,9 @@ messages/
   es.json
   en.json
 
-middleware.ts      # next-intl middleware at repo root; matcher excludes /api/*, /auth/*, static assets
+proxy.ts           # Next 16 renamed middleware → proxy. Existing file does auth gating;
+                   # i18n is composed INTO it (next-intl handler runs first, then auth check).
+                   # Matcher excludes /api/*, /auth/*, static assets.
 
 app/
   [locale]/        # ALL existing routes move here
@@ -100,9 +102,16 @@ app/
 | `/admin/mensajes` | `/en/admin/messages` |
 | `/admin/mensajes/[id]` | `/en/admin/messages/[id]` |
 
-## 6. Locale detection (middleware)
+## 6. Locale detection (composed in `proxy.ts`)
 
-Behavior on first visit (no `NEXT_LOCALE` cookie):
+> **Next 16 note:** `middleware.ts` is deprecated and renamed to `proxy.ts`. The repo's existing `proxy.ts` already handles Supabase auth gating (`/login`, `/perfil`, `/onboarding`, `/entrenamiento` redirects based on session + onboarding state). i18n is composed **into** that file — it does NOT replace the existing logic.
+
+**Composition order inside `proxy()`:**
+1. Run next-intl's `createMiddleware` handler first.
+2. If it returned a redirect (locale auto-redirect or trailing-slash normalization) → return it immediately. Don't run auth; the redirected request will hit `proxy()` again with the resolved locale.
+3. Otherwise, take next-intl's `NextResponse` (carries locale cookie + headers) and thread it through the existing Supabase auth gating. Auth redirect targets MUST be locale-aware — use next-intl's `getPathname({ locale, href })` to build the destination, not hardcoded `/login`/`/entrenamiento`/`/onboarding`.
+
+**Behavior on first visit (no `NEXT_LOCALE` cookie):**
 
 1. Skip locale handling for known bots (Googlebot, Bingbot, etc. via `User-Agent`) — they get the URL as requested.
 2. Read `Accept-Language` header.
@@ -253,7 +262,7 @@ DB enums (`Sex`, `Category`) keep their values. UI maps via `messages.*.categori
 ### Phase 1 — Infra (no user-visible change)
 - Install `next-intl`.
 - Create `src/shared/i18n/{config,request,routing}.ts`.
-- Add root `middleware.ts` (next-intl) with bot-skip + non-ES → EN rule.
+- Update root `proxy.ts` to compose next-intl handler with existing Supabase auth gating (see section 6). Add bot-skip + non-`es*` → EN rule. Make all auth-redirect targets locale-aware via next-intl `getPathname`.
 - Mass move `app/*` → `app/[locale]/*` (excluding `api/`, `auth/`).
 - Update root `layout.tsx` to wrap `NextIntlClientProvider`, set `<html lang>`.
 - Replace `next/link` and `next/navigation` imports with localized versions from `@/shared/i18n/routing`.
