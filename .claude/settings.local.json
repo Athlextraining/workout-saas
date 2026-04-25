@@ -38,7 +38,8 @@
       "Bash(git merge *)",
       "Bash(git stash *)",
       "Bash(git restore *)",
-      "Bash(page\")"
+      "Bash(page\")",
+      "Bash(git mv *)"
     ]
   }
 }
