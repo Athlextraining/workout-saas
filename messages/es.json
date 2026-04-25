@@ -412,6 +412,22 @@
       "back": "Atrás"
     }
   },
+  "admin": {
+    "threads": {
+      "title": "Bandeja · Admin",
+      "summaryOpen": "{count, plural, =0 {Sin abiertos} =1 {1 abierto} other {# abiertos}}",
+      "summaryTotal": "total"
+    },
+    "thread": {
+      "backLink": "← Bandeja",
+      "statusOpen": "Abierto",
+      "statusClosed": "Cerrado",
+      "closeButton": "Cerrar hilo",
+      "reopenButton": "Reabrir hilo",
+      "closing": "…",
+      "reopening": "…"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",

@@ -412,6 +412,22 @@
       "back": "Back"
     }
   },
+  "admin": {
+    "threads": {
+      "title": "Inbox · Admin",
+      "summaryOpen": "{count, plural, =0 {No open} =1 {1 open} other {# open}}",
+      "summaryTotal": "total"
+    },
+    "thread": {
+      "backLink": "← Inbox",
+      "statusOpen": "Open",
+      "statusClosed": "Closed",
+      "closeButton": "Close thread",
+      "reopenButton": "Reopen thread",
+      "closing": "…",
+      "reopening": "…"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
