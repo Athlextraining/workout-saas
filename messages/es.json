@@ -203,7 +203,8 @@
       "email": "Email",
       "subscription": "Suscripción",
       "status": "Estado",
-      "nextRenewal": "Siguiente renovación"
+      "nextRenewal": "Siguiente renovación",
+      "language": "Idioma"
     },
     "status": {
       "active": "Activa",
