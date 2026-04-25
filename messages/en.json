@@ -197,6 +197,25 @@
       "loading": "Connecting..."
     }
   },
+  "perfil": {
+    "title": "Profile",
+    "fields": {
+      "email": "Email",
+      "subscription": "Subscription",
+      "status": "Status",
+      "nextRenewal": "Next renewal"
+    },
+    "status": {
+      "active": "Active",
+      "none": "No subscription"
+    },
+    "actions": {
+      "managePortal": "Manage subscription",
+      "managingPortal": "Opening portal...",
+      "signOut": "Sign out",
+      "signingOut": "Signing out..."
+    }
+  },
   "entrenamiento": {
     "title": "Weekly Training",
     "subtitle": "Your training is being prepared. Check back shortly.",

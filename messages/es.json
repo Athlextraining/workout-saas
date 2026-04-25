@@ -197,6 +197,25 @@
       "loading": "Conectando..."
     }
   },
+  "perfil": {
+    "title": "Perfil",
+    "fields": {
+      "email": "Email",
+      "subscription": "Suscripción",
+      "status": "Estado",
+      "nextRenewal": "Siguiente renovación"
+    },
+    "status": {
+      "active": "Activa",
+      "none": "Sin suscripción"
+    },
+    "actions": {
+      "managePortal": "Gestionar suscripción",
+      "managingPortal": "Abriendo portal...",
+      "signOut": "Cerrar sesión",
+      "signingOut": "Cerrando sesión..."
+    }
+  },
   "entrenamiento": {
     "title": "Entrenamiento semanal",
     "subtitle": "Tu entrenamiento se esta preparando. Vuelve en unos momentos.",
