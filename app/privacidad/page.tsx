@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad — ATHLEX Training',
-  description: 'Política de privacidad de ATHLEX Training',
+  title: 'Política de privacidad',
+  description:
+    'Política de privacidad de ATHLEX Training. Cómo tratamos tus datos personales en el servicio de programación ATHX.',
+  alternates: { canonical: '/privacidad' },
+  robots: { index: true, follow: true },
 }
 
 const LAST_UPDATED = '24 de abril de 2026'

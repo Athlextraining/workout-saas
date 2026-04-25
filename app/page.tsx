@@ -1,11 +1,51 @@
 import Link from "next/link";
 import { Reveal } from "./reveal";
+import { JsonLd, softwareApplicationLd, faqPageLd } from "@/shared/seo/jsonld";
+
+const FAQ_ITEMS = [
+  {
+    question: "¿Necesito experiencia previa?",
+    answer:
+      "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
+  },
+  {
+    question: "¿Qué material necesito?",
+    answer:
+      "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
+  },
+  {
+    question: "¿Cuánto dura cada sesión?",
+    answer: "Entre 60 y 90 minutos.",
+  },
+  {
+    question: "¿Diferencia ATHX vs ATHX PRO?",
+    answer:
+      "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
+  },
+  {
+    question: "¿Cómo cancelo?",
+    answer:
+      "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
+  },
+];
 
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <link
+        rel="preload"
+        as="image"
+        href="/backgroundhero.webp"
+        fetchPriority="high"
+      />
+      <JsonLd data={softwareApplicationLd()} />
+      <JsonLd data={faqPageLd(FAQ_ITEMS)} />
       {/* Hero */}
       <section className="hero-shell">
+        <p className="sr-only">
+          ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas
+          preparando ATHX 2026 en España y Latinoamérica.
+        </p>
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-image" />
           <div className="hero-vignette" />
@@ -17,22 +57,25 @@ export default function Home() {
         <div className="hero-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            ATHX™ Traning by ATHLEX
+            ATHX™ Training by ATHLEX
           </span>
 
-          <h1 className="hero-title">
+          <div className="hero-title">
             ENTRENA
             <br />
             MEJORA
             <br />
             <span className="hero-title-accent font-extrabold">COMPITE.</span>
-          </h1>
+          </div>
 
-          <p className="hero-sub">
-            Programa de entrenamiento y seguimiento para competir al máximo
-            nivel en
-            <strong> ATHX</strong>.
-          </p>
+          <div className="hero-sub">
+            <h1 className="inline m-0 p-0 [font:inherit]">
+              <strong>Programación ATHX</strong>
+            </h1>
+            ™: plan semanal de entrenamiento para preparar{" "}
+            <strong>ATHX 2026</strong>. Seguimiento y chat directo con tu
+            entrenador.
+          </div>
 
           <Link href="/login" className="hero-cta-primary">
             COMIENZA AHORA
@@ -104,9 +147,7 @@ export default function Home() {
                   <div className="phone-bubble phone-bubble--theirs">
                     Perfecto. Mañana subimos a 115. 🔥
                   </div>
-                  <div className="phone-bubble phone-bubble--mine">
-                    Vamos!
-                  </div>
+                  <div className="phone-bubble phone-bubble--mine">Vamos!</div>
                 </div>
                 <div className="phone-chat-input">
                   <span>Escribe un mensaje…</span>
@@ -173,9 +214,9 @@ export default function Home() {
         <Reveal className="features-intro">
           <p className="features-intro-tag">El programa</p>
           <h2 className="features-intro-title">
-            Tres pilares.
+            Programación ATHX:
             <br />
-            Cero relleno.
+            tres pilares, cero relleno.
           </h2>
         </Reveal>
 
@@ -309,7 +350,7 @@ export default function Home() {
         <div className="max-w-md mx-auto space-y-8">
           <Reveal>
             <h2 className="text-3xl font-bold leading-tight text-center">
-              Por qué ATHLEX Training
+              Por qué elegir ATHLEX para tu entrenamiento ATHX
             </h2>
           </Reveal>
           <ul className="space-y-5">
@@ -327,6 +368,13 @@ export default function Home() {
               </Reveal>
             ))}
           </ul>
+          <p className="text-center text-sm text-muted">
+            ¿Nuevo en la competición?{" "}
+            <Link href="/que-es-athx" className="text-accent underline">
+              Empieza por qué es ATHX
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
@@ -337,38 +385,17 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-center">FAQ</h2>
           </Reveal>
           <div className="space-y-3">
-            {[
-              {
-                q: "¿Necesito experiencia previa?",
-                a: "Sí, recomendado conocimiento previo. El programa asume dominio de los movimientos incluidos este año.",
-              },
-              {
-                q: "¿Qué material necesito?",
-                a: "Box estándar: barra olímpica, mancuernas, sandbag, box jump, ski-erg o remo.",
-              },
-              {
-                q: "¿Cuánto dura cada sesión?",
-                a: "Entre 60 y 90 minutos.",
-              },
-              {
-                q: "¿Diferencia ATHX vs ATHX PRO?",
-                a: "PRO tiene una carga de trabajo mayor y los entrenamientos suelen durar un poco más.",
-              },
-              {
-                q: "¿Cómo cancelo?",
-                a: "Desde tu perfil, un click. Cancela cuando quieras. Mantienes acceso hasta el final del periodo pagado.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.q} delay={i * 0.06} y={20}>
+            {FAQ_ITEMS.map((item, i) => (
+              <Reveal key={item.question} delay={i * 0.06} y={20}>
                 <details className="glass rounded-xl px-5 py-4 group">
                   <summary className="text-sm font-medium list-none flex items-center justify-between cursor-pointer">
-                    <span>{item.q}</span>
+                    <span>{item.question}</span>
                     <span className="text-accent transition-transform group-open:rotate-45">
                       +
                     </span>
                   </summary>
                   <p className="text-muted text-sm mt-3 leading-relaxed">
-                    {item.a}
+                    {item.answer}
                   </p>
                 </details>
               </Reveal>
@@ -398,7 +425,10 @@ export default function Home() {
       {/* Legal footer */}
       <footer className="px-6 pt-6 pb-10 border-t border-white/5">
         <div className="max-w-md mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted">
-          <Link href="/privacidad" className="hover:text-white transition-colors">
+          <Link
+            href="/privacidad"
+            className="hover:text-white transition-colors"
+          >
             Privacidad
           </Link>
           <Link href="/terminos" className="hover:text-white transition-colors">

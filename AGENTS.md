@@ -98,6 +98,12 @@ Layer rule: `app → modules.application → modules.{domain,infra} → shared`.
 
 ```
 app/
+├─ robots.ts                     ─→ shared.seo.site
+├─ sitemap.ts                    ─→ shared.seo.site
+├─ manifest.ts                   ─→ shared.seo.site
+├─ opengraph-image.tsx           (dynamic OG 1200x630, next/og)
+├─ twitter-image.tsx             ─→ opengraph-image
+├─ icon.tsx                      (dynamic app icon, next/og)
 ├─ login/page.tsx                ─→ identity.{sign-in, sign-up} + shared.supabase.client
 ├─ onboarding/page.tsx           ─→ onboarding.{save-basic-info, save-category, save-fitness-data, complete-onboarding}
 │                                  + identity.update-avatar + shared.supabase.client
@@ -123,8 +129,11 @@ app/
 │  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
 ├─ bienvenida/page.tsx           ─→ motion + components.reveal  (post-checkout cinematic tour)
+├─ que-es-athx/page.tsx          ─→ shared.seo.jsonld
 ├─ privacidad/page.tsx           ─→ (legal, no deps — required by Google OAuth consent)
 ├─ terminos/page.tsx             ─→ (legal, no deps — required by Google OAuth consent)
+├─ layout.tsx (root)             UPDATED: ─→ shared.seo.{site, jsonld} + shared.analytics
+├─ page.tsx (home)               UPDATED: ─→ shared.seo.jsonld (Organization/WebSite/SoftwareApplication/FAQ JSON-LD)
 └─ api/stripe/
    ├─ checkout/route.ts          ─→ billing.create-checkout-session
    ├─ portal/route.ts            ─→ billing.create-portal-session
@@ -198,6 +207,11 @@ src/modules/
 
 src/shared/
 ├─ infra/supabase/{client,server,admin}.ts
+├─ seo/
+│  ├─ site.ts                    (SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, DEFAULT_KEYWORDS, locales)
+│  └─ jsonld.tsx                 (JsonLd component + organization/webSite/softwareApplication/faqPage builders)
+├─ analytics/
+│  └─ analytics.tsx              ─→ @vercel/analytics + GA4 via next/script (client component, mounts via root layout)
 └─ utils/dates.ts                (getMondayOf, formatLocalDate, getWeekStartDate)
 ```
 

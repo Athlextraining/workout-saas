@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones — ATHLEX Training',
-  description: 'Términos y condiciones de uso de ATHLEX Training',
+  title: 'Términos y condiciones',
+  description:
+    'Términos y condiciones de ATHLEX Training. Condiciones de uso, suscripción y cancelación del servicio.',
+  alternates: { canonical: '/terminos' },
+  robots: { index: true, follow: true },
 }
 
 const LAST_UPDATED = '24 de abril de 2026'
