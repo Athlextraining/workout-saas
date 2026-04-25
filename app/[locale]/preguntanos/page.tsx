@@ -1,12 +1,13 @@
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { Link, redirect } from '@/shared/i18n/routing'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { listUserThreads } from '@/modules/support/application/list-user-threads'
 import { ThreadList } from '@/modules/support/ui/thread-list'
 
 export default async function PreguntanosPage() {
+  const locale = await getLocale()
   const user = await getCurrentUser()
-  if (!user) redirect('/login')
+  if (!user) redirect({ href: '/login', locale })
 
   const threads = await listUserThreads()
 
@@ -27,7 +28,7 @@ export default async function PreguntanosPage() {
         </Link>
       </header>
 
-      <ThreadList threads={threads} basePath="/preguntanos" />
+      <ThreadList threads={threads} pathname="/preguntanos/[id]" />
     </div>
   )
 }

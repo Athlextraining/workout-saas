@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import { notFound, redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { Link, redirect } from '@/shared/i18n/routing'
+import { notFound } from 'next/navigation'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { getThread } from '@/modules/support/application/get-thread'
 import { MessageBubble } from '@/modules/support/ui/message-bubble'
@@ -10,8 +11,9 @@ export default async function ThreadPage({
 }: {
   params: Promise<{ id: string }>
 }) {
+  const locale = await getLocale()
   const user = await getCurrentUser()
-  if (!user) redirect('/login')
+  if (!user) redirect({ href: '/login', locale })
 
   const { id } = await params
   const data = await getThread(id)

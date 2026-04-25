@@ -8,6 +8,7 @@ import {
   ViewTransition,
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "@/shared/i18n/routing";
 import { saveBasicInfo } from "@/modules/onboarding/application/save-basic-info";
 import { saveCategory } from "@/modules/onboarding/application/save-category";
 import { saveFitnessData } from "@/modules/onboarding/application/save-fitness-data";
@@ -954,12 +955,12 @@ function StepPayment({ onSubscribe }: { onSubscribe: () => void }) {
         >
           Suscribirse
         </button>
-        <a
+        <Link
           href="/entrenamiento"
           className="block w-full py-3 text-center text-sm text-muted hover:text-white transition-colors"
         >
           Continuar sin suscripción
-        </a>
+        </Link>
       </div>
     </div>
   );

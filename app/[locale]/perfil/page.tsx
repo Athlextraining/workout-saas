@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { redirect } from '@/shared/i18n/routing'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { signOut } from '@/modules/identity/application/sign-out'
 import { getActiveSubscription } from '@/modules/billing/infra/subscription-repository'
@@ -16,8 +17,12 @@ export const metadata: Metadata = {
 }
 
 export default async function PerfilPage() {
+  const locale = await getLocale()
   const user = await getCurrentUser()
-  if (!user) redirect('/login')
+  if (!user) {
+    redirect({ href: '/login', locale })
+    return null
+  }
 
   const subscription = await getActiveSubscription(user.id)
 

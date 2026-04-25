@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 import { JsonLd, faqPageLd } from "@/shared/seo/jsonld";
 
 export const metadata: Metadata = {

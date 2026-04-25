@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition, ViewTransition } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "@/shared/i18n/routing";
 import { Reveal } from "../reveal";
 
 type Step = {
@@ -265,10 +266,10 @@ function StepFinal() {
       </Reveal>
 
       <Reveal delay={0.28} className="w-full">
-        <a href="/entrenamiento" className="hero-cta-primary">
+        <Link href="/entrenamiento" className="hero-cta-primary">
           VER MI ENTRENAMIENTO
           <Arrow />
-        </a>
+        </Link>
       </Reveal>
     </div>
   );

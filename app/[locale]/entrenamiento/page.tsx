@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";

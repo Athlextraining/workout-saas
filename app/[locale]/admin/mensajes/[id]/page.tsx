@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/shared/i18n/routing'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/modules/support/application/require-admin'
 import { getThread } from '@/modules/support/application/get-thread'

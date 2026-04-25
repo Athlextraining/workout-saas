@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 import type {
   SupportThreadWithMeta,
   SupportThreadWithMessages,

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infra/supabase/server";
 import { NavMenu } from "./components/nav-menu";
 import { AdminBell } from "./components/admin-bell";

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/shared/i18n/routing'
 import { sendNewMessage } from '../application/send-new-message'
 import { SUBJECT_MAX, BODY_MAX } from '../domain/validators'
 
-export function ContactForm({ redirectBase = '/preguntanos' }: { redirectBase?: string }) {
+export function ContactForm() {
   const [subject, setSubject] = useState('')
   const [body, setBody] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -21,7 +21,7 @@ export function ContactForm({ redirectBase = '/preguntanos' }: { redirectBase?: 
         setError(res.error)
         return
       }
-      router.push(`${redirectBase}/${res.threadId}`)
+      router.push({ pathname: '/preguntanos/[id]', params: { id: res.threadId! } })
       router.refresh()
     })
   }

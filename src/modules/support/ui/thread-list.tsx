@@ -1,13 +1,15 @@
-import Link from 'next/link'
+import { Link } from '@/shared/i18n/routing'
 import type { SupportThreadWithMeta } from '../domain/thread'
+
+type ThreadPathname = '/preguntanos/[id]' | '/admin/mensajes/[id]'
 
 interface Props {
   threads: SupportThreadWithMeta[]
-  basePath: string
+  pathname: ThreadPathname
   showUserEmail?: boolean
 }
 
-export function ThreadList({ threads, basePath, showUserEmail = false }: Props) {
+export function ThreadList({ threads, pathname, showUserEmail = false }: Props) {
   if (threads.length === 0) {
     return (
       <div className="glass rounded-xl p-6 text-center text-muted text-sm">
@@ -26,7 +28,7 @@ export function ThreadList({ threads, basePath, showUserEmail = false }: Props) 
         return (
           <li key={t.id}>
             <Link
-              href={`${basePath}/${t.id}`}
+              href={{ pathname, params: { id: t.id } }}
               className="block glass rounded-xl p-4 hover:bg-white/5 transition-colors"
             >
               <div className="flex items-center justify-between gap-3 mb-1">

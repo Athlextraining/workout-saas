@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { Link } from '@/shared/i18n/routing'
 import { Drawer } from 'vaul'
 import { signOut } from '@/modules/identity/application/sign-out'
 
@@ -132,7 +132,7 @@ function MenuLink({
   icon,
   onNavigate,
 }: {
-  href: string
+  href: '/perfil' | '/preguntanos' | '/admin/mensajes'
   label: string
   icon: React.ReactNode
   onNavigate: () => void

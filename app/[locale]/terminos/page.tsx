@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Link } from '@/shared/i18n/routing'
 
 export const metadata: Metadata = {
   title: 'Términos y condiciones',
@@ -38,9 +39,9 @@ export default function TerminosPage() {
         <Section title="2. Aceptación">
           <p>
             Al crear una cuenta o suscribirte aceptas estos términos y nuestra{' '}
-            <a href="/privacidad" className="text-[var(--accent-green)] underline">
+            <Link href="/privacidad" className="text-[var(--accent-green)] underline">
               Política de Privacidad
-            </a>
+            </Link>
             . Si no estás de acuerdo, no uses el servicio.
           </p>
         </Section>

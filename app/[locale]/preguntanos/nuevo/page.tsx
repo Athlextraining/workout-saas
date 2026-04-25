@@ -1,11 +1,12 @@
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { Link, redirect } from '@/shared/i18n/routing'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { ContactForm } from '@/modules/support/ui/contact-form'
 
 export default async function NuevoMensajePage() {
+  const locale = await getLocale()
   const user = await getCurrentUser()
-  if (!user) redirect('/login')
+  if (!user) redirect({ href: '/login', locale })
 
   return (
     <div className="max-w-lg mx-auto py-12 px-4 space-y-6">

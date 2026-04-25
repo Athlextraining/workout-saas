@@ -17,7 +17,7 @@ export default async function AdminMensajesPage() {
         </p>
       </header>
 
-      <ThreadList threads={threads} basePath="/admin/mensajes" showUserEmail />
+      <ThreadList threads={threads} pathname="/admin/mensajes/[id]" showUserEmail />
     </div>
   )
 }
