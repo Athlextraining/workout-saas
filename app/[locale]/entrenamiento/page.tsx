@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, getLocale } from 'next-intl/server'
 import { Link } from "@/shared/i18n/routing";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
@@ -36,6 +36,7 @@ const DAY_KEYS: (keyof WeekContent)[] = [
 
 export default async function EntrenamientoPage() {
   const user = await getCurrentUser();
+  const locale = await getLocale();
   const t = await getTranslations('entrenamiento');
 
   // Not registered: CTA to sign up
@@ -102,7 +103,7 @@ export default async function EntrenamientoPage() {
 
   const [subscribed, workout, profile] = await Promise.all([
     isUserSubscribed(user.id),
-    getCurrentWeekWorkout(),
+    getCurrentWeekWorkout(locale as 'es' | 'en'),
     getCurrentProfile(),
   ]);
 

@@ -3,8 +3,9 @@ import { getProfile } from '@/modules/identity/infra/profile-repository'
 import { getUserCycleWeek } from '../domain/cycle'
 import { getTemplate } from '../infra/template-repository'
 import type { UserWeekWorkout } from '../domain/workout'
+import type { Locale } from '@/shared/i18n/config'
 
-export async function getCurrentWeekWorkout(): Promise<UserWeekWorkout | null> {
+export async function getCurrentWeekWorkout(locale: Locale): Promise<UserWeekWorkout | null> {
   const user = await getCurrentUser()
   if (!user) return null
 
@@ -13,7 +14,7 @@ export async function getCurrentWeekWorkout(): Promise<UserWeekWorkout | null> {
 
   const { cycleNumber, weekNumber } = getUserCycleWeek(profile.cycle_start_date)
 
-  const template = await getTemplate(profile.category, weekNumber)
+  const template = await getTemplate(profile.category, weekNumber, locale)
   if (!template) return null
 
   return { ...template, cycle_number: cycleNumber, week_number: weekNumber }
