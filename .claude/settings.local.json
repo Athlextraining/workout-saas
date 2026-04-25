@@ -41,7 +41,9 @@
       "Bash(page\")",
       "Bash(git mv *)",
       "Bash(python3 *)",
-      "Bash(cd C:\\\\\\\\Users\\\\\\\\Patricio\\\\\\\\workout-saas)"
+      "Bash(cd C:\\\\\\\\Users\\\\\\\\Patricio\\\\\\\\workout-saas)",
+      "Bash(tasklist)",
+      "PowerShell(Stop-Process *)"
     ]
   }
 }
