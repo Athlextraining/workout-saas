@@ -171,6 +171,32 @@
       }
     }
   },
+  "login": {
+    "title": {
+      "signIn": "Sign in",
+      "signUp": "Create account"
+    },
+    "form": {
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "fullNamePlaceholder": "Full name"
+    },
+    "submit": {
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "signingIn": "Signing in...",
+      "signingUp": "Creating account..."
+    },
+    "toggle": {
+      "toSignUp": "Don't have an account? Sign up",
+      "toSignIn": "Already have an account? Sign in"
+    },
+    "divider": "or",
+    "google": {
+      "button": "Continue with Google",
+      "loading": "Connecting..."
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",

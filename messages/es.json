@@ -171,6 +171,32 @@
       }
     }
   },
+  "login": {
+    "title": {
+      "signIn": "Iniciar sesión",
+      "signUp": "Crear cuenta"
+    },
+    "form": {
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Contraseña",
+      "fullNamePlaceholder": "Nombre completo"
+    },
+    "submit": {
+      "signIn": "Entrar",
+      "signUp": "Registrarse",
+      "signingIn": "Entrando...",
+      "signingUp": "Creando cuenta..."
+    },
+    "toggle": {
+      "toSignUp": "¿No tienes cuenta? Regístrate",
+      "toSignIn": "¿Ya tienes cuenta? Inicia sesión"
+    },
+    "divider": "o",
+    "google": {
+      "button": "Continuar con Google",
+      "loading": "Conectando..."
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",
