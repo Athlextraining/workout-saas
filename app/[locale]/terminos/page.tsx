@@ -1,12 +1,33 @@
 import type { Metadata } from 'next'
 import { Link } from '@/shared/i18n/routing'
+import { SITE_URL } from '@/shared/seo/site'
 
-export const metadata: Metadata = {
-  title: 'Términos y condiciones',
-  description:
-    'Términos y condiciones de ATHLEX Training. Condiciones de uso, suscripción y cancelación del servicio.',
-  alternates: { canonical: '/terminos' },
-  robots: { index: true, follow: true },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  const esPath = '/terminos'
+  const enPath = '/en/terms'
+  const selfPath = isEn ? enPath : esPath
+
+  return {
+    title: isEn ? 'Terms and conditions' : 'Términos y condiciones',
+    description: isEn
+      ? 'ATHLEX Training terms and conditions. Service use, subscription, and cancellation terms.'
+      : 'Términos y condiciones de ATHLEX Training. Condiciones de uso, suscripción y cancelación del servicio.',
+    alternates: {
+      canonical: `${SITE_URL}${selfPath}`,
+      languages: {
+        es: `${SITE_URL}${esPath}`,
+        en: `${SITE_URL}${enPath}`,
+        'x-default': `${SITE_URL}${esPath}`,
+      },
+    },
+    robots: { index: true, follow: true },
+  }
 }
 
 const LAST_UPDATED = '24 de abril de 2026'

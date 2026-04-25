@@ -1,11 +1,32 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/shared/seo/site'
 
-export const metadata: Metadata = {
-  title: 'Política de privacidad',
-  description:
-    'Política de privacidad de ATHLEX Training. Cómo tratamos tus datos personales en el servicio de programación ATHX.',
-  alternates: { canonical: '/privacidad' },
-  robots: { index: true, follow: true },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  const esPath = '/privacidad'
+  const enPath = '/en/privacy'
+  const selfPath = isEn ? enPath : esPath
+
+  return {
+    title: isEn ? 'Privacy Policy' : 'Política de privacidad',
+    description: isEn
+      ? 'ATHLEX Training privacy policy. How we handle your personal data in the ATHX programming service.'
+      : 'Política de privacidad de ATHLEX Training. Cómo tratamos tus datos personales en el servicio de programación ATHX.',
+    alternates: {
+      canonical: `${SITE_URL}${selfPath}`,
+      languages: {
+        es: `${SITE_URL}${esPath}`,
+        en: `${SITE_URL}${enPath}`,
+        'x-default': `${SITE_URL}${esPath}`,
+      },
+    },
+    robots: { index: true, follow: true },
+  }
 }
 
 const LAST_UPDATED = '24 de abril de 2026'

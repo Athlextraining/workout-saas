@@ -1,27 +1,43 @@
 import type { Metadata } from "next";
 import { Link } from "@/shared/i18n/routing";
 import { JsonLd, faqPageLd } from "@/shared/seo/jsonld";
+import { SITE_URL } from "@/shared/seo/site";
 
-export const metadata: Metadata = {
-  title: "Qué es ATHX: guía del atleta para 2026",
-  description:
-    "ATHX es la competición fitness de ATHLEX. Aprende qué es ATHX, los 3 eventos (Strength, Endurance, MetCon X), categorías ATHX y ATHX PRO, y cómo preparar ATHX 2026 con programación oficial.",
-  alternates: {
-    canonical: "/que-es-athx",
-    languages: {
-      "es-ES": "/que-es-athx",
-      "es-419": "/que-es-athx",
-      "x-default": "/que-es-athx",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEn = locale === "en";
+  const esPath = "/que-es-athx";
+  const enPath = "/en/what-is-athx";
+  const selfPath = isEn ? enPath : esPath;
+
+  return {
+    title: isEn ? "What is ATHX: athlete guide for 2026" : "Qué es ATHX: guía del atleta para 2026",
+    description: isEn
+      ? "ATHX is ATHLEX's fitness competition. Learn what ATHX is, the 3 events (Strength, Endurance, MetCon X), ATHX and ATHX PRO categories, and how to prepare for ATHX 2026 with official programming."
+      : "ATHX es la competición fitness de ATHLEX. Aprende qué es ATHX, los 3 eventos (Strength, Endurance, MetCon X), categorías ATHX y ATHX PRO, y cómo preparar ATHX 2026 con programación oficial.",
+    alternates: {
+      canonical: `${SITE_URL}${selfPath}`,
+      languages: {
+        es: `${SITE_URL}${esPath}`,
+        en: `${SITE_URL}${enPath}`,
+        "x-default": `${SITE_URL}${esPath}`,
+      },
     },
-  },
-  openGraph: {
-    type: "article",
-    title: "Qué es ATHX: guía del atleta para 2026",
-    description:
-      "Qué es ATHX, formato de la competición, categorías, y cómo prepararte.",
-    url: "/que-es-athx",
-  },
-};
+    openGraph: {
+      type: "article",
+      title: isEn ? "What is ATHX: athlete guide for 2026" : "Qué es ATHX: guía del atleta para 2026",
+      description: isEn
+        ? "What ATHX is, competition format, categories, and how to prepare."
+        : "Qué es ATHX, formato de la competición, categorías, y cómo prepararte.",
+      url: `${SITE_URL}${selfPath}`,
+      locale: isEn ? "en_US" : "es_ES",
+    },
+  };
+}
 
 const FAQS = [
   {
