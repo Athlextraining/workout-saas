@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/shared/i18n/routing'
 import { replyToThread } from '../application/reply-to-thread'
 import { BODY_MAX } from '../domain/validators'
 

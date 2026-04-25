@@ -1,3 +1,15 @@
+# Commands
+
+- `npm run dev` — local dev (port 3000)
+- `npm run build` — prod build
+- `npm run lint` — eslint
+- `npx supabase ...` — DB CLI (devDep)
+
+# Env vars
+
+Required: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_ID`, `NEXT_PUBLIC_APP_URL`, `RESEND_API_KEY`, `ADMIN_EMAIL`.
+Optional: `NEXT_PUBLIC_GA_ID`, `RESEND_FROM_EMAIL`.
+
 # Git commits
 
 - NEVER add `Co-Authored-By: Claude` (or any AI co-author trailer) to commit messages.
@@ -107,7 +119,7 @@ app/
 ├─ login/page.tsx                ─→ identity.{sign-in, sign-up} + shared.supabase.client
 ├─ onboarding/page.tsx           ─→ onboarding.{save-basic-info, save-category, save-fitness-data, complete-onboarding}
 │                                  + identity.update-avatar + shared.supabase.client
-├─ entrenamiento/page.tsx        ─→ identity.get-current-user + billing.is-user-subscribed
+├─ entrenamiento/page.tsx        ─→ identity.get-current-user + billing.get-subscription-status
 │                                  + training.{get-current-week-workout, cycle.is-free-week}
 ├─ entrenamiento/subscribe-button.tsx ─→ POST /api/stripe/checkout
 ├─ perfil/page.tsx               ─→ identity.{get-current-user, sign-out} + billing.get-active-subscription

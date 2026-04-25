@@ -1,9 +1,11 @@
 'use server'
 
-import { redirect } from 'next/navigation'
+import { getLocale } from 'next-intl/server'
+import { redirect } from '@/shared/i18n/routing'
 import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
 
 export async function signUp(formData: FormData) {
+  const locale = await getLocale()
   const supabase = await createSupabaseServerClient()
 
   const email = formData.get('email') as string
@@ -22,5 +24,5 @@ export async function signUp(formData: FormData) {
     return { error: error.message }
   }
 
-  redirect('/onboarding')
+  redirect({ href: '/onboarding', locale })
 }
