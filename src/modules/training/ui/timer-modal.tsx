@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Drawer } from 'vaul'
 import type { TimerConfig, TimerMode } from '../domain/timer'
 import { modeLabel } from '../domain/timer'
@@ -175,6 +176,8 @@ function Field({
   step?: number
   unit: string
 }) {
+  const t = useTranslations('timer')
+
   function inc(delta: number) {
     const next = Math.max(min, Math.min(max, value + delta))
     onChange(next)
@@ -183,7 +186,7 @@ function Field({
     <div className="timer-field">
       <span className="timer-field-label">{label}</span>
       <div className="timer-field-ctrl">
-        <button type="button" className="timer-step" onClick={() => inc(-step)} aria-label="Decrementar">
+        <button type="button" className="timer-step" onClick={() => inc(-step)} aria-label={t('decrease')}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M5 12h14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
@@ -192,7 +195,7 @@ function Field({
           {value}
           <span className="timer-field-unit">{unit}</span>
         </span>
-        <button type="button" className="timer-step" onClick={() => inc(step)} aria-label="Incrementar">
+        <button type="button" className="timer-step" onClick={() => inc(step)} aria-label={t('increase')}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           </svg>

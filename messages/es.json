@@ -468,6 +468,13 @@
       "reopening": "…"
     }
   },
+  "timer": {
+    "launch": "Iniciar timer",
+    "decrease": "Decrementar",
+    "increase": "Incrementar",
+    "close": "Cerrar",
+    "stop": "Parar"
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",

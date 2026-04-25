@@ -39,7 +39,9 @@
       "Bash(git stash *)",
       "Bash(git restore *)",
       "Bash(page\")",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(python3 *)",
+      "Bash(cd C:\\\\\\\\Users\\\\\\\\Patricio\\\\\\\\workout-saas)"
     ]
   }
 }

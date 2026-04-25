@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { AnimatePresence, motion } from 'motion/react'
 import type { TimerConfig } from '../domain/timer'
 import { formatMs, modeLabel } from '../domain/timer'
@@ -8,6 +9,7 @@ import { useTimer } from './use-timer'
 import { TimerModal } from './timer-modal'
 
 export function WorkoutTimer({ compact = false }: { compact?: boolean } = {}) {
+  const t = useTranslations('timer')
   const [modalOpen, setModalOpen] = useState(false)
   const [config, setConfig] = useState<TimerConfig | null>(null)
 
@@ -21,13 +23,13 @@ export function WorkoutTimer({ compact = false }: { compact?: boolean } = {}) {
         type="button"
         onClick={() => setModalOpen(true)}
         className={`timer-launch-btn ${compact ? 'is-compact' : ''}`}
-        aria-label="Iniciar timer"
+        aria-label={t('launch')}
       >
         <svg width={compact ? 14 : 18} height={compact ? 14 : 18} viewBox="0 0 24 24" fill="none" aria-hidden>
           <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
           <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <span className="timer-launch-label">{compact ? 'Timer' : 'Iniciar timer'}</span>
+        <span className="timer-launch-label">{compact ? 'Timer' : t('launch')}</span>
       </button>
 
       <TimerModal
@@ -60,6 +62,7 @@ function ActiveTimer({
   config: TimerConfig
   onClose: () => void
 }) {
+  const t = useTranslations('timer')
   const { snapshot, start, pause, resume, stop } = useTimer(config)
 
   useEffect(() => {
@@ -139,7 +142,7 @@ function ActiveTimer({
               onClose()
             }}
           >
-            {isDone ? 'Cerrar' : 'Parar'}
+            {isDone ? t('close') : t('stop')}
           </button>
         </div>
       </motion.div>
