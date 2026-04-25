@@ -257,6 +257,16 @@ DB enums (`Sex`, `Category`) keep their values. UI maps via `messages.*.categori
 - Pass `locale: 'es' | 'en'` to Stripe Checkout (`create-checkout-session.ts`) and Billing Portal (`create-portal-session.ts`) so hosted UI matches.
 - Single price unchanged. Translate display copy in app via messages.
 
+### 9.7 Multi-currency by geo (future, post-Phase-3)
+
+Goal: charge USD to US visitors, GBP to UK, EUR to EU/LATAM, without splitting EN URL.
+
+- Keep single `en` locale. No `en-US`/`en-GB` URL split (avoids dup-content + maintenance churn).
+- Enable Stripe **multi-currency Price** (`currency_options`) on the existing Product → add USD, GBP, EUR.
+- In `create-checkout-session.ts`: read `request.headers.get('x-vercel-ip-country')`, map country → currency, pass to Stripe session (`currency` field). Fall back to USD when geo unknown.
+- UI: format displayed price with `useFormatter().number(amount, { style: 'currency', currency })`.
+- Trigger condition for shipping this: when paid EN traffic from non-EUR markets becomes meaningful, OR before a US/UK paid-acquisition push. Ship as its own mini-phase; not blocking i18n Phase 2/3.
+
 ## 10. Phasing
 
 ### Phase 1 — Infra (no user-visible change)
