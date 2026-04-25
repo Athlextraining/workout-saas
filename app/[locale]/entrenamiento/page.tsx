@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { Link } from "@/shared/i18n/routing";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
@@ -35,6 +36,7 @@ const DAY_KEYS: (keyof WeekContent)[] = [
 
 export default async function EntrenamientoPage() {
   const user = await getCurrentUser();
+  const t = await getTranslations('entrenamiento');
 
   // Not registered: CTA to sign up
   if (!user) {
@@ -50,29 +52,28 @@ export default async function EntrenamientoPage() {
         <div className="train-cta-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            Acceso exclusivo
+            {t('ctaUnregistered.eyebrow')}
           </span>
 
           <Reveal delay={0.1}>
             <h1 className="train-cta-title">
-              TU PLAN
+              {t('ctaUnregistered.title')}
               <br />
               <span className="train-cta-title-accent font-extrabold">
-                TE ESPERA.
+                {t('ctaUnregistered.title').split('\n')[2]}
               </span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="train-cta-sub">
-              Entrenamiento y seguimiento adaptado a tu categoría. Regístrate en
-              5 minutos y empieza.
+              {t('ctaUnregistered.subtitle')}
             </p>
           </Reveal>
 
           <Reveal delay={0.3} className="w-full">
             <Link href="/login" className="hero-cta-primary">
-              COMIENZA AHORA
+              {t('ctaUnregistered.button')}
               <svg
                 width="18"
                 height="18"
@@ -92,7 +93,7 @@ export default async function EntrenamientoPage() {
           </Reveal>
 
           <Reveal delay={0.4}>
-            <p className="train-cta-fineprint">Primera semana gratis</p>
+            <p className="train-cta-fineprint">{t('ctaUnregistered.fineprint')}</p>
           </Reveal>
         </div>
       </section>
@@ -108,10 +109,10 @@ export default async function EntrenamientoPage() {
   if (!workout) {
     return (
       <div className="max-w-lg mx-auto py-12 px-4">
-        <h1 className="text-2xl font-bold mb-4">Entrenamiento semanal</h1>
+        <h1 className="text-2xl font-bold mb-4">{t('title')}</h1>
         <div className="glass rounded-xl p-6 text-center">
           <p className="text-muted">
-            Tu entrenamiento se esta preparando. Vuelve en unos momentos.
+            {t('subtitle')}
           </p>
         </div>
       </div>
@@ -131,15 +132,14 @@ export default async function EntrenamientoPage() {
         <div className="glass rounded-xl p-8 text-center space-y-6">
           <div className="text-5xl">🔒</div>
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold">Continua tu progreso</h1>
+            <h1 className="text-2xl font-bold">{t('paywall.title')}</h1>
             <p className="text-muted text-sm">
-              Has completado tu primera semana gratuita. Suscríbete para acceder
-              al resto.
+              {t('paywall.subtitle')}
             </p>
           </div>
           <SubscribeButton
             className="block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
-            label="Suscribirse"
+            label={t('paywall.button')}
           />
         </div>
       </div>
@@ -167,7 +167,7 @@ export default async function EntrenamientoPage() {
               className={`badge badge--pill badge--glass phase-${phase.code.toLowerCase()}`}
             >
               <span className="badge-dot phase-chip-dot" />
-              {profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"} · Semana{" "}
+              {profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"} · {t('week.phase')}{" "}
               {weekNumber}
             </span>
             <WorkoutTimer compact />

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useTranslations, useFormatter } from 'next-intl'
 import { AnimatePresence, motion } from 'motion/react'
 import type { WeekContent, DayWorkout } from '@/modules/training/domain/workout'
 
@@ -16,24 +17,15 @@ const DAY_KEYS: DayKey[] = [
   'domingo',
 ]
 
-const DAY_SHORT: Record<DayKey, string> = {
-  lunes: 'Lun',
-  martes: 'Mar',
-  miercoles: 'Mié',
-  jueves: 'Jue',
-  viernes: 'Vie',
-  sabado: 'Sáb',
-  domingo: 'Dom',
-}
-
-const DAY_FULL: Record<DayKey, string> = {
-  lunes: 'Lunes',
-  martes: 'Martes',
-  miercoles: 'Miércoles',
-  jueves: 'Jueves',
-  viernes: 'Viernes',
-  sabado: 'Sábado',
-  domingo: 'Domingo',
+// Map ES day keys to numeric weekday (0=Sun, 1=Mon, ..., 6=Sat)
+const DAY_TO_WEEKDAY: Record<DayKey, number> = {
+  domingo: 0,
+  lunes: 1,
+  martes: 2,
+  miercoles: 3,
+  jueves: 4,
+  viernes: 5,
+  sabado: 6,
 }
 
 interface UserMaxes {
@@ -57,6 +49,8 @@ export function WeekView({
   weekNumber,
   maxes,
 }: Props) {
+  const t = useTranslations('entrenamiento')
+  const format = useFormatter()
   const [active, setActive] = useState<DayKey>(todayKey)
   const [done, setDone] = useState<Record<DayKey, boolean>>({
     lunes: false, martes: false, miercoles: false, jueves: false,
@@ -89,6 +83,22 @@ export function WeekView({
 
   const dayContent = content[active]
 
+  // Get short day label using formatter
+  const getDayShort = (day: DayKey) => {
+    const weekday = DAY_TO_WEEKDAY[day]
+    const date = new Date()
+    date.setDate(date.getDate() - date.getDay() + weekday)
+    return format.dateTime(date, { weekday: 'short' })
+  }
+
+  // Get full day label using formatter
+  const getDayFull = (day: DayKey) => {
+    const weekday = DAY_TO_WEEKDAY[day]
+    const date = new Date()
+    date.setDate(date.getDate() - date.getDay() + weekday)
+    return format.dateTime(date, { weekday: 'long' })
+  }
+
   return (
     <div className="space-y-4">
       <div ref={tabsRef} className="day-tabs">
@@ -103,7 +113,7 @@ export function WeekView({
               onClick={() => setActive(day)}
               className={`day-pill ${isActive ? 'is-active' : ''} ${isToday ? 'is-today' : ''} ${isDone ? 'is-done' : ''}`}
             >
-              <span className="day-pill-label">{DAY_SHORT[day]}</span>
+              <span className="day-pill-label">{getDayShort(day)}</span>
               {isDone && (
                 <span className="day-pill-check" aria-hidden>
                   <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
@@ -130,6 +140,7 @@ export function WeekView({
             done={done[active]}
             onToggleDone={() => toggleDone(active)}
             maxes={maxes}
+            getDayFull={getDayFull}
           />
         </motion.div>
       </AnimatePresence>
@@ -143,18 +154,21 @@ function DayCard({
   done,
   onToggleDone,
   maxes,
+  getDayFull,
 }: {
   dayKey: DayKey
   day: DayWorkout | undefined
   done: boolean
   onToggleDone: () => void
   maxes: UserMaxes
+  getDayFull: (day: DayKey) => string
 }) {
+  const t = useTranslations('entrenamiento')
   return (
     <article className="glass rounded-2xl p-5 space-y-5">
       <header className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <h2 className="text-lg font-semibold leading-tight">{DAY_FULL[dayKey]}</h2>
+          <h2 className="text-lg font-semibold leading-tight">{getDayFull(dayKey)}</h2>
           {day?.titulo && (
             <p className="text-accent text-xs mt-1">{day.titulo}</p>
           )}
@@ -163,14 +177,14 @@ function DayCard({
           type="button"
           onClick={onToggleDone}
           className={`done-toggle ${done ? 'is-done' : ''}`}
-          aria-label={done ? 'Marcar como no hecho' : 'Marcar como hecho'}
+          aria-label={done ? t('day.markUndone') : t('day.markDone')}
         >
           {done ? (
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
               <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           ) : (
-            <span className="text-[10px] uppercase tracking-wider pl-[0.05em]">Hecho</span>
+            <span className="text-[10px] uppercase tracking-wider pl-[0.05em]">{t('done')}</span>
           )}
         </button>
       </header>
@@ -178,11 +192,11 @@ function DayCard({
       {day?.recuperacion ? (
         <p className="text-muted text-sm">{day.recuperacion}</p>
       ) : !day ? (
-        <p className="text-muted text-sm">Descanso</p>
+        <p className="text-muted text-sm">{t('day.rest')}</p>
       ) : (
         <div className="space-y-5">
           {day.warmup && day.warmup.length > 0 && (
-            <Section title="Warm-up">
+            <Section title={t('sections.warmup')}>
               <div className="space-y-1.5">
                 {day.warmup.map((ex, i) => (
                   <Row key={i} left={ex.nombre} right={ex.repeticiones} />
@@ -192,7 +206,7 @@ function DayCard({
           )}
 
           {day.fuerza && day.fuerza.length > 0 && (
-            <Section title="Fuerza" chip={day.fuerza[0].tempo} chipVariant="muted">
+            <Section title={t('sections.strength')} chip={day.fuerza[0].tempo} chipVariant="muted">
               <div className="divide-y divide-white/5">
                 {day.fuerza.map((ex, i) => {
                   const calc = calcWeightFromPct(ex.nombre, ex.pct_1rm, maxes)
@@ -223,7 +237,7 @@ function DayCard({
 
           {day.wod && (
             <Section
-              title="WOD"
+              title={t('sections.wod')}
               chip={day.wod.tipo}
               chipMeta={day.wod.cap}
               chipVariant="green"

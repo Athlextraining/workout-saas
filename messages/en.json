@@ -197,6 +197,42 @@
       "loading": "Connecting..."
     }
   },
+  "entrenamiento": {
+    "title": "Weekly Training",
+    "subtitle": "Your training is being prepared. Check back shortly.",
+    "ctaUnregistered": {
+      "eyebrow": "Exclusive Access",
+      "title": "YOUR PLAN\nAWAITS.",
+      "subtitle": "Training and tracking built for your category. Sign up in 5 minutes and start.",
+      "button": "START NOW",
+      "fineprint": "First week free"
+    },
+    "paywall": {
+      "title": "Keep Your Progress",
+      "subtitle": "You've completed your free first week. Subscribe to access the rest.",
+      "button": "Subscribe"
+    },
+    "subscribe": {
+      "button": "Subscribe",
+      "redirecting": "Redirecting...",
+      "errorGeneral": "Error creating checkout session",
+      "errorConnection": "Connection error"
+    },
+    "week": {
+      "phase": "Week"
+    },
+    "day": {
+      "rest": "Rest",
+      "markDone": "Mark as done",
+      "markUndone": "Mark as undone"
+    },
+    "sections": {
+      "warmup": "Warm-up",
+      "strength": "Strength",
+      "wod": "WOD"
+    },
+    "done": "Done"
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",
