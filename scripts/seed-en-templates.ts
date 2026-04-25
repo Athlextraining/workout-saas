@@ -58,7 +58,7 @@ async function main() {
 
     const { data: existing, error: readErr } = await supabase
       .from('workout_templates')
-      .select('week_content')
+      .select('content')
       .eq('category', category)
       .eq('week_number', weekNumber)
       .single()
@@ -72,13 +72,13 @@ async function main() {
     }
 
     const merged = {
-      ...(existing.week_content as Record<string, unknown>),
+      ...(existing.content as Record<string, unknown>),
       en: enContent,
     }
 
     const { error: writeErr } = await supabase
       .from('workout_templates')
-      .update({ week_content: merged })
+      .update({ content: merged })
       .eq('category', category)
       .eq('week_number', weekNumber)
 

@@ -1,0 +1,268 @@
+{
+  "lunes": {
+    "wod": {
+      "tipo": "AMRAP 12",
+      "ejercicios": [
+        {
+          "peso": "43/30 kg",
+          "nombre": "Thrusters",
+          "repeticiones": "10"
+        },
+        {
+          "nombre": "Toes-to-Bar",
+          "repeticiones": "10"
+        },
+        {
+          "nombre": "Cal Bike",
+          "repeticiones": "12/10"
+        }
+      ],
+      "descripcion": "AMRAP 12 minutos"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Codos altos, torso vertical.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Front Squat",
+        "series": 5,
+        "pct_1rm": 70,
+        "repeticiones": "4"
+      }
+    ],
+    "titulo": "Fuerza: Front Squat + Couplet",
+    "warmup": [
+      {
+        "nombre": "Bike Erg",
+        "repeticiones": "2 min"
+      },
+      {
+        "nombre": "Front Rack Stretch",
+        "repeticiones": "30s x 2"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Front Squats barra vacia",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Toes-to-Bar",
+        "repeticiones": "5"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Recuperacion activa",
+    "recuperacion": "30-40 min carrera Z2 o natacion. Movilidad cadera 15 min. Foam roller."
+  },
+  "martes": {
+    "wod": {
+      "tipo": "EMOM 14",
+      "ejercicios": [
+        {
+          "peso": "50/30 kg",
+          "nombre": "Min impar: Sandbag Carry",
+          "repeticiones": "30m"
+        },
+        {
+          "nombre": "Min par: Burpees",
+          "repeticiones": "12"
+        }
+      ],
+      "descripcion": "EMOM 14 minutos (alternar 2 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Dip vertical, no hacia delante.",
+        "tempo": "Every 2 min for 10 min",
+        "nombre": "Push Press",
+        "series": 5,
+        "pct_1rm": 70,
+        "repeticiones": "4"
+      }
+    ],
+    "titulo": "Fuerza: Push Press + Sandbag intervals",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Banded Pull-Aparts",
+        "repeticiones": "15"
+      },
+      {
+        "nombre": "Push Press barra vacia",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hollow Rocks",
+        "repeticiones": "20"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "18 min",
+      "tipo": "For Time",
+      "notas": "Sin sandbag esta semana, foco en resistencia muscular.",
+      "ejercicios": [
+        {
+          "nombre": "Ski-erg",
+          "repeticiones": "40/30 cal"
+        },
+        {
+          "peso": "20/12.5 kg",
+          "nombre": "DB GTOH alterno",
+          "repeticiones": "30"
+        },
+        {
+          "peso": "20/12.5 kg suitcase",
+          "notas": "30m ida + 30m vuelta",
+          "nombre": "DB Walking Lunges",
+          "repeticiones": "60m"
+        },
+        {
+          "nombre": "Burpee Broad Jumps",
+          "repeticiones": "30m"
+        }
+      ],
+      "descripcion": "Chipper For Time (Cap 18 min)"
+    },
+    "fuerza": [],
+    "titulo": "MetCon X parcial + accesorios",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "300m"
+      },
+      {
+        "nombre": "DB Press ligero",
+        "repeticiones": "8+8"
+      },
+      {
+        "nombre": "Broad Jumps",
+        "repeticiones": "5"
+      },
+      {
+        "nombre": "DB Suitcase carry",
+        "repeticiones": "20m"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Descanso",
+    "recuperacion": "Descanso completo"
+  },
+  "viernes": {
+    "wod": {
+      "cap": "22 min",
+      "tipo": "For Distance",
+      "notas": "Apuntar pace por bloque. Ritmo Z3 sostenido.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "750m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "750m"
+        }
+      ],
+      "descripcion": "22 min — alternar 750m, intentar mejorar distancia total vs semana 1"
+    },
+    "fuerza": [],
+    "titulo": "Endurance: Row + Run con pace target",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "300m"
+      },
+      {
+        "nombre": "Run",
+        "repeticiones": "200m"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "10 por pierna"
+      },
+      {
+        "nombre": "Pogo Hops",
+        "repeticiones": "20"
+      },
+      {
+        "nombre": "A-Skips",
+        "repeticiones": "20m"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "cap": "14 min",
+      "tipo": "For Time",
+      "ejercicios": [
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "21-15-9"
+        },
+        {
+          "peso": "20/12.5 kg",
+          "nombre": "DB GTOH alterno",
+          "repeticiones": "21-15-9"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "21-15-9"
+        }
+      ],
+      "descripcion": "21-15-9 For Time (Cap 14 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Subir 5kg vs semana 1.",
+        "tempo": "Every 2:30 for 10 min",
+        "nombre": "Deadlift",
+        "series": 4,
+        "pct_1rm": 70,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "Fuerza: Deadlift + Triplete",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Glute Bridges",
+        "repeticiones": "15"
+      },
+      {
+        "nombre": "Single Leg RDL",
+        "repeticiones": "8 por pierna"
+      },
+      {
+        "nombre": "Deadlifts barra vacia",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Plank",
+        "repeticiones": "30s x 2"
+      }
+    ]
+  }
+}

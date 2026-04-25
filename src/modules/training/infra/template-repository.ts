@@ -18,11 +18,11 @@ export async function getTemplate(
 
   if (!data) return null
 
-  const localized = data.week_content as LocalizedWeekContent
+  const localized = data.content as LocalizedWeekContent
   const content: WeekContent = localized[locale] ?? localized.es!
 
   return {
-    ...(data as Omit<WorkoutTemplate, 'week_content'>),
-    week_content: content,
+    ...(data as Omit<WorkoutTemplate, 'content'>),
+    content,
   } as WorkoutTemplate
 }

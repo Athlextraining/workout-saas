@@ -1,0 +1,236 @@
+{
+  "lunes": {
+    "wod": {
+      "tipo": "AMRAP 8",
+      "notas": "Ritmo conversacional. RPE 5.",
+      "ejercicios": [
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "10/8"
+        },
+        {
+          "nombre": "Push-ups",
+          "repeticiones": "10"
+        },
+        {
+          "nombre": "Air Squats",
+          "repeticiones": "15"
+        }
+      ],
+      "descripcion": "AMRAP 8 minutos suave"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 5-6",
+        "notas": "Tecnica, sin fallos. No buscar carga.",
+        "tempo": "Every 2 min for 8 min",
+        "nombre": "Strict Press",
+        "series": 4,
+        "pct_1rm": 60,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "DELOAD: Strict Press tecnica + Couplet ligero",
+    "warmup": [
+      {
+        "nombre": "Bike Erg",
+        "repeticiones": "2 min suave"
+      },
+      {
+        "nombre": "Banded Pass-throughs",
+        "repeticiones": "15"
+      },
+      {
+        "nombre": "Strict Press barra vacia",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "8"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Recuperacion activa",
+    "recuperacion": "20-30 min carrera muy suave o paseo. Movilidad completa 20 min."
+  },
+  "martes": {
+    "wod": {
+      "tipo": "AMRAP 8",
+      "notas": "RPE 5-6. No vaciarse.",
+      "ejercicios": [
+        {
+          "peso": "17.5/12.5 kg",
+          "nombre": "DB GTOH dual",
+          "repeticiones": "10"
+        },
+        {
+          "notas": "20\"/16\"",
+          "nombre": "Box Step-ups",
+          "repeticiones": "10"
+        },
+        {
+          "nombre": "Sit-ups",
+          "repeticiones": "15"
+        }
+      ],
+      "descripcion": "AMRAP 8 minutos"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 5-6",
+        "notas": "Movilidad y patron, sin esfuerzo.",
+        "tempo": "Every 2 min for 8 min",
+        "nombre": "Back Squat",
+        "series": 4,
+        "pct_1rm": 60,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "DELOAD: Back Squat ligero + AMRAP corto",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "300m suave"
+      },
+      {
+        "nombre": "Cossack Squats",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Banded Glute Walks",
+        "repeticiones": "15 pasos"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "12 min",
+      "tipo": "For Time",
+      "notas": "RPE 6 max. Solo movimiento, no test.",
+      "ejercicios": [
+        {
+          "nombre": "Ski-erg",
+          "repeticiones": "20/15 cal"
+        },
+        {
+          "peso": "17.5/12.5 kg",
+          "nombre": "DB GTOH dual",
+          "repeticiones": "20"
+        },
+        {
+          "notas": "20\"/16\"",
+          "nombre": "Box Step-overs",
+          "repeticiones": "20"
+        },
+        {
+          "peso": "17.5/12.5 kg",
+          "nombre": "DB Walking Lunges front rack",
+          "repeticiones": "20m"
+        }
+      ],
+      "descripcion": "MetCon X parcial ligero (Cap 12 min)"
+    },
+    "fuerza": [],
+    "titulo": "DELOAD: MetCon X parcial ligero",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "300m suave"
+      },
+      {
+        "nombre": "DB ligero",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "8"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Descanso",
+    "recuperacion": "Descanso completo. Fin del ciclo de 6 semanas."
+  },
+  "viernes": {
+    "wod": {
+      "cap": "20 min",
+      "tipo": "For Time Z2",
+      "notas": "Pace conversacional. Pulso bajo. Solo recuperar.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "500m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "500m"
+        }
+      ],
+      "descripcion": "20 min Z2 — alternar 500m row / 500m run"
+    },
+    "fuerza": [],
+    "titulo": "DELOAD: Endurance Z2",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "300m suave"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "8 por pierna"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "tipo": "EMOM 10",
+      "ejercicios": [
+        {
+          "nombre": "Min impar: Cal Bike",
+          "repeticiones": "10/8"
+        },
+        {
+          "peso": "17.5/12.5 kg",
+          "nombre": "Min par: DB Walking Lunges front rack",
+          "repeticiones": "16 pasos"
+        }
+      ],
+      "descripcion": "EMOM 10 minutos suave"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 5",
+        "notas": "Patron y respiracion. Cero RPE alto.",
+        "tempo": "Every 2 min for 8 min",
+        "nombre": "Deadlift",
+        "series": 4,
+        "pct_1rm": 60,
+        "repeticiones": "3"
+      }
+    ],
+    "titulo": "DELOAD: Deadlift tecnica + movilidad",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "300m suave"
+      },
+      {
+        "nombre": "Romanian Deadlifts",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Deadlifts barra vacia",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Plank",
+        "repeticiones": "30s"
+      }
+    ]
+  }
+}
