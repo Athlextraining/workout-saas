@@ -57,20 +57,25 @@ export default function Home() {
         <div className="hero-content">
           <span className="hero-eyebrow">
             <span className="hero-dot" />
-            ATHX Training by ATHLEX
+            ATHX™ Training by ATHLEX
           </span>
 
-          <h1 className="hero-title">
-            ENTRENAMIENTO
+          <div className="hero-title">
+            ENTRENA
             <br />
-            <span className="hero-title-accent font-extrabold">ATHX.</span>
-          </h1>
+            MEJORA
+            <br />
+            <span className="hero-title-accent font-extrabold">COMPITE.</span>
+          </div>
 
-          <p className="hero-sub">
-            Programación ATHX oficial: plan semanal de entrenamiento para
-            preparar <strong>ATHX 2026</strong>, con seguimiento y chat directo
-            con tu coach. Para atletas de España y Latinoamérica.
-          </p>
+          <div className="hero-sub">
+            <h1 className="inline m-0 p-0 [font:inherit]">
+              <strong>Programación ATHX</strong>
+            </h1>
+            ™: plan semanal de entrenamiento para preparar{" "}
+            <strong>ATHX 2026</strong>. Seguimiento y chat directo con tu
+            entrenador.
+          </div>
 
           <Link href="/login" className="hero-cta-primary">
             COMIENZA AHORA
@@ -142,9 +147,7 @@ export default function Home() {
                   <div className="phone-bubble phone-bubble--theirs">
                     Perfecto. Mañana subimos a 115. 🔥
                   </div>
-                  <div className="phone-bubble phone-bubble--mine">
-                    Vamos!
-                  </div>
+                  <div className="phone-bubble phone-bubble--mine">Vamos!</div>
                 </div>
                 <div className="phone-chat-input">
                   <span>Escribe un mensaje…</span>
@@ -422,7 +425,10 @@ export default function Home() {
       {/* Legal footer */}
       <footer className="px-6 pt-6 pb-10 border-t border-white/5">
         <div className="max-w-md mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted">
-          <Link href="/privacidad" className="hover:text-white transition-colors">
+          <Link
+            href="/privacidad"
+            className="hover:text-white transition-colors"
+          >
             Privacidad
           </Link>
           <Link href="/terminos" className="hover:text-white transition-colors">

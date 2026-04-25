@@ -7,7 +7,7 @@ export const BRAND_SHORT = "ATHLEX";
 export const COMPETITION = "ATHX";
 
 export const DEFAULT_DESCRIPTION =
-  "Programación y entrenamiento ATHX para atletas de España y Latinoamérica. Plan semanal, seguimiento y chat directo con coach. Primera semana gratis.";
+  "Programación y entrenamiento ATHX™ para atletas. Plan semanal, seguimiento y chat directo con el entrenador. Primera semana gratis.";
 
 export const DEFAULT_KEYWORDS = [
   "ATHX",
