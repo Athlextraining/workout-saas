@@ -294,6 +294,29 @@
     "bubble": {
       "you": "Tú",
       "admin": "ATHLEX"
+    },
+    "chat": {
+      "anonTitle": "Entrena con seguimiento completo",
+      "anonDesc": "Habla directo con el equipo ATHLEX, recibe feedback de tus sesiones y accede al programa completo.",
+      "anonBullet1": "Chat directo con el coach",
+      "anonBullet2": "Workouts adaptados ATHX / ATHX PRO",
+      "anonBullet3": "Seguimiento de 1RM y progresos",
+      "anonCta": "Empieza ya",
+      "anonFineprint": "Primera semana gratis.",
+      "userStatus": "Responde en ~24h",
+      "welcomeMsg": "¡Hola! Cuéntanos qué necesitas — dudas de técnica, escalas, dolores, lo que sea. Te respondemos lo antes posible.",
+      "placeholder": "Escribe un mensaje…",
+      "sendAriaLabel": "Enviar",
+      "loading": "Cargando…",
+      "threadClosed": "Este hilo está cerrado.",
+      "reopenBtn": "Iniciar nueva consulta",
+      "adminClosedMsg": "Hilo cerrado.",
+      "adminBackBtn": "Volver",
+      "inboxTitle": "Bandeja",
+      "inboxSubSingular": "1 hilo",
+      "inboxSubPlural": "{count} hilos",
+      "inboxEmpty": "Sin hilos todavía.",
+      "adminTuLabel": "Tú: "
     }
   },
   "onboarding": {
@@ -374,6 +397,23 @@
       "notAuthenticated": "No autenticado",
       "checkoutError": "Error al crear la sesión de pago",
       "connectionError": "Error de conexión"
+    }
+  },
+  "nav": {
+    "brandAriaLabel": "ATHLEX training",
+    "programLink": "Programación",
+    "signInButton": "Entrar",
+    "menu": {
+      "ariaLabel": "Menú",
+      "title": "Menú",
+      "profileLink": "Perfil",
+      "contactLink": "Pregúntanos",
+      "adminLink": "Admin · Mensajes",
+      "signOut": "Cerrar sesión"
+    },
+    "adminBell": {
+      "ariaLabel": "Mensajes",
+      "inboxTitle": "Bandeja de mensajes"
     }
   },
   "bienvenida": {

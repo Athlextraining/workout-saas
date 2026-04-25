@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/shared/i18n/routing";
 import type {
   SupportThreadWithMeta,
@@ -40,6 +41,7 @@ export function ChatPanel({
 
 // ─── Anon ────────────────────────────────────────────────
 function AnonCta() {
+  const t = useTranslations("support.chat");
   return (
     <div className="chat-anon">
       <div className="chat-anon-icon">
@@ -52,20 +54,19 @@ function AnonCta() {
           />
         </svg>
       </div>
-      <h3 className="chat-anon-title">Entrena con seguimiento completo</h3>
+      <h3 className="chat-anon-title">{t("anonTitle")}</h3>
       <p className="chat-anon-sub">
-        Habla directo con el equipo ATHLEX, recibe feedback de tus sesiones y
-        accede al programa completo.
+        {t("anonDesc")}
       </p>
       <ul className="chat-anon-bullets">
-        <li>Chat directo con el coach</li>
-        <li>Workouts adaptados ATHX / ATHX PRO</li>
-        <li>Seguimiento de 1RM y progresos</li>
+        <li>{t("anonBullet1")}</li>
+        <li>{t("anonBullet2")}</li>
+        <li>{t("anonBullet3")}</li>
       </ul>
       <Link href="/login" className="chat-anon-cta">
-        Empieza ya
+        {t("anonCta")}
       </Link>
-      <p className="chat-anon-fineprint">Primera semana gratis.</p>
+      <p className="chat-anon-fineprint">{t("anonFineprint")}</p>
     </div>
   );
 }
@@ -78,6 +79,7 @@ function UserChat({
   open: boolean;
   onStateChange?: (unread: number) => void;
 }) {
+  const t = useTranslations("support.chat");
   const [thread, setThread] = useState<SupportThreadWithMessages | null>(null);
   const [threadId, setThreadId] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -179,14 +181,14 @@ function UserChat({
         <div className="chat-live-avatar">A</div>
         <div className="min-w-0">
           <p className="chat-live-name">ATHLEX</p>
-          <p className="chat-live-status">Responde en ~24h</p>
+          <p className="chat-live-status">{t("userStatus")}</p>
         </div>
       </header>
 
       <div ref={scrollRef} className="chat-live-messages">
-        {!loaded && <Placeholder />}
-        {loaded && !thread && <WelcomeMessage />}
-        {loaded && thread && thread.messages.length === 0 && <WelcomeMessage />}
+        {!loaded && <Placeholder t={t} />}
+        {loaded && !thread && <WelcomeMessage t={t} />}
+        {loaded && thread && thread.messages.length === 0 && <WelcomeMessage t={t} />}
         {thread?.messages.map((m) => (
           <Bubble key={m.id} message={m} mine={m.author === "user"} />
         ))}
@@ -194,7 +196,7 @@ function UserChat({
 
       {thread?.thread.status === "closed" ? (
         <div className="chat-live-reopen">
-          <p>Este hilo está cerrado.</p>
+          <p>{t("threadClosed")}</p>
           <button
             type="button"
             onClick={() => {
@@ -204,7 +206,7 @@ function UserChat({
             }}
             className="chat-live-reopen-btn"
           >
-            Iniciar nueva consulta
+            {t("reopenBtn")}
           </button>
         </div>
       ) : (
@@ -215,6 +217,7 @@ function UserChat({
           sending={sending}
           error={error}
           inputRef={inputRef}
+          t={t}
         />
       )}
     </div>
@@ -229,6 +232,7 @@ function AdminChat({
   open: boolean;
   onStateChange?: (unread: number) => void;
 }) {
+  const t = useTranslations("support.chat");
   const [threads, setThreads] = useState<SupportThreadWithMeta[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [thread, setThread] = useState<SupportThreadWithMessages | null>(null);
@@ -299,20 +303,20 @@ function AdminChat({
       <div className="chat-inbox">
         <header className="chat-inbox-head">
           <div>
-            <h3 className="chat-inbox-title">Bandeja</h3>
+            <h3 className="chat-inbox-title">{t("inboxTitle")}</h3>
             <p className="chat-inbox-sub">
-              {threads.length} hilo{threads.length === 1 ? "" : "s"}
+              {threads.length === 1 ? t("inboxSubSingular") : t("inboxSubPlural", { count: threads.length })}
             </p>
           </div>
         </header>
         <div className="chat-inbox-list">
           {threads.length === 0 && (
-            <p className="chat-empty-admin">Sin hilos todavía.</p>
+            <p className="chat-empty-admin">{t("inboxEmpty")}</p>
           )}
-          {threads.map((t) => {
-            const unread = t.unread_for_admin;
+          {threads.map((thread) => {
+            const unread = thread.unread_for_admin;
             const date = new Date(
-              t.last_message_at ?? t.updated_at
+              thread.last_message_at ?? thread.updated_at
             ).toLocaleString("es-ES", {
               day: "2-digit",
               month: "short",
@@ -321,22 +325,22 @@ function AdminChat({
             });
             return (
               <button
-                key={t.id}
+                key={thread.id}
                 type="button"
-                onClick={() => setActiveId(t.id)}
+                onClick={() => setActiveId(thread.id)}
                 className={`chat-thread-row ${unread ? "is-unread" : ""}`}
               >
                 <div className="chat-thread-top">
-                  <span className="chat-thread-subject">{t.subject}</span>
+                  <span className="chat-thread-subject">{thread.subject}</span>
                   {unread && <span className="chat-thread-dot" />}
                 </div>
-                {t.user_email && (
-                  <span className="chat-thread-meta">{t.user_email}</span>
+                {thread.user_email && (
+                  <span className="chat-thread-meta">{thread.user_email}</span>
                 )}
-                {t.last_message_preview && (
+                {thread.last_message_preview && (
                   <span className="chat-thread-preview">
-                    {t.last_message_author === "admin" ? "Tú: " : ""}
-                    {t.last_message_preview}
+                    {thread.last_message_author === "admin" ? t("adminTuLabel") : ""}
+                    {thread.last_message_preview}
                   </span>
                 )}
                 <span className="chat-thread-date">{date}</span>
@@ -358,7 +362,7 @@ function AdminChat({
             setThread(null);
           }}
           className="chat-back-btn"
-          aria-label="Volver"
+          aria-label={t("adminBackBtn")}
         >
           <svg
             width="18"
@@ -390,7 +394,7 @@ function AdminChat({
       </header>
 
       <div ref={scrollRef} className="chat-live-messages">
-        {!thread && <Placeholder />}
+        {!thread && <Placeholder t={t} />}
         {thread?.messages.map((m) => (
           <Bubble key={m.id} message={m} mine={m.author === "admin"} />
         ))}
@@ -398,7 +402,7 @@ function AdminChat({
 
       {thread?.thread.status === "closed" ? (
         <div className="chat-live-reopen">
-          <p>Hilo cerrado.</p>
+          <p>{t("adminClosedMsg")}</p>
         </div>
       ) : (
         <Composer
@@ -408,6 +412,7 @@ function AdminChat({
           sending={sending}
           error={error}
           inputRef={inputRef}
+          t={t}
         />
       )}
     </div>
@@ -430,19 +435,18 @@ function Bubble({ message, mine }: { message: SupportMessage; mine: boolean }) {
   );
 }
 
-function WelcomeMessage() {
+function WelcomeMessage({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <div className="chat-msg is-theirs">
       <div className="chat-msg-bubble">
-        ¡Hola! Cuéntanos qué necesitas — dudas de técnica, escalas, dolores, lo
-        que sea. Te respondemos lo antes posible.
+        {t("welcomeMsg")}
       </div>
     </div>
   );
 }
 
-function Placeholder() {
-  return <p className="chat-placeholder">Cargando…</p>;
+function Placeholder({ t }: { t: ReturnType<typeof useTranslations> }) {
+  return <p className="chat-placeholder">{t("loading")}</p>;
 }
 
 function Composer({
@@ -452,6 +456,7 @@ function Composer({
   sending,
   error,
   inputRef,
+  t,
 }: {
   body: string;
   setBody: (v: string) => void;
@@ -459,6 +464,7 @@ function Composer({
   sending: boolean;
   error: string | null;
   inputRef: React.RefObject<HTMLTextAreaElement | null>;
+  t: ReturnType<typeof useTranslations>;
 }) {
   function onKey(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -477,7 +483,7 @@ function Composer({
           onKeyDown={onKey}
           maxLength={BODY_MAX}
           rows={3}
-          placeholder="Escribe un mensaje…"
+          placeholder={t("placeholder")}
           className="chat-composer-input"
           autoComplete="off"
           autoCorrect="off"
@@ -493,7 +499,7 @@ function Composer({
           type="submit"
           disabled={sending || !body.trim()}
           className="chat-composer-send"
-          aria-label="Enviar"
+          aria-label={t("sendAriaLabel")}
         >
           {sending ? (
             "…"

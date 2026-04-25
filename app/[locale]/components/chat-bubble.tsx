@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { useTranslations } from 'next-intl'
 import { Drawer } from 'vaul'
 import { ChatPanel } from './chat-panel'
 
@@ -61,6 +62,8 @@ export function ChatBubble({ initialMode }: Props) {
     }
   }, [open])
 
+  const t = useTranslations('support.chat');
+
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>
       <Drawer.Trigger asChild>
@@ -69,7 +72,7 @@ export function ChatBubble({ initialMode }: Props) {
           className="chat-bubble"
           aria-label={
             initialMode === 'anon'
-              ? 'Más información'
+              ? t('anonTitle')
               : 'Abrir chat con el equipo'
           }
         >
