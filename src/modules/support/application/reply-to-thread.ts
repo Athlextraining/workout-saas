@@ -2,6 +2,8 @@
 
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
 import { getCurrentProfile } from '@/modules/identity/application/get-current-profile'
+import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
+import { defaultLocale, locales, type Locale } from '@/shared/i18n/config'
 import { addMessage, getThreadById } from '../infra/thread-repository'
 import {
   sendReplyToUser,
@@ -42,12 +44,23 @@ export async function replyToThread(input: {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   try {
     if (author === 'admin' && threadData.user_email) {
+      const supabase = await createSupabaseServerClient()
+      const { data: ownerProfile } = await supabase
+        .from('profiles')
+        .select('locale')
+        .eq('id', threadData.thread.user_id)
+        .maybeSingle()
+      const rawLocale = ownerProfile?.locale as string | null | undefined
+      const recipientLocale: Locale = locales.includes(rawLocale as Locale)
+        ? (rawLocale as Locale)
+        : defaultLocale
       await sendReplyToUser({
         threadId: input.threadId,
         subject: threadData.thread.subject,
         body,
         userEmail: threadData.user_email,
         appUrl,
+        recipientLocale,
       })
     } else if (author === 'user') {
       await sendUserReplyToAdmin({

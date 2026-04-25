@@ -1,4 +1,6 @@
 import { Resend } from 'resend'
+import { getTranslations } from 'next-intl/server'
+import type { Locale } from '@/shared/i18n/config'
 
 const key = process.env.RESEND_API_KEY
 const resend = key ? new Resend(key) : null
@@ -20,43 +22,54 @@ interface ReplyInput {
   body: string
   userEmail: string
   appUrl: string
+  recipientLocale: Locale
 }
 
 export async function sendNewMessageToAdmin(input: NewMessageInput) {
   if (!resend || !ADMIN) return { skipped: true }
+  const t = await getTranslations({ locale: 'es', namespace: 'emails.newMessageToAdmin' })
   const link = `${input.appUrl}/admin/mensajes/${input.threadId}`
   await resend.emails.send({
     from: FROM,
     to: ADMIN,
     replyTo: input.userEmail,
-    subject: `Mensaje de ${input.userEmail}`,
-    text: `${input.body}\n\n— ver hilo: ${link}`,
+    subject: t('subject', { userEmail: input.userEmail }),
+    text: `${input.body}\n\n${t('bodyTrailer', { link })}`,
   })
   return { skipped: false }
 }
 
 export async function sendReplyToUser(input: ReplyInput) {
   if (!resend || !ADMIN) return { skipped: true }
-  const link = `${input.appUrl}/preguntanos/${input.threadId}`
+  const t = await getTranslations({
+    locale: input.recipientLocale,
+    namespace: 'emails.replyToUser',
+  })
+  const path =
+    input.recipientLocale === 'en'
+      ? `/en/contact/${input.threadId}`
+      : `/preguntanos/${input.threadId}`
+  const link = `${input.appUrl}${path}`
   await resend.emails.send({
     from: FROM,
     to: input.userEmail,
     replyTo: ADMIN,
-    subject: `Re: [ATHLEX] ${input.subject}`,
-    text: `${input.body}\n\n— responde desde la app: ${link}`,
+    subject: t('subject', { subject: input.subject }),
+    text: `${input.body}\n\n${t('bodyTrailer', { link })}`,
   })
   return { skipped: false }
 }
 
 export async function sendUserReplyToAdmin(input: NewMessageInput) {
   if (!resend || !ADMIN) return { skipped: true }
+  const t = await getTranslations({ locale: 'es', namespace: 'emails.userReplyToAdmin' })
   const link = `${input.appUrl}/admin/mensajes/${input.threadId}`
   await resend.emails.send({
     from: FROM,
     to: ADMIN,
     replyTo: input.userEmail,
-    subject: `Mensaje de ${input.userEmail}`,
-    text: `${input.body}\n\n— ver hilo: ${link}`,
+    subject: t('subject', { userEmail: input.userEmail }),
+    text: `${input.body}\n\n${t('bodyTrailer', { link })}`,
   })
   return { skipped: false }
 }

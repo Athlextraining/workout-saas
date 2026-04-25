@@ -625,5 +625,19 @@
       "support": "Soporte",
       "copyright": "© ATHLEX Training"
     }
+  },
+  "emails": {
+    "newMessageToAdmin": {
+      "subject": "Mensaje de {userEmail}",
+      "bodyTrailer": "— ver hilo: {link}"
+    },
+    "replyToUser": {
+      "subject": "Re: [ATHLEX] {subject}",
+      "bodyTrailer": "— responde desde la app: {link}"
+    },
+    "userReplyToAdmin": {
+      "subject": "Mensaje de {userEmail}",
+      "bodyTrailer": "— ver hilo: {link}"
+    }
   }
 }
