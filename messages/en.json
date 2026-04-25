@@ -376,6 +376,42 @@
       "connectionError": "Connection error"
     }
   },
+  "bienvenida": {
+    "steps": {
+      "methodology": {
+        "eyebrow": "Methodology",
+        "title": "Science, not luck",
+        "description": "Each week follows calculated periodization and progression."
+      },
+      "sessions": {
+        "eyebrow": "Sessions",
+        "title": "60 to 90 minutes",
+        "description": "Dense training, no filler. Every exercise, every rep, has a purpose."
+      },
+      "progression": {
+        "eyebrow": "Progression",
+        "title": "Loads that scale",
+        "description": "Start with what you can handle. The plan adjusts week by week so you progress as much as possible."
+      }
+    },
+    "welcome": {
+      "badge": "Subscription active",
+      "title": "YOU'RE NOW",
+      "titleAccent": "ATHLEX.",
+      "subtitle": "Welcome. In 3 screens we'll show you how your programming works.",
+      "button": "Let's go"
+    },
+    "final": {
+      "badge": "All set",
+      "title": "YOUR PLAN",
+      "titleAccent": "AWAITS.",
+      "subtitle": "Each Monday, the next week unlocks.",
+      "button": "VIEW MY TRAINING"
+    },
+    "header": {
+      "back": "Back"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — ATHX training and programming for athletes preparing for ATHX 2026 in Spain and Latin America.",

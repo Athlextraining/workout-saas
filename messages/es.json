@@ -376,6 +376,42 @@
       "connectionError": "Error de conexión"
     }
   },
+  "bienvenida": {
+    "steps": {
+      "methodology": {
+        "eyebrow": "Metodología",
+        "title": "Ciencia, no azar",
+        "description": "Cada semana sigue periodización y progresión calculados."
+      },
+      "sessions": {
+        "eyebrow": "Sesiones",
+        "title": "60 a 90 minutos",
+        "description": "Entrenamientos densos, sin relleno. Cada ejercicio, cada rep, tiene un propósito."
+      },
+      "progression": {
+        "eyebrow": "Progresión",
+        "title": "Cargas que escalan",
+        "description": "Empieza con lo que puedas manejar. El plan se ajusta semana a semana para que progreses lo máximo posible."
+      }
+    },
+    "welcome": {
+      "badge": "Suscripción activa",
+      "title": "YA ERES",
+      "titleAccent": "ATHLEX.",
+      "subtitle": "Bienvenido. En 3 pantallas te contamos cómo funciona tu programación.",
+      "button": "Adelante"
+    },
+    "final": {
+      "badge": "Todo listo",
+      "title": "TU PLAN",
+      "titleAccent": "TE ESPERA.",
+      "subtitle": "Cada lunes se desbloquea la siguiente semana.",
+      "button": "VER MI ENTRENAMIENTO"
+    },
+    "header": {
+      "back": "Atrás"
+    }
+  },
   "home": {
     "hero": {
       "srOnlyDesc": "ATHLEX Training — entrenamiento ATHX y programación ATHX para atletas preparando ATHX 2026 en España y Latinoamérica.",
