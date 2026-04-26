@@ -87,14 +87,9 @@ export async function proxy(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) => {
             request.cookies.set(name, value);
           });
-          response = NextResponse.next({ request });
-          if (!cookieLocale) {
-            response.cookies.set('NEXT_LOCALE', effectiveLocale, {
-              path: '/',
-              maxAge: 60 * 60 * 24 * 365,
-              sameSite: 'lax',
-            });
-          }
+          // Do NOT replace response — intlResponse carries the locale rewrite
+          // headers that Next.js needs to resolve /  → app/[locale]/page.tsx.
+          // Just set the new auth cookies on the existing response.
           cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options);
           });
