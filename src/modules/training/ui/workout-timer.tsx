@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslations } from 'next-intl'
 import { AnimatePresence, motion } from 'motion/react'
 import type { TimerConfig } from '../domain/timer'
@@ -86,7 +87,7 @@ function ActiveTimer({
     return formatMs(snapshot.remainingMs ?? snapshot.elapsedMs)
   })()
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -146,6 +147,7 @@ function ActiveTimer({
           </button>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   )
 }
