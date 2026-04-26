@@ -103,7 +103,7 @@
       },
       "cookies": {
         "title": "8. Cookies",
-        "body": "Usamos cookies técnicas necesarias para mantener la sesión iniciada. No usamos cookies publicitarias ni de análisis de terceros."
+        "body": "Usamos cookies técnicas necesarias para mantener la sesión iniciada y cookies analíticas de Google Analytics (con tu consentimiento) para medir el uso de la app. No usamos cookies publicitarias."
       },
       "changes": {
         "title": "9. Cambios",
@@ -468,6 +468,33 @@
       "reopening": "…"
     }
   },
+  "cookies": {
+    "banner": {
+      "message": "Usamos cookies analíticas (Google Analytics) para mejorar la experiencia. Las cookies técnicas son necesarias para el funcionamiento del servicio.",
+      "accept": "Aceptar",
+      "decline": "Rechazar",
+      "learnMore": "Más info"
+    },
+    "page": {
+      "title": "Política de Cookies",
+      "lastUpdatedLabel": "Última actualización",
+      "lastUpdated": "26 de abril de 2026",
+      "sections": {
+        "technical": {
+          "title": "Cookies técnicas (necesarias)",
+          "body": "Usamos cookies de sesión de Supabase para mantener la sesión iniciada. Son estrictamente necesarias para el funcionamiento del servicio y no requieren consentimiento."
+        },
+        "analytics": {
+          "title": "Cookies analíticas (Google Analytics)",
+          "body": "Si lo consientes, usamos Google Analytics para medir el uso de la app y mejorarla. Recoge datos anónimos de navegación (páginas visitadas, duración de sesión). Puedes retirar el consentimiento en cualquier momento desde el banner inferior."
+        },
+        "control": {
+          "title": "Control de cookies",
+          "body": "Puedes aceptar o rechazar las cookies analíticas desde el banner que aparece al entrar por primera vez. También puedes borrar las cookies desde la configuración de tu navegador en cualquier momento."
+        }
+      }
+    }
+  },
   "timer": {
     "launch": "Iniciar timer",
     "decrease": "Decrementar",
@@ -594,6 +621,7 @@
       "ctaFineprint": "Primera semana gratis",
       "privacy": "Privacidad",
       "terms": "Términos",
+      "cookiePolicy": "Cookies",
       "support": "Soporte",
       "copyright": "© ATHLEX Training"
     }

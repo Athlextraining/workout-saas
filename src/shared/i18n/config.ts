@@ -37,6 +37,7 @@ export const pathnames = {
     es: '/terminos',
     en: '/terms',
   },
+  '/cookies': '/cookies',
   '/bienvenida': {
     es: '/bienvenida',
     en: '/welcome',

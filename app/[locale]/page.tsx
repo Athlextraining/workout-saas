@@ -424,6 +424,9 @@ export default async function Home({
           <Link href="/terminos" className="hover:text-white transition-colors">
             {t("footer.terms")}
           </Link>
+          <Link href="/cookies" className="hover:text-white transition-colors">
+            {t("footer.cookiePolicy")}
+          </Link>
           <a
             href="mailto:soporte@athlextraining.com"
             className="hover:text-white transition-colors"

@@ -1,15 +1,8 @@
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
-import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
-
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+import { sendGAEvent } from "@next/third-parties/google";
 
 export function Analytics() {
-  return (
-    <>
-      <VercelAnalytics />
-      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
-    </>
-  );
+  return <VercelAnalytics />;
 }
 
 export function trackEvent(

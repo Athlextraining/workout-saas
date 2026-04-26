@@ -20,6 +20,7 @@ import { NavbarSkeleton } from "./navbar-skeleton";
 import { NavProgress } from "./nav-progress";
 import { ChatBubbleServer } from "./components/chat-bubble-server";
 import { Analytics } from "@/shared/analytics/analytics";
+import { CookieBanner } from "@/shared/analytics/cookie-banner";
 
 const league_spartan = League_Spartan({
   variable: "--font-league-spartan",
@@ -136,6 +137,7 @@ export default async function RootLayout({
             <ChatBubbleServer />
           </Suspense>
           <Analytics />
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -103,7 +103,7 @@
       },
       "cookies": {
         "title": "8. Cookies",
-        "body": "We use technical cookies necessary to maintain your login session. We do not use advertising or third-party analytics cookies."
+        "body": "We use technical cookies necessary to maintain your login session, and Google Analytics cookies (with your consent) to measure app usage. We do not use advertising cookies."
       },
       "changes": {
         "title": "9. Changes",
@@ -468,6 +468,33 @@
       "reopening": "…"
     }
   },
+  "cookies": {
+    "banner": {
+      "message": "We use analytics cookies (Google Analytics) to improve your experience. Technical cookies are necessary for the service to work.",
+      "accept": "Accept",
+      "decline": "Decline",
+      "learnMore": "Learn more"
+    },
+    "page": {
+      "title": "Cookie Policy",
+      "lastUpdatedLabel": "Last updated",
+      "lastUpdated": "April 26, 2026",
+      "sections": {
+        "technical": {
+          "title": "Technical cookies (necessary)",
+          "body": "We use Supabase session cookies to keep you signed in. These are strictly necessary for the service to function and do not require consent."
+        },
+        "analytics": {
+          "title": "Analytics cookies (Google Analytics)",
+          "body": "With your consent, we use Google Analytics to measure app usage and improve it. It collects anonymous browsing data (pages visited, session duration). You can withdraw consent at any time from the banner at the bottom."
+        },
+        "control": {
+          "title": "Cookie control",
+          "body": "You can accept or decline analytics cookies from the banner shown on your first visit. You can also delete cookies from your browser settings at any time."
+        }
+      }
+    }
+  },
   "timer": {
     "launch": "Start timer",
     "decrease": "Decrease",
@@ -594,6 +621,7 @@
       "ctaFineprint": "First week free",
       "privacy": "Privacy",
       "terms": "Terms",
+      "cookiePolicy": "Cookies",
       "support": "Support",
       "copyright": "© ATHLEX Training"
     }
