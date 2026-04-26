@@ -2028,16 +2028,25 @@ a,
 
 .timer-launch-btn.is-compact {
   width: auto;
-  height: 1.5rem;
-  padding: 0 0.7rem;
+  height: 2rem;
+  padding: 0 0.85rem;
   margin-top: 0;
   border-radius: 999px;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  gap: 0.4rem;
-  letter-spacing: 0.14em;
+  gap: 0.45rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1;
+  border-color: rgba(44, 255, 5, 0.55);
+  background: rgba(44, 255, 5, 0.12);
+  box-shadow: 0 0 10px rgba(44, 255, 5, 0.18);
+}
+
+.timer-launch-btn.is-compact:hover {
+  background: rgba(44, 255, 5, 0.2);
+  border-color: rgba(44, 255, 5, 0.75);
+  box-shadow: 0 0 14px rgba(44, 255, 5, 0.28);
 }
 
 .timer-launch-btn.is-compact .timer-launch-label {
