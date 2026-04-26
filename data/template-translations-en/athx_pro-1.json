@@ -1,0 +1,274 @@
+{
+  "lunes": {
+    "wod": {
+      "cap": "12 min",
+      "tipo": "Rounds For Time",
+      "ejercicios": [
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "15/12"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "Dual DB GTOH",
+          "repeticiones": "12"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "12"
+        }
+      ],
+      "descripcion": "4 Rounds For Time (Cap 12 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 6-7",
+        "notas": "2 warm-up sets first. Technique first.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Back Squat",
+        "series": 5,
+        "pct_1rm": 70,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "BASE: Back Squat 5x5 + Triplet",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m"
+      },
+      {
+        "nombre": "Cossack Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Back Squat empty bar",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Banded Glute Walks",
+        "repeticiones": "20 steps"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Active recovery",
+    "recuperacion": "30-40 min Z2 run or swim. Hip/shoulder mobility 15 min."
+  },
+  "martes": {
+    "wod": {
+      "tipo": "EMOM 12",
+      "ejercicios": [
+        {
+          "nombre": "Min 1: Ski-erg",
+          "repeticiones": "12/9 cal"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "Min 2: Dual DB Push Press",
+          "repeticiones": "10"
+        },
+        {
+          "nombre": "Min 3: Toes-to-Bar",
+          "repeticiones": "10"
+        }
+      ],
+      "descripcion": "EMOM 12 minutes (3 rotating movements)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 6-7",
+        "notas": "High elbows, no bouncing.",
+        "tempo": "Every 2 min for 10 min",
+        "nombre": "Strict Press",
+        "series": 5,
+        "pct_1rm": 70,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "BASE: Strict Press 5x5 + EMOM",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Banded Pass-throughs",
+        "repeticiones": "20"
+      },
+      {
+        "nombre": "Strict Press empty bar",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hanging Knee Raises",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "20 min",
+      "tipo": "For Time",
+      "notas": "Initial benchmark test. Don't empty the tank.",
+      "ejercicios": [
+        {
+          "nombre": "Ski-erg",
+          "repeticiones": "30/20 cal"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "Dual DB GTOH",
+          "repeticiones": "20"
+        },
+        {
+          "peso": "70/50 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "30m"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "20"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Front Rack Walking Lunges",
+          "repeticiones": "30m"
+        }
+      ],
+      "descripcion": "MetCon X intro (Cap 20 min)"
+    },
+    "fuerza": [],
+    "titulo": "MetCon X intro Rx",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "300m progressive"
+      },
+      {
+        "nombre": "Light Dual DB GTOH",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Broad Jumps",
+        "repeticiones": "5"
+      },
+      {
+        "nombre": "Sandbag Pickup",
+        "repeticiones": "3"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Rest",
+    "recuperacion": "Complete rest"
+  },
+  "viernes": {
+    "wod": {
+      "cap": "20 min",
+      "tipo": "For Distance",
+      "notas": "Z2-Z3 pace. Aim for steady pace.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "1000m"
+        }
+      ],
+      "descripcion": "20 min — alternate 1000m row / 1000m run"
+    },
+    "fuerza": [],
+    "titulo": "Endurance: Row + Run initial test",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Run",
+        "repeticiones": "200m"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "10 per leg"
+      },
+      {
+        "nombre": "Pogo Hops",
+        "repeticiones": "20"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "tipo": "AMRAP 10",
+      "ejercicios": [
+        {
+          "peso": "70/50 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "30m"
+        },
+        {
+          "nombre": "Pull-ups",
+          "repeticiones": "10"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Front Rack Walking Lunges",
+          "repeticiones": "20m"
+        }
+      ],
+      "descripcion": "AMRAP 10 minutes"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 6-7",
+        "notas": "Neutral back. Technique.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Deadlift",
+        "series": 5,
+        "pct_1rm": 70,
+        "repeticiones": "5"
+      }
+    ],
+    "titulo": "BASE: Deadlift 5x5 + Couplet",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m"
+      },
+      {
+        "nombre": "Glute Bridges",
+        "repeticiones": "12"
+      },
+      {
+        "nombre": "Romanian Deadlifts",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Deadlifts empty bar",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Plank",
+        "repeticiones": "45s"
+      }
+    ]
+  }
+}
