@@ -7,15 +7,20 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: SITE_NAME,
     description:
       "Programación y entrenamiento ATHX. Plan semanal y seguimiento.",
-    start_url: "/",
+    start_url: "/entrenamiento",
+    scope: "/",
     display: "standalone",
+    orientation: "portrait",
     background_color: "#000000",
     theme_color: "#000000",
     lang: "es",
     categories: ["fitness", "health", "sports"],
     icons: [
       { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },
+      { src: "/icon1", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "/icon", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/icon1", sizes: "192x192", type: "image/png", purpose: "maskable" },
+      { src: "/icon", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

@@ -643,5 +643,20 @@
       "subject": "Reply from {userEmail}",
       "bodyTrailer": "— view thread: {link}"
     }
+  },
+  "installPwa": {
+    "eyebrow": "Quick access",
+    "title": "Install the app",
+    "description": "Add it to your home screen to open it in one tap, no browser bar.",
+    "button": "Install app",
+    "hintProfile": "You can also do this later from your profile.",
+    "ios": {
+      "title": "Install on iPhone",
+      "description": "Steps to add the app to your home screen on iOS.",
+      "step1": "Tap the <icon></icon> Share button in the Safari bar.",
+      "step2": "Scroll and tap “Add to Home Screen”.",
+      "step3": "Confirm with “Add”. Done.",
+      "close": "Got it"
+    }
   }
 }

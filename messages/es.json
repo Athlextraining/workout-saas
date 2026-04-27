@@ -643,5 +643,20 @@
       "subject": "Mensaje de {userEmail}",
       "bodyTrailer": "— ver hilo: {link}"
     }
+  },
+  "installPwa": {
+    "eyebrow": "Acceso rápido",
+    "title": "Instala la app",
+    "description": "Añádela a tu pantalla de inicio para abrirla en un toque, sin barra del navegador.",
+    "button": "Instalar app",
+    "hintProfile": "También puedes hacerlo más tarde desde tu perfil.",
+    "ios": {
+      "title": "Instalar en iPhone",
+      "description": "Pasos para añadir la app a tu pantalla de inicio en iOS.",
+      "step1": "Toca el botón <icon></icon> Compartir en la barra de Safari.",
+      "step2": "Desplázate y toca «Añadir a pantalla de inicio».",
+      "step3": "Confirma con «Añadir». Listo.",
+      "close": "Entendido"
+    }
   }
 }

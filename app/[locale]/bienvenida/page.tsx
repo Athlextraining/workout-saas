@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "motion/react";
 import { Link } from "@/shared/i18n/routing";
 import { Reveal } from "../reveal";
+import { InstallPwa } from "../components/install-pwa";
 
 type Step = {
   bg: string;
@@ -253,7 +254,11 @@ function StepFinal() {
         <p className="hero-sub">{t("final.subtitle")}</p>
       </Reveal>
 
-      <Reveal delay={0.28} className="w-full">
+      <Reveal delay={0.24} className="w-full">
+        <InstallPwa variant="inline" showHint />
+      </Reveal>
+
+      <Reveal delay={0.32} className="w-full">
         <Link href="/entrenamiento" className="hero-cta-primary">
           {t("final.button")}
           <Arrow />

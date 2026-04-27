@@ -115,7 +115,9 @@ app/
 ├─ manifest.ts                   ─→ shared.seo.site
 ├─ opengraph-image.tsx           (dynamic OG 1200x630, next/og)
 ├─ twitter-image.tsx             ─→ opengraph-image
-├─ icon.tsx                      (dynamic app icon, next/og)
+├─ icon.tsx                      (dynamic app icon 512×512, next/og)
+├─ icon1.tsx                     (dynamic app icon 192×192, next/og — PWA install criteria)
+├─ apple-icon.tsx                (dynamic apple-touch-icon 180×180, next/og — iOS home screen)
 ├─ login/page.tsx                ─→ identity.{sign-in, sign-up} + shared.supabase.client
 ├─ onboarding/page.tsx           ─→ onboarding.{save-basic-info, save-category, save-fitness-data, complete-onboarding}
 │                                  + identity.update-avatar + shared.supabase.client
@@ -123,6 +125,7 @@ app/
 │                                  + training.{get-current-week-workout, cycle.is-free-week}
 ├─ entrenamiento/subscribe-button.tsx ─→ POST /api/stripe/checkout
 ├─ perfil/page.tsx               ─→ identity.{get-current-user, sign-out} + billing.get-active-subscription
+│                                  + components.install-pwa
 ├─ perfil/portal-button.tsx      ─→ POST /api/stripe/portal
 ├─ navbar.tsx                    ─→ shared.supabase.server + components.{nav-menu, admin-bell}
 ├─ components/nav-menu.tsx       ─→ vaul + identity.sign-out
@@ -130,6 +133,7 @@ app/
 ├─ components/chat-bubble-server.tsx ─→ shared.supabase.server + components.chat-bubble
 ├─ components/chat-bubble.tsx    ─→ vaul + components.chat-panel + /api/support/poll
 ├─ components/chat-panel.tsx     ─→ support.{send-new-message, reply-to-thread, mark-thread-read, validators}
+├─ components/install-pwa.tsx    ─→ vaul  (PWA install: Android beforeinstallprompt + iOS Safari modal; registers /sw.js)
 ├─ api/support/poll/route.ts     ─→ identity.{get-current-user, get-current-profile}
 │                                  + support.{list-user-threads, list-all-threads, get-thread, get-unread-count}
 ├─ preguntanos/
@@ -140,7 +144,7 @@ app/
 │  ├─ page.tsx                   ─→ support.{require-admin, list-all-threads, ui.thread-list}
 │  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
-├─ bienvenida/page.tsx           ─→ motion + components.reveal  (post-checkout cinematic tour)
+├─ bienvenida/page.tsx           ─→ motion + components.{reveal, install-pwa}  (post-checkout cinematic tour, install CTA on final step)
 ├─ que-es-athx/page.tsx          ─→ shared.seo.jsonld
 ├─ privacidad/page.tsx           ─→ (legal, no deps — required by Google OAuth consent)
 ├─ terminos/page.tsx             ─→ (legal, no deps — required by Google OAuth consent)
