@@ -46,7 +46,8 @@
       "PowerShell(Stop-Process *)",
       "Bash(git tag *)",
       "Bash(git fetch *)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "Bash(git cherry-pick *)"
     ]
   }
 }
