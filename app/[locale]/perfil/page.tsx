@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getLocale, getTranslations, getFormatter } from 'next-intl/server'
 import { redirect } from '@/shared/i18n/routing'
 import { getCurrentUser } from '@/modules/identity/application/get-current-user'
+import { getCurrentProfile } from '@/modules/identity/application/get-current-profile'
 import { signOut } from '@/modules/identity/application/sign-out'
 import { getActiveSubscription } from '@/modules/billing/infra/subscription-repository'
 import { PortalButton } from './portal-button'
@@ -26,6 +27,7 @@ export default async function PerfilPage() {
     return null
   }
 
+  const profile = await getCurrentProfile()
   const subscription = await getActiveSubscription(user.id)
 
   return (
@@ -60,6 +62,12 @@ export default async function PerfilPage() {
             </p>
           </>
         )}
+        <div className="border-t border-white/10" />
+        <p>
+          <span className="text-muted text-sm">{t('fields.language')}</span>
+          <br />
+          {profile?.locale === 'en' ? 'English' : 'Español'}
+        </p>
       </div>
 
       <div className="space-y-3">

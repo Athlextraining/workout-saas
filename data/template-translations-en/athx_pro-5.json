@@ -1,0 +1,297 @@
+{
+  "lunes": {
+    "wod": {
+      "tipo": "AMRAP 8",
+      "notas": "High intensity, sustained.",
+      "ejercicios": [
+        {
+          "nombre": "Toes-to-Bar",
+          "repeticiones": "10"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Push Press dual",
+          "repeticiones": "12"
+        },
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "12/9"
+        }
+      ],
+      "descripcion": "AMRAP 8 minutes"
+    },
+    "fuerza": [
+      {
+        "peso": "Up to daily 1RM",
+        "notas": "Simulates ATHX Games Strength block. Aim for 1RM.",
+        "tempo": "12 min cap",
+        "nombre": "Strict Press build to 1RM",
+        "series": 6,
+        "pct_1rm": 100,
+        "repeticiones": "5-3-2-1-1-1"
+      }
+    ],
+    "titulo": "PEAK: Strength event simulation (Strict Press 1RM)",
+    "warmup": [
+      {
+        "nombre": "Bike Erg",
+        "repeticiones": "3 min progressive"
+      },
+      {
+        "nombre": "Banded Pass-throughs",
+        "repeticiones": "20"
+      },
+      {
+        "nombre": "Strict Press empty bar",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hollow Hold",
+        "repeticiones": "30s"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Active recovery",
+    "recuperacion": "30 min Z2 (easy run or bike). Hip/spine mobility 15 min. Sauna or cold if available."
+  },
+  "martes": {
+    "wod": {
+      "cap": "10 min",
+      "tipo": "21-15-9 For Time",
+      "notas": "Fran benchmark attempting PR. Aim for time.",
+      "ejercicios": [
+        {
+          "peso": "47.5/32.5 kg",
+          "nombre": "Thrusters",
+          "repeticiones": "21-15-9"
+        },
+        {
+          "nombre": "Pull-ups",
+          "repeticiones": "21-15-9"
+        }
+      ],
+      "descripcion": "21-15-9 For Time (Cap 10 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 9",
+        "notas": "Cycle load peak. Add 5-10kg vs week 3.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Back Squat",
+        "series": 5,
+        "pct_1rm": 88,
+        "repeticiones": "2"
+      }
+    ],
+    "titulo": "PEAK: Back Squat heavy + Couplet",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m"
+      },
+      {
+        "nombre": "Cossack Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Back Squat empty bar",
+        "repeticiones": "10 with pause"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Banded Glute Walks",
+        "repeticiones": "20 steps"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "25 min",
+      "tipo": "For Time",
+      "notas": "Cycle peak. Compare time vs week 4. Maximum effort.",
+      "ejercicios": [
+        {
+          "nombre": "Ski-erg",
+          "repeticiones": "50/35 cal"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB GTOH dual",
+          "repeticiones": "40"
+        },
+        {
+          "peso": "70/50 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "40m"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "40"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Walking Lunges front rack",
+          "repeticiones": "40m"
+        },
+        {
+          "nombre": "Burpee Broad Jumps",
+          "repeticiones": "40m"
+        }
+      ],
+      "descripcion": "Full MetCon X Rx — Final cycle test (Cap 25 min)"
+    },
+    "fuerza": [],
+    "titulo": "PEAK: Full MetCon X Rx (final test)",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "500m progressive"
+      },
+      {
+        "nombre": "DB GTOH dual light",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Broad Jumps",
+        "repeticiones": "5"
+      },
+      {
+        "nombre": "Sandbag Pickup",
+        "repeticiones": "3"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Rest",
+    "recuperacion": "Complete rest. Hydration + nutrition. Prepare for deload."
+  },
+  "viernes": {
+    "wod": {
+      "cap": "30 min",
+      "tipo": "For Time",
+      "notas": "Simulates ATHX Games Endurance block. Steady threshold pace.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Row",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Row",
+          "repeticiones": "500m"
+        },
+        {
+          "nombre": "Final Run",
+          "repeticiones": "until cap or 2K"
+        }
+      ],
+      "descripcion": "Endurance event sim (Cap 30 min): alternating 1000m row/run switches"
+    },
+    "fuerza": [],
+    "titulo": "PEAK: Endurance event simulation",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m progressive"
+      },
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "10 per leg"
+      },
+      {
+        "nombre": "Pogo Hops",
+        "repeticiones": "30"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "cap": "12 min",
+      "tipo": "For Time",
+      "ejercicios": [
+        {
+          "peso": "70/50 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "60m"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Walking Lunges front rack",
+          "repeticiones": "40m"
+        },
+        {
+          "nombre": "Burpee Broad Jumps",
+          "repeticiones": "20m"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "30"
+        }
+      ],
+      "descripcion": "For Time (Cap 12 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "Up to daily 1RM",
+        "notas": "Don't fail reps, stop if technique breaks down.",
+        "tempo": "12 min cap",
+        "nombre": "Deadlift build to heavy single",
+        "series": 6,
+        "pct_1rm": 95,
+        "repeticiones": "5-3-2-1-1-1"
+      }
+    ],
+    "titulo": "PEAK: Deadlift heavy single + partial MetCon X",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Romanian Deadlifts",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Deadlifts empty bar",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Sandbag Pickups",
+        "repeticiones": "5"
+      },
+      {
+        "nombre": "Box Jumps",
+        "repeticiones": "10"
+      }
+    ]
+  }
+}

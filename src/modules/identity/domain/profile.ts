@@ -16,6 +16,7 @@ export interface Profile {
   run_5k_minutes: number | null
   onboarding_completed: boolean
   cycle_start_date: string | null
+  locale: string
   is_admin?: boolean
 }
 

@@ -20,5 +20,17 @@ export async function signIn(formData: FormData) {
     return { error: error.message }
   }
 
+  // Backfill profiles.locale for users who signed up before the column existed
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user && (locale === 'es' || locale === 'en')) {
+    // Only update if profile still has default 'es' AND active locale differs
+    await supabase
+      .from('profiles')
+      .update({ locale })
+      .eq('id', user.id)
+      .eq('locale', 'es')
+      .neq('locale', locale)
+  }
+
   redirect({ href: '/entrenamiento', locale })
 }

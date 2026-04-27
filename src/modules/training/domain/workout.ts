@@ -1,4 +1,5 @@
 import type { Category } from '@/modules/identity/domain/profile'
+import type { Locale } from '@/shared/i18n/config'
 
 export interface WarmupExercise {
   nombre: string
@@ -57,3 +58,10 @@ export interface WorkoutTemplate {
 export interface UserWeekWorkout extends WorkoutTemplate {
   cycle_number: number
 }
+
+/**
+ * Storage shape of `workout_templates.week_content` after migration 010.
+ * UI code never sees this wrapper — the repo unwraps to the active locale's
+ * WeekContent (with ES fallback when EN not yet seeded).
+ */
+export type LocalizedWeekContent = Record<Locale, WeekContent | null>

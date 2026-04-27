@@ -43,7 +43,10 @@
       "Bash(python3 *)",
       "Bash(cd C:\\\\\\\\Users\\\\\\\\Patricio\\\\\\\\workout-saas)",
       "Bash(tasklist)",
-      "PowerShell(Stop-Process *)"
+      "PowerShell(Stop-Process *)",
+      "Bash(git tag *)",
+      "Bash(git fetch *)",
+      "Bash(git log *)"
     ]
   }
 }

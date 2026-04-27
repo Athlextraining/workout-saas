@@ -1,0 +1,268 @@
+{
+  "lunes": {
+    "wod": {
+      "cap": "14 min",
+      "tipo": "For Time",
+      "ejercicios": [
+        {
+          "peso": "9/6 kg",
+          "nombre": "Wall Balls",
+          "repeticiones": "40"
+        },
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "30/22"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB GTOH dual",
+          "repeticiones": "30"
+        },
+        {
+          "nombre": "Burpees",
+          "repeticiones": "20"
+        }
+      ],
+      "descripcion": "Chipper For Time (Cap 14 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Codos altos, torso vertical.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Front Squat",
+        "series": 5,
+        "pct_1rm": 75,
+        "repeticiones": "4"
+      }
+    ],
+    "titulo": "BASE: Front Squat 5x4 + Chipper",
+    "warmup": [
+      {
+        "nombre": "Bike Erg",
+        "repeticiones": "3 min"
+      },
+      {
+        "nombre": "Wrist Mobility",
+        "repeticiones": "1 min"
+      },
+      {
+        "nombre": "Front Squats barra vacia",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hollow Hold",
+        "repeticiones": "30s"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Recuperacion activa",
+    "recuperacion": "30-40 min Z2 + movilidad 15 min."
+  },
+  "martes": {
+    "wod": {
+      "tipo": "AMRAP 12",
+      "ejercicios": [
+        {
+          "nombre": "Cal Ski-erg",
+          "repeticiones": "15/12"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Push Press dual",
+          "repeticiones": "12"
+        },
+        {
+          "nombre": "Toes-to-Bar",
+          "repeticiones": "10"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "10"
+        }
+      ],
+      "descripcion": "AMRAP 12 minutos"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Dip-drive vertical.",
+        "tempo": "Every 2 min for 10 min",
+        "nombre": "Push Press",
+        "series": 5,
+        "pct_1rm": 75,
+        "repeticiones": "4"
+      }
+    ],
+    "titulo": "BASE: Push Press 5x4 + AMRAP",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Banded Pass-throughs",
+        "repeticiones": "20"
+      },
+      {
+        "nombre": "Push Press barra vacia",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hanging Knee Raises",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "12 min",
+      "tipo": "21-15-9 For Time",
+      "ejercicios": [
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Thrusters dual",
+          "repeticiones": "21-15-9"
+        },
+        {
+          "nombre": "Burpee Broad Jumps",
+          "repeticiones": "21-15-9"
+        },
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "21-15-9"
+        }
+      ],
+      "descripcion": "21-15-9 For Time (Cap 12 min)"
+    },
+    "fuerza": [],
+    "titulo": "Triplete intenso (no full MetCon X)",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "400m progresivo"
+      },
+      {
+        "nombre": "Burpees",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "DB ligero",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Descanso",
+    "recuperacion": "Descanso completo"
+  },
+  "viernes": {
+    "wod": {
+      "cap": "22 min",
+      "tipo": "For Distance",
+      "notas": "Mantener pace de semana 1, mejorar 5s/1K.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "1000m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "1000m"
+        }
+      ],
+      "descripcion": "22 min — alternar 1000m row / 1000m run, pace constante"
+    },
+    "fuerza": [],
+    "titulo": "Endurance: pace target",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Run",
+        "repeticiones": "200m"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "10 por pierna"
+      },
+      {
+        "nombre": "Pogo Hops",
+        "repeticiones": "20"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "cap": "10 min",
+      "tipo": "Rounds For Time",
+      "ejercicios": [
+        {
+          "peso": "70/50 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "40m"
+        },
+        {
+          "nombre": "Pull-ups",
+          "repeticiones": "12"
+        },
+        {
+          "peso": "22.5/15 kg",
+          "nombre": "DB Walking Lunges front rack",
+          "repeticiones": "20m"
+        }
+      ],
+      "descripcion": "3 Rounds For Time (Cap 10 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 7",
+        "notas": "Subir 5kg vs semana 1.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Deadlift",
+        "series": 5,
+        "pct_1rm": 75,
+        "repeticiones": "4"
+      }
+    ],
+    "titulo": "BASE: Deadlift +5kg + Couplet",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m"
+      },
+      {
+        "nombre": "Glute Bridges",
+        "repeticiones": "12"
+      },
+      {
+        "nombre": "Romanian Deadlifts",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Deadlifts barra vacia",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Side Plank",
+        "repeticiones": "30s/lado"
+      }
+    ]
+  }
+}

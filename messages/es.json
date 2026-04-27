@@ -203,7 +203,8 @@
       "email": "Email",
       "subscription": "Suscripción",
       "status": "Estado",
-      "nextRenewal": "Siguiente renovación"
+      "nextRenewal": "Siguiente renovación",
+      "language": "Idioma"
     },
     "status": {
       "active": "Activa",
@@ -508,7 +509,8 @@
       "eyebrow": "ATHX™ Training by ATHLEX",
       "title": "ENTRENA\nMEJORA",
       "titleAccent": "COMPITE.",
-      "subtitle": "Programación ATHX™: plan semanal de entrenamiento para preparar ATHX 2026. Seguimiento y chat directo con tu entrenador.",
+      "h1title": "Programación ATHX",
+      "subtitle": "™: plan semanal de entrenamiento para preparar ATHX 2026. Seguimiento y chat directo con tu entrenador.",
       "ctaPrimary": "COMIENZA AHORA",
       "fineprint": "Primera semana gratis",
       "scrollCue": "Programa"
@@ -576,7 +578,7 @@
         "Primera semana gratis"
       ],
       "cta": "Suscríbete",
-      "fineprint": "Cancela cuando quieras"
+      "fineprint": "Sin permanencia"
     },
     "whyChoose": {
       "title": "Por qué elegir ATHLEX para tu entrenamiento ATHX",
@@ -624,6 +626,20 @@
       "cookiePolicy": "Cookies",
       "support": "Soporte",
       "copyright": "© ATHLEX Training"
+    }
+  },
+  "emails": {
+    "newMessageToAdmin": {
+      "subject": "Mensaje de {userEmail}",
+      "bodyTrailer": "— ver hilo: {link}"
+    },
+    "replyToUser": {
+      "subject": "Re: [ATHLEX] {subject}",
+      "bodyTrailer": "— responde desde la app: {link}"
+    },
+    "userReplyToAdmin": {
+      "subject": "Mensaje de {userEmail}",
+      "bodyTrailer": "— ver hilo: {link}"
     }
   }
 }

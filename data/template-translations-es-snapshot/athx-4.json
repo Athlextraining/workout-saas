@@ -1,0 +1,286 @@
+{
+  "lunes": {
+    "wod": {
+      "cap": "12 min",
+      "tipo": "Rounds For Time",
+      "ejercicios": [
+        {
+          "nombre": "Cal Row",
+          "repeticiones": "15/12"
+        },
+        {
+          "peso": "9/6 kg",
+          "nombre": "Wall Balls",
+          "repeticiones": "15"
+        },
+        {
+          "nombre": "Chest-to-Bar Pull-ups",
+          "repeticiones": "8"
+        }
+      ],
+      "descripcion": "4 Rounds For Time (Cap 12 min)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 8",
+        "notas": "Codos altos. Subir 5kg vs semana 2.",
+        "tempo": "Every 2:30 for 12:30",
+        "nombre": "Front Squat",
+        "series": 5,
+        "pct_1rm": 80,
+        "repeticiones": "3"
+      }
+    ],
+    "titulo": "Fuerza: Front Squat heavy + Triplete",
+    "warmup": [
+      {
+        "nombre": "Bike Erg",
+        "repeticiones": "3 min"
+      },
+      {
+        "nombre": "Wrist Mobility",
+        "repeticiones": "1 min"
+      },
+      {
+        "nombre": "Front Squats barra vacia",
+        "repeticiones": "10 con pausa"
+      },
+      {
+        "nombre": "Goblet Squats",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "C2B Pull-ups",
+        "repeticiones": "5"
+      }
+    ]
+  },
+  "jueves": {
+    "titulo": "Recuperacion activa",
+    "recuperacion": "30-40 min carrera Z2 o natacion. Movilidad cadera/hombros 15 min."
+  },
+  "martes": {
+    "wod": {
+      "tipo": "EMOM 16",
+      "ejercicios": [
+        {
+          "nombre": "Min 1: Ski-erg",
+          "repeticiones": "15/12 cal"
+        },
+        {
+          "peso": "20/12.5 kg",
+          "nombre": "Min 2: DB GTOH alterno",
+          "repeticiones": "12"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Min 3: Box Jump Over",
+          "repeticiones": "12"
+        },
+        {
+          "nombre": "Min 4: Burpees",
+          "repeticiones": "10"
+        }
+      ],
+      "descripcion": "EMOM 16 minutos (4 movimientos rotando)"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 8",
+        "notas": "Subir vs semana 2.",
+        "tempo": "Every 2 min for 10 min",
+        "nombre": "Push Press",
+        "series": 5,
+        "pct_1rm": 80,
+        "repeticiones": "3"
+      }
+    ],
+    "titulo": "Fuerza: Push Press heavy + EMOM mixto",
+    "warmup": [
+      {
+        "nombre": "Run",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Banded Pass-throughs",
+        "repeticiones": "15"
+      },
+      {
+        "nombre": "Push Press barra vacia",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Push-ups",
+        "repeticiones": "10"
+      },
+      {
+        "nombre": "Hanging Knee Raises",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "sabado": {
+    "wod": {
+      "cap": "25 min",
+      "tipo": "For Time",
+      "notas": "Test cronometrado. Apuntar tiempo, comparar vs semana 3.",
+      "ejercicios": [
+        {
+          "nombre": "Ski-erg",
+          "repeticiones": "45/30 cal"
+        },
+        {
+          "peso": "20/12.5 kg",
+          "nombre": "DB GTOH alterno",
+          "repeticiones": "30"
+        },
+        {
+          "peso": "50/30 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "30m"
+        },
+        {
+          "notas": "24\"/20\"",
+          "nombre": "Box Jump Over",
+          "repeticiones": "30"
+        },
+        {
+          "peso": "20/12.5 kg suitcase",
+          "nombre": "DB Walking Lunges",
+          "repeticiones": "30m"
+        },
+        {
+          "nombre": "Burpee Broad Jumps",
+          "repeticiones": "30m"
+        }
+      ],
+      "descripcion": "MetCon X completo Rx (Cap 25 min)"
+    },
+    "fuerza": [],
+    "titulo": "MetCon X completo (test 2)",
+    "warmup": [
+      {
+        "nombre": "Ski-erg",
+        "repeticiones": "400m progresivo"
+      },
+      {
+        "nombre": "DB GTOH ligero",
+        "repeticiones": "5+5"
+      },
+      {
+        "nombre": "Broad Jumps",
+        "repeticiones": "5"
+      },
+      {
+        "nombre": "Sandbag Pickup",
+        "repeticiones": "3"
+      },
+      {
+        "nombre": "Box Step-overs",
+        "repeticiones": "10"
+      }
+    ]
+  },
+  "domingo": {
+    "titulo": "Descanso",
+    "recuperacion": "Descanso completo"
+  },
+  "viernes": {
+    "wod": {
+      "cap": "22 min",
+      "tipo": "For Distance",
+      "notas": "Apuntar pace 2K/1K. Intentar mejorar vs semana 3.",
+      "ejercicios": [
+        {
+          "nombre": "Row",
+          "repeticiones": "750m"
+        },
+        {
+          "nombre": "Run",
+          "repeticiones": "750m"
+        }
+      ],
+      "descripcion": "22 min — alternar 750m row/run, ritmo umbral"
+    },
+    "fuerza": [],
+    "titulo": "Endurance: Row + Run + Bike threshold",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "400m"
+      },
+      {
+        "nombre": "Run",
+        "repeticiones": "200m"
+      },
+      {
+        "nombre": "Bike",
+        "repeticiones": "1 min"
+      },
+      {
+        "nombre": "Lunges",
+        "repeticiones": "10 por pierna"
+      },
+      {
+        "nombre": "Pogo Hops",
+        "repeticiones": "20"
+      }
+    ]
+  },
+  "miercoles": {
+    "wod": {
+      "tipo": "AMRAP 12",
+      "ejercicios": [
+        {
+          "peso": "50/30 kg",
+          "nombre": "Sandbag Carry",
+          "repeticiones": "30m"
+        },
+        {
+          "nombre": "Pull-ups",
+          "repeticiones": "12"
+        },
+        {
+          "peso": "20/12.5 kg suitcase",
+          "nombre": "DB Walking Lunges",
+          "repeticiones": "20m"
+        }
+      ],
+      "descripcion": "AMRAP 12 minutos"
+    },
+    "fuerza": [
+      {
+        "peso": "RPE 8.5",
+        "notas": "Subir 5-10kg vs semana 3.",
+        "tempo": "Every 2:30 for 10 min",
+        "nombre": "Deadlift",
+        "series": 4,
+        "pct_1rm": 85,
+        "repeticiones": "3"
+      }
+    ],
+    "titulo": "Fuerza: Deadlift heavy + Couplet",
+    "warmup": [
+      {
+        "nombre": "Row",
+        "repeticiones": "500m"
+      },
+      {
+        "nombre": "Glute Bridges con peso",
+        "repeticiones": "12"
+      },
+      {
+        "nombre": "Romanian Deadlifts",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Deadlifts barra vacia",
+        "repeticiones": "8"
+      },
+      {
+        "nombre": "Plank con peso",
+        "repeticiones": "30s"
+      }
+    ]
+  }
+}
