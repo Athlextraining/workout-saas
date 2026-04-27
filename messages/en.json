@@ -509,7 +509,8 @@
       "eyebrow": "ATHX™ Training by ATHLEX",
       "title": "TRAIN\nGROW",
       "titleAccent": "COMPETE.",
-      "subtitle": "ATHX Programming™: weekly training plan to prepare for ATHX 2026. Progress tracking and direct chat with your coach.",
+      "h1title": "ATHX Programming",
+      "subtitle": "™: weekly training plan to prepare for ATHX 2026. Progress tracking and direct chat with your coach.",
       "ctaPrimary": "START NOW",
       "fineprint": "First week free",
       "scrollCue": "Program"

@@ -47,8 +47,8 @@ export default async function Home({
         href="/backgroundhero.webp"
         fetchPriority="high"
       />
-      <JsonLd data={softwareApplicationLd(locale as 'es' | 'en')} />
-      <JsonLd data={faqPageLd(faqItems, locale as 'es' | 'en')} />
+      <JsonLd data={softwareApplicationLd(locale as "es" | "en")} />
+      <JsonLd data={faqPageLd(faqItems, locale as "es" | "en")} />
       {/* Hero */}
       <section className="hero-shell">
         <p className="sr-only">{t("hero.srOnlyDesc")}</p>
@@ -82,7 +82,7 @@ export default async function Home({
 
           <div className="hero-sub">
             <h1 className="inline m-0 p-0 [font:inherit]">
-              <strong>Programación ATHX</strong>
+              <strong>{t("hero.h1title")}</strong>
             </h1>
             {t("hero.subtitle")}
           </div>
@@ -140,8 +140,12 @@ export default async function Home({
                 <div className="phone-chat-head">
                   <div className="phone-chat-avatar">A</div>
                   <div>
-                    <p className="phone-chat-name">{t("tools.chat.coachName")}</p>
-                    <p className="phone-chat-status">{t("tools.chat.coachStatus")}</p>
+                    <p className="phone-chat-name">
+                      {t("tools.chat.coachName")}
+                    </p>
+                    <p className="phone-chat-status">
+                      {t("tools.chat.coachStatus")}
+                    </p>
                   </div>
                 </div>
                 <div className="phone-chat-body">
@@ -154,7 +158,9 @@ export default async function Home({
                   <div className="phone-bubble phone-bubble--theirs">
                     {t("tools.chat.bubble3")}
                   </div>
-                  <div className="phone-bubble phone-bubble--mine">{t("tools.chat.bubble4")}</div>
+                  <div className="phone-bubble phone-bubble--mine">
+                    {t("tools.chat.bubble4")}
+                  </div>
                 </div>
                 <div className="phone-chat-input">
                   <span>{t("tools.chat.inputPlaceholder")}</span>
@@ -200,8 +206,12 @@ export default async function Home({
                     />
                   </svg>
                   <div className="phone-timer-time">
-                    <span className="phone-timer-big">{t("tools.timer.time")}</span>
-                    <span className="phone-timer-small">{t("tools.timer.round")}</span>
+                    <span className="phone-timer-big">
+                      {t("tools.timer.time")}
+                    </span>
+                    <span className="phone-timer-small">
+                      {t("tools.timer.round")}
+                    </span>
                   </div>
                 </div>
                 <div className="phone-timer-ctrl">
