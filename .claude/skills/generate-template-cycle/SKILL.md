@@ -30,7 +30,8 @@ Generate the full 6-week shared workout template for ATHX Games 2026 preparation
        -H "apikey: ${SERVICE_ROLE_KEY}" \
        -H "Authorization: Bearer ${SERVICE_ROLE_KEY}"
      ```
-   - Generate the workout JSON following the methodology below.
+     Read previous week from `content.es` (canonical). Use it as progression baseline.
+   - Generate the workout JSON in BOTH locales (`es` and `en`) following the methodology below.
 
 5. Upsert each template:
    ```bash
@@ -43,7 +44,7 @@ Generate the full 6-week shared workout template for ATHX Games 2026 preparation
    {
      "category": "athx" | "athx_pro",
      "week_number": N,
-     "content": { ... },
+     "content": { "es": { ...WeekContent_ES }, "en": { ...WeekContent_EN } },
      "model_version": "claude-opus-4-7"
    }
    EOF
@@ -86,6 +87,10 @@ Generate the full 6-week shared workout template for ATHX Games 2026 preparation
 **Strength loading:** Use `pct_1rm` field where applicable (frontend will compute actual weight from user's 1RM in future). Use RPE as fallback.
 
 ## JSON output structure
+
+The `content` column is a JSONB with shape `{ es: WeekContent, en: WeekContent }`. Both locales are required (no nulls). Day keys (`lunes`..`domingo`) stay in Spanish in BOTH locales — they are stable identifiers, not user-visible strings.
+
+`WeekContent` (same shape under both `es` and `en`):
 
 ```json
 {
@@ -131,9 +136,31 @@ Generate the full 6-week shared workout template for ATHX Games 2026 preparation
 - WOD: `{ "tipo": str, "cap"?: str, "descripcion": str, "ejercicios": [...], "notas"?: str }`
 - WOD ejercicio: `{ "nombre": str, "repeticiones": str, "peso"?: str, "notas"?: str }`
 
-## Language
+## Language (bilingual output — REQUIRED)
 
-Spanish for titles/descriptions. English for universal CrossFit movement names (Thrusters, Wall Balls, Toes-to-Bar, Clean & Jerk, Snatch, Box Jump Over, etc.).
+Generate two parallel `WeekContent` objects with identical structure, keys, numbers, sets/reps, weights, percentages, and day keys. Only the human-readable strings differ.
+
+Translate in `en`:
+- `titulo` → English (e.g. "Fuerza: Back Squat + Metcon" → "Strength: Back Squat + Metcon")
+- `descripcion` (WOD) → English
+- `notas` → English
+- `recuperacion` → English
+- `tempo` → English ("Every 2 min for 10 min" stays; "Cada 2 min..." → "Every 2 min...")
+
+Keep identical (do NOT translate) in BOTH locales:
+- Day keys: `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `sabado`, `domingo` (stable identifiers)
+- Movement names (`nombre`): use the universal English CrossFit name in both locales (Thruster, Wall Ball, Toes-to-Bar, Clean & Jerk, Snatch, Box Jump Over, Back Squat, Deadlift, Strict Press, Row, Burpee, etc.)
+- Numbers, `series`, `repeticiones`, `peso`, `pct_1rm`, `cap`, `tipo` codes (For Time / AMRAP / EMOM stay English in both)
+
+Example pair (lunes):
+```json
+{
+  "es": { "lunes": { "titulo": "Fuerza: Back Squat + Metcon", "wod": { "descripcion": "4 Rounds For Time (Cap 12 min)", ... } } },
+  "en": { "lunes": { "titulo": "Strength: Back Squat + Metcon", "wod": { "descripcion": "4 Rounds For Time (Cap 12 min)", ... } } }
+}
+```
+
+Sanity check before upsert: `Object.keys(content.es).sort()` must equal `Object.keys(content.en).sort()`.
 
 ## Progression rules
 

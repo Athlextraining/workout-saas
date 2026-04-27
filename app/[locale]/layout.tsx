@@ -83,19 +83,17 @@ export async function generateMetadata({
       title: titleDefault,
       description,
     },
-    robots: isEn
-      ? { index: false, follow: false }
-      : {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            "max-image-preview": "large",
-            "max-snippet": -1,
-            "max-video-preview": -1,
-          },
-        },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     formatDetection: { telephone: false, email: false, address: false },
     verification: {
       google: "0I3Tszx3upfC4WQEetpiTU2wA1xGH8AnShOiRiSpULo",

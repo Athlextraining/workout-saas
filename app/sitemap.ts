@@ -13,6 +13,7 @@ const PUBLIC_ROUTES: Entry[] = [
   { esPath: "/que-es-athx", enPath: "/en/what-is-athx", priority: 0.9, changeFrequency: "monthly" },
   { esPath: "/privacidad", enPath: "/en/privacy", priority: 0.3, changeFrequency: "yearly" },
   { esPath: "/terminos", enPath: "/en/terms", priority: 0.3, changeFrequency: "yearly" },
+  { esPath: "/cookies", enPath: "/en/cookies", priority: 0.2, changeFrequency: "yearly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

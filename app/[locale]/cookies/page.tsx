@@ -10,7 +10,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const path = "/cookies";
+  const esPath = "/cookies";
+  const enPath = "/en/cookies";
+  const selfPath = isEn ? enPath : esPath;
 
   return {
     title: isEn ? "Cookie Policy" : "Política de Cookies",
@@ -18,11 +20,11 @@ export async function generateMetadata({
       ? "ATHLEX Training cookie policy. Which cookies we use and how to manage them."
       : "Política de cookies de ATHLEX Training. Qué cookies usamos y cómo gestionarlas.",
     alternates: {
-      canonical: `${SITE_URL}${path}`,
+      canonical: `${SITE_URL}${selfPath}`,
       languages: {
-        es: `${SITE_URL}${path}`,
-        en: `${SITE_URL}/en${path}`,
-        "x-default": `${SITE_URL}${path}`,
+        es: `${SITE_URL}${esPath}`,
+        en: `${SITE_URL}${enPath}`,
+        "x-default": `${SITE_URL}${esPath}`,
       },
     },
     robots: { index: true, follow: true },
