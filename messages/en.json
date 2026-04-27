@@ -410,6 +410,7 @@
       "profileLink": "Profile",
       "contactLink": "Contact",
       "adminLink": "Admin · Messages",
+      "installLink": "Install app",
       "signOut": "Sign out"
     },
     "adminBell": {

@@ -6,6 +6,7 @@ import { Link } from '@/shared/i18n/routing'
 import { Drawer } from 'vaul'
 import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 import { signOut } from '@/modules/identity/application/sign-out'
+import { InstallPwa } from './install-pwa'
 
 interface Props {
   avatarUrl?: string | null
@@ -102,6 +103,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
                   }
                 />
               )}
+              <InstallPwa variant="menu-row" nested />
             </nav>
 
             <div className="mt-auto pt-4 border-t border-white/10">

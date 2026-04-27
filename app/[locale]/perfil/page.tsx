@@ -7,7 +7,6 @@ import { signOut } from '@/modules/identity/application/sign-out'
 import { getActiveSubscription } from '@/modules/billing/infra/subscription-repository'
 import { PortalButton } from './portal-button'
 import { SignOutButton } from './sign-out-button'
-import { InstallPwa } from '../components/install-pwa'
 
 export const metadata: Metadata = {
   robots: {
@@ -70,8 +69,6 @@ export default async function PerfilPage() {
           {profile?.locale === 'en' ? 'English' : 'Español'}
         </p>
       </div>
-
-      <InstallPwa variant="card" />
 
       <div className="space-y-3">
         {subscription && <PortalButton />}

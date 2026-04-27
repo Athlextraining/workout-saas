@@ -39,11 +39,12 @@ function isStandalone(): boolean {
 }
 
 interface Props {
-  variant?: 'card' | 'inline'
+  variant?: 'card' | 'inline' | 'menu-row'
   showHint?: boolean
+  nested?: boolean
 }
 
-export function InstallPwa({ variant = 'card', showHint = false }: Props) {
+export function InstallPwa({ variant = 'card', showHint = false, nested = false }: Props) {
   const t = useTranslations('installPwa')
   const [platform, setPlatform] = useState<Platform>('unknown')
   const [iosBrowser, setIosBrowser] = useState<IosBrowser>('safari')
@@ -107,11 +108,13 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
       className={
         variant === 'card'
           ? 'w-full py-3.5 rounded-xl text-base font-semibold btn-gradient flex items-center justify-center gap-2'
+          : variant === 'menu-row'
+          ? 'nav-drawer-item w-full text-left'
           : 'w-full py-3 rounded-xl text-sm font-semibold btn-gradient flex items-center justify-center gap-2'
       }
     >
       <DownloadIcon />
-      {t('button')}
+      {variant === 'menu-row' ? <span>{t('button')}</span> : t('button')}
     </button>
   )
 
@@ -126,6 +129,8 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
           </div>
           {button}
         </div>
+      ) : variant === 'menu-row' ? (
+        button
       ) : (
         <div className="space-y-2">
           {button}
@@ -135,7 +140,7 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
         </div>
       )}
 
-      <Drawer.Root open={iosOpen} onOpenChange={setIosOpen}>
+      <IosDrawer nested={nested} open={iosOpen} onOpenChange={setIosOpen}>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
           <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-[var(--bg-primary)] border-t border-white/10 p-6 pb-safe-bottom">
@@ -217,7 +222,7 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
             </button>
           </Drawer.Content>
         </Drawer.Portal>
-      </Drawer.Root>
+      </IosDrawer>
     </>
   )
 }
@@ -235,6 +240,31 @@ function DownloadIcon() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  )
+}
+
+function IosDrawer({
+  nested,
+  open,
+  onOpenChange,
+  children,
+}: {
+  nested: boolean
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  children: React.ReactNode
+}) {
+  if (nested) {
+    return (
+      <Drawer.NestedRoot open={open} onOpenChange={onOpenChange}>
+        {children}
+      </Drawer.NestedRoot>
+    )
+  }
+  return (
+    <Drawer.Root open={open} onOpenChange={onOpenChange}>
+      {children}
+    </Drawer.Root>
   )
 }
 
