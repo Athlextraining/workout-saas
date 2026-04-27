@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
 import { stripe } from '../infra/stripe-client'
 
@@ -29,12 +30,21 @@ export async function createCheckoutSession(): Promise<
       .eq('id', user.id)
   }
 
+  const locale = await getLocale()
+  const isEn = locale === 'en'
+  const base = process.env.NEXT_PUBLIC_APP_URL
+  const successUrl = isEn ? `${base}/en/welcome` : `${base}/bienvenida`
+  const cancelUrl = isEn
+    ? `${base}/en/training?canceled=true`
+    : `${base}/entrenamiento?canceled=true`
+
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: 'subscription',
     line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/bienvenida`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/entrenamiento?canceled=true`,
+    locale: isEn ? 'en' : 'es',
+    success_url: successUrl,
+    cancel_url: cancelUrl,
   })
 
   return { url: session.url! }

@@ -47,7 +47,9 @@
       "Bash(git tag *)",
       "Bash(git fetch *)",
       "Bash(git log *)",
-      "Bash(git cherry-pick *)"
+      "Bash(git cherry-pick *)",
+      "Bash(npx -y json-diff messages/es.json messages/en.json)",
+      "Bash(test -f app/\\\\[locale\\\\]/twitter-image.tsx)"
     ]
   }
 }

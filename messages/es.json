@@ -450,7 +450,8 @@
       "button": "VER MI ENTRENAMIENTO"
     },
     "header": {
-      "back": "Atrás"
+      "back": "Atrás",
+      "next": "Siguiente"
     }
   },
   "admin": {
@@ -466,7 +467,8 @@
       "closeButton": "Cerrar hilo",
       "reopenButton": "Reabrir hilo",
       "closing": "…",
-      "reopening": "…"
+      "reopening": "…",
+      "fromUser": "De: {email}"
     }
   },
   "cookies": {

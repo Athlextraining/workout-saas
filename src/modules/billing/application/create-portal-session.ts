@@ -1,3 +1,4 @@
+import { getLocale } from 'next-intl/server'
 import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
 import { stripe } from '../infra/stripe-client'
 
@@ -18,9 +19,16 @@ export async function createPortalSession(): Promise<
     return { error: 'No subscription found', status: 400 }
   }
 
+  const locale = await getLocale()
+  const isEn = locale === 'en'
+  const returnUrl = isEn
+    ? `${process.env.NEXT_PUBLIC_APP_URL}/en/profile`
+    : `${process.env.NEXT_PUBLIC_APP_URL}/perfil`
+
   const session = await stripe.billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
-    return_url: `${process.env.NEXT_PUBLIC_APP_URL}/perfil`,
+    locale: isEn ? 'en' : 'es',
+    return_url: returnUrl,
   })
 
   return { url: session.url }

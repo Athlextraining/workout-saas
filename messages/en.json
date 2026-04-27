@@ -450,7 +450,8 @@
       "button": "VIEW MY TRAINING"
     },
     "header": {
-      "back": "Back"
+      "back": "Back",
+      "next": "Next"
     }
   },
   "admin": {
@@ -466,7 +467,8 @@
       "closeButton": "Close thread",
       "reopenButton": "Reopen thread",
       "closing": "…",
-      "reopening": "…"
+      "reopening": "…",
+      "fromUser": "From: {email}"
     }
   },
   "cookies": {
