@@ -656,7 +656,18 @@
       "step1": "Tap the <icon></icon> Share button in the Safari bar.",
       "step2": "Scroll and tap “Add to Home Screen”.",
       "step3": "Confirm with “Add”. Done.",
-      "close": "Got it"
+      "close": "Got it",
+      "copyLink": "Copy link",
+      "copied": "Copied!",
+      "notSafari": {
+        "title": "Open in Safari to install",
+        "titleInApp": "Open in Safari",
+        "body": "iOS only allows installing apps from Safari. Copy the link and paste it into Safari to continue.",
+        "bodyInApp": "You're inside an app (Instagram, Facebook…). To install, open the link in Safari.",
+        "step1": "Tap “Copy link” above.",
+        "step2": "Open Safari and paste the link in the address bar.",
+        "step3": "Once in Safari, tap “Install app” again."
+      }
     }
   }
 }

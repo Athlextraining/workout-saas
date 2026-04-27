@@ -10,6 +10,7 @@ type BeforeInstallPromptEvent = Event & {
 }
 
 type Platform = 'android' | 'ios' | 'desktop' | 'unknown'
+type IosBrowser = 'safari' | 'other' | 'inapp'
 
 function detectPlatform(): Platform {
   if (typeof navigator === 'undefined') return 'unknown'
@@ -18,6 +19,16 @@ function detectPlatform(): Platform {
   if (/iphone|ipad|ipod/.test(ua)) return 'ios'
   if (/macintosh/.test(ua) && navigator.maxTouchPoints > 1) return 'ios'
   return 'desktop'
+}
+
+function detectIosBrowser(): IosBrowser {
+  if (typeof navigator === 'undefined') return 'safari'
+  const ua = navigator.userAgent
+  // In-app browsers
+  if (/FBAN|FBAV|Instagram|Line|Twitter|TikTok|GSA/.test(ua)) return 'inapp'
+  // Other browsers (Chrome, Firefox, Edge, Opera on iOS)
+  if (/CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser/.test(ua)) return 'other'
+  return 'safari'
 }
 
 function isStandalone(): boolean {
@@ -35,12 +46,15 @@ interface Props {
 export function InstallPwa({ variant = 'card', showHint = false }: Props) {
   const t = useTranslations('installPwa')
   const [platform, setPlatform] = useState<Platform>('unknown')
+  const [iosBrowser, setIosBrowser] = useState<IosBrowser>('safari')
   const [installed, setInstalled] = useState(false)
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null)
   const [iosOpen, setIosOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     setPlatform(detectPlatform())
+    setIosBrowser(detectIosBrowser())
     setInstalled(isStandalone())
 
     // Register service worker so Chrome fires beforeinstallprompt
@@ -125,32 +139,75 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
           <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-[var(--bg-primary)] border-t border-white/10 p-6 pb-safe-bottom">
-            <Drawer.Title className="text-lg font-semibold mb-4">
-              {t('ios.title')}
+            <Drawer.Title className="text-lg font-semibold mb-2">
+              {iosBrowser === 'safari'
+                ? t('ios.title')
+                : iosBrowser === 'inapp'
+                ? t('ios.notSafari.titleInApp')
+                : t('ios.notSafari.title')}
             </Drawer.Title>
             <Drawer.Description className="sr-only">
               {t('ios.description')}
             </Drawer.Description>
-            <ol className="space-y-4 text-sm">
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-black text-xs font-bold flex items-center justify-center">1</span>
-                <span>
-                  {t.rich('ios.step1', {
-                    icon: () => (
-                      <ShareIcon className="inline-block align-text-bottom mx-1" />
-                    ),
-                  })}
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-black text-xs font-bold flex items-center justify-center">2</span>
-                <span>{t('ios.step2')}</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-black text-xs font-bold flex items-center justify-center">3</span>
-                <span>{t('ios.step3')}</span>
-              </li>
-            </ol>
+
+            {iosBrowser === 'safari' ? (
+              <ol className="space-y-4 text-sm mt-4">
+                <li className="flex gap-3">
+                  <Step n={1} />
+                  <span>
+                    {t.rich('ios.step1', {
+                      icon: () => (
+                        <ShareIcon className="inline-block align-text-bottom mx-1" />
+                      ),
+                    })}
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <Step n={2} />
+                  <span>{t('ios.step2')}</span>
+                </li>
+                <li className="flex gap-3">
+                  <Step n={3} />
+                  <span>{t('ios.step3')}</span>
+                </li>
+              </ol>
+            ) : (
+              <div className="space-y-4 mt-2">
+                <p className="text-sm text-muted">
+                  {iosBrowser === 'inapp'
+                    ? t('ios.notSafari.bodyInApp')
+                    : t('ios.notSafari.body')}
+                </p>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(window.location.origin)
+                      setCopied(true)
+                      setTimeout(() => setCopied(false), 2000)
+                    } catch {}
+                  }}
+                  className="w-full py-3 rounded-xl btn-gradient text-sm font-semibold"
+                >
+                  {copied ? t('ios.copied') : t('ios.copyLink')}
+                </button>
+                <ol className="space-y-3 text-sm pt-2 border-t border-white/10">
+                  <li className="flex gap-3">
+                    <Step n={1} />
+                    <span>{t('ios.notSafari.step1')}</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <Step n={2} />
+                    <span>{t('ios.notSafari.step2')}</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <Step n={3} />
+                    <span>{t('ios.notSafari.step3')}</span>
+                  </li>
+                </ol>
+              </div>
+            )}
+
             <button
               type="button"
               onClick={() => setIosOpen(false)}
@@ -162,6 +219,14 @@ export function InstallPwa({ variant = 'card', showHint = false }: Props) {
         </Drawer.Portal>
       </Drawer.Root>
     </>
+  )
+}
+
+function Step({ n }: { n: number }) {
+  return (
+    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-black text-xs font-bold flex items-center justify-center">
+      {n}
+    </span>
   )
 }
 

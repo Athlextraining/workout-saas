@@ -656,7 +656,18 @@
       "step1": "Toca el botón <icon></icon> Compartir en la barra de Safari.",
       "step2": "Desplázate y toca «Añadir a pantalla de inicio».",
       "step3": "Confirma con «Añadir». Listo.",
-      "close": "Entendido"
+      "close": "Entendido",
+      "copyLink": "Copiar enlace",
+      "copied": "¡Copiado!",
+      "notSafari": {
+        "title": "Abre en Safari para instalar",
+        "titleInApp": "Abre en Safari",
+        "body": "iOS solo permite instalar apps desde Safari. Copia el enlace y pégalo en Safari para continuar.",
+        "bodyInApp": "Estás dentro de una app (Instagram, Facebook…). Para instalar, abre el enlace en Safari.",
+        "step1": "Toca «Copiar enlace» arriba.",
+        "step2": "Abre Safari y pega el enlace en la barra de direcciones.",
+        "step3": "Una vez en Safari, vuelve a tocar «Instalar app»."
+      }
     }
   }
 }
