@@ -197,6 +197,7 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
 }
 
 function StepInfo({ step, onNext }: { step: Step; onNext: () => void }) {
+  const t = useTranslations("bienvenida");
   return (
     <div className="space-y-8 text-center">
       <Reveal delay={0.05}>
@@ -219,7 +220,7 @@ function StepInfo({ step, onNext }: { step: Step; onNext: () => void }) {
           onClick={onNext}
           className="w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
         >
-          Siguiente
+          {t("header.next")}
         </button>
       </Reveal>
     </div>

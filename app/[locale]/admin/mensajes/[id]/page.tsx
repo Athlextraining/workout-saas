@@ -42,7 +42,7 @@ export default async function AdminThreadPage({
         </div>
         <h1 className="text-2xl font-bold leading-tight">{thread.subject}</h1>
         {user_email && (
-          <p className="text-muted text-xs">De: {user_email}</p>
+          <p className="text-muted text-xs">{t('thread.fromUser', { email: user_email })}</p>
         )}
       </header>
 
