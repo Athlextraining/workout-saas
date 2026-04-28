@@ -104,7 +104,7 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
                   }
                 />
               )}
-              <InstallPwa variant="menu-row" nested />
+              <InstallPwa variant="menu-row" onBeforeInstall={() => setOpen(false)} />
             </nav>
 
             <div className="mt-auto pt-4 border-t border-white/10">

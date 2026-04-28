@@ -94,6 +94,9 @@ export async function generateMetadata({
         "max-video-preview": -1,
       },
     },
+    icons: {
+      apple: "/apple-touch-icon.png",
+    },
     formatDetection: { telephone: false, email: false, address: false },
     verification: {
       google: "0I3Tszx3upfC4WQEetpiTU2wA1xGH8AnShOiRiSpULo",

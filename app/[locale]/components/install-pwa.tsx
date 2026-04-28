@@ -42,9 +42,10 @@ interface Props {
   variant?: 'card' | 'inline' | 'menu-row'
   showHint?: boolean
   nested?: boolean
+  onBeforeInstall?: () => void
 }
 
-export function InstallPwa({ variant = 'card', showHint = false, nested = false }: Props) {
+export function InstallPwa({ variant = 'card', showHint = false, nested = false, onBeforeInstall }: Props) {
   const t = useTranslations('installPwa')
   const [platform, setPlatform] = useState<Platform>('unknown')
   const [iosBrowser, setIosBrowser] = useState<IosBrowser>('safari')
@@ -86,6 +87,7 @@ export function InstallPwa({ variant = 'card', showHint = false, nested = false 
   }
 
   async function handleClick() {
+    onBeforeInstall?.()
     if (platform === 'ios') {
       setIosOpen(true)
       return
@@ -140,7 +142,7 @@ export function InstallPwa({ variant = 'card', showHint = false, nested = false 
         </div>
       )}
 
-      <IosDrawer nested={nested} open={iosOpen} onOpenChange={setIosOpen}>
+      <IosDrawer nested={false} open={iosOpen} onOpenChange={setIosOpen}>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/60 z-50" />
           <Drawer.Content className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-[var(--bg-primary)] border-t border-white/10 p-6 pb-safe-bottom">
