@@ -1,4 +1,4 @@
-import { getLocale } from 'next-intl/server'
+import { cookies } from 'next/headers'
 import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
 import { stripe } from '../infra/stripe-client'
 
@@ -30,8 +30,8 @@ export async function createCheckoutSession(): Promise<
       .eq('id', user.id)
   }
 
-  const locale = await getLocale()
-  const isEn = locale === 'en'
+  const cookieStore = await cookies()
+  const isEn = cookieStore.get('NEXT_LOCALE')?.value === 'en'
   const base = process.env.NEXT_PUBLIC_APP_URL
   const successUrl = isEn ? `${base}/en/welcome` : `${base}/bienvenida`
   const cancelUrl = isEn

@@ -1,4 +1,4 @@
-import { getLocale } from 'next-intl/server'
+import { cookies } from 'next/headers'
 import { createSupabaseServerClient } from '@/shared/infra/supabase/server'
 import { stripe } from '../infra/stripe-client'
 
@@ -19,8 +19,8 @@ export async function createPortalSession(): Promise<
     return { error: 'No subscription found', status: 400 }
   }
 
-  const locale = await getLocale()
-  const isEn = locale === 'en'
+  const cookieStore = await cookies()
+  const isEn = cookieStore.get('NEXT_LOCALE')?.value === 'en'
   const returnUrl = isEn
     ? `${process.env.NEXT_PUBLIC_APP_URL}/en/profile`
     : `${process.env.NEXT_PUBLIC_APP_URL}/perfil`
