@@ -2,7 +2,10 @@
 
 import { requireAdmin } from './require-admin'
 import { createAdminThread } from '../infra/thread-repository'
+import { sendReplyToUser } from '../infra/email-client'
 import { validateBody, validateSubject } from '../domain/validators'
+import { createSupabaseAdmin } from '@/shared/infra/supabase/admin'
+import { defaultLocale, locales, type Locale } from '@/shared/i18n/config'
 
 export async function sendAdminMessage(input: {
   userId: string
@@ -26,6 +29,30 @@ export async function sendAdminMessage(input: {
     body,
   })
   if (error || !thread) return { error: error ?? 'No se pudo crear el hilo.' }
+
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+  try {
+    const admin = createSupabaseAdmin()
+    const { data: profile } = await admin
+      .from('profiles')
+      .select('locale')
+      .eq('id', input.userId)
+      .maybeSingle()
+    const rawLocale = profile?.locale as string | null | undefined
+    const recipientLocale: Locale = locales.includes(rawLocale as Locale)
+      ? (rawLocale as Locale)
+      : defaultLocale
+    await sendReplyToUser({
+      threadId: thread.id,
+      subject,
+      body,
+      userEmail: input.userEmail,
+      appUrl,
+      recipientLocale,
+    })
+  } catch (e) {
+    console.error('Resend error (admin message):', e)
+  }
 
   return { threadId: thread.id }
 }
