@@ -35,7 +35,7 @@ export async function createAdminThread(params: {
   subject: string
   body: string
 }): Promise<{ thread?: SupportThread; error?: string }> {
-  const supabase = await createSupabaseServerClient()
+  const supabase = createSupabaseAdmin()
   const { data: thread, error: tErr } = await supabase
     .from('support_threads')
     .insert({ user_id: params.userId, subject: params.subject })
