@@ -17,6 +17,15 @@ export async function createCheckoutSession(): Promise<
 
   let customerId = profile?.stripe_customer_id as string | null
 
+  if (customerId) {
+    try {
+      await stripe.customers.retrieve(customerId)
+    } catch {
+      customerId = null
+      await supabase.from('profiles').update({ stripe_customer_id: null }).eq('id', user.id)
+    }
+  }
+
   if (!customerId) {
     const customer = await stripe.customers.create({
       email: user.email,
