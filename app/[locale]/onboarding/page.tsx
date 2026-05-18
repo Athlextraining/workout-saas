@@ -994,7 +994,7 @@ function StepPayment({
         </button>
         <Link
           href="/entrenamiento"
-          className="block w-full py-3 text-center text-sm text-muted hover:text-white transition-colors"
+          className="block w-full h-[52px] rounded-xl text-sm font-medium text-muted hover:text-white glass flex items-center justify-center transition-colors"
         >
           {t("steps.payment.skipLink")}
         </Link>

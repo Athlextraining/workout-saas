@@ -49,7 +49,14 @@
       "Bash(git log *)",
       "Bash(git cherry-pick *)",
       "Bash(npx -y json-diff messages/es.json messages/en.json)",
-      "Bash(test -f app/\\\\[locale\\\\]/twitter-image.tsx)"
+      "Bash(test -f app/\\\\[locale\\\\]/twitter-image.tsx)",
+      "Bash(git config *)",
+      "Bash(identify --version)",
+      "Bash(convert --version)",
+      "Bash(dnf list *)",
+      "Bash(convert public/logo.jpeg -resize 180x180 -quality 95 public/apple-touch-icon.png)",
+      "Bash(convert public/logo.jpeg -resize 192x192 -quality 95 public/icon-192.png)",
+      "Bash(convert public/logo.jpeg -resize 512x512 -quality 95 public/icon-512.png)"
     ]
   }
 }
