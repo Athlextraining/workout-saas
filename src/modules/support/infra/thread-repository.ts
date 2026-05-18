@@ -30,6 +30,21 @@ export async function createThread(params: {
   return { thread, message }
 }
 
+export async function getLatestOpenThreadForUser(
+  userId: string,
+): Promise<SupportThread | null> {
+  const supabase = createSupabaseAdmin()
+  const { data } = await supabase
+    .from('support_threads')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('status', 'open')
+    .order('updated_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+  return data ?? null
+}
+
 export async function createAdminThread(params: {
   userId: string
   subject: string
@@ -49,6 +64,24 @@ export async function createAdminThread(params: {
   if (mErr) return { error: mErr.message }
 
   return { thread }
+}
+
+export async function addAdminMessageToThread(params: {
+  threadId: string
+  body: string
+}): Promise<{ error?: string }> {
+  const supabase = createSupabaseAdmin()
+  const { error: mErr } = await supabase
+    .from('support_messages')
+    .insert({ thread_id: params.threadId, author: 'admin', body: params.body })
+  if (mErr) return { error: mErr.message }
+
+  await supabase
+    .from('support_threads')
+    .update({ updated_at: new Date().toISOString() })
+    .eq('id', params.threadId)
+
+  return {}
 }
 
 export async function addMessage(params: {

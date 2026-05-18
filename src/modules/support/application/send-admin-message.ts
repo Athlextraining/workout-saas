@@ -1,7 +1,11 @@
 'use server'
 
 import { requireAdmin } from './require-admin'
-import { createAdminThread } from '../infra/thread-repository'
+import {
+  createAdminThread,
+  getLatestOpenThreadForUser,
+  addAdminMessageToThread,
+} from '../infra/thread-repository'
 import { sendReplyToUser } from '../infra/email-client'
 import { validateBody, validateSubject } from '../domain/validators'
 import { createSupabaseAdmin } from '@/shared/infra/supabase/admin'
@@ -23,12 +27,26 @@ export async function sendAdminMessage(input: {
   const subjectErr = validateSubject(subject)
   if (subjectErr) return { error: subjectErr }
 
-  const { thread, error } = await createAdminThread({
-    userId: input.userId,
-    subject,
-    body,
-  })
-  if (error || !thread) return { error: error ?? 'No se pudo crear el hilo.' }
+  // Reuse existing open thread if one exists to avoid duplicate chats
+  const existingThread = await getLatestOpenThreadForUser(input.userId)
+  let thread: { id: string } | undefined
+
+  if (existingThread) {
+    const { error: msgErr } = await addAdminMessageToThread({
+      threadId: existingThread.id,
+      body,
+    })
+    if (msgErr) return { error: msgErr }
+    thread = existingThread
+  } else {
+    const { thread: newThread, error } = await createAdminThread({
+      userId: input.userId,
+      subject,
+      body,
+    })
+    if (error || !newThread) return { error: error ?? 'No se pudo crear el hilo.' }
+    thread = newThread
+  }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
   try {
