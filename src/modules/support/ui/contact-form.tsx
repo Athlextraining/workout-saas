@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from 'react'
 import { useTranslations } from 'next-intl'
-import { useRouter } from '@/shared/i18n/routing'
 import { sendNewMessage } from '../application/send-new-message'
 import { SUBJECT_MAX, BODY_MAX } from '../domain/validators'
 
@@ -12,7 +11,6 @@ export function ContactForm() {
   const [body, setBody] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
-  const router = useRouter()
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -21,10 +19,7 @@ export function ContactForm() {
       const res = await sendNewMessage({ subject, body })
       if (res.error) {
         setError(res.error)
-        return
       }
-      router.push({ pathname: '/preguntanos/[id]', params: { id: res.threadId! } })
-      router.refresh()
     })
   }
 

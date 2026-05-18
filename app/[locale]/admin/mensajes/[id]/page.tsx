@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import { Link } from '@/shared/i18n/routing'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/modules/support/application/require-admin'
@@ -15,11 +15,10 @@ export default async function AdminThreadPage({
   await requireAdmin()
 
   const { id } = await params
-  const data = await getThread(id)
+  const [data, t] = await Promise.all([getThread(id), getTranslations('admin')])
   if (!data) notFound()
 
   const { thread, messages, user_email } = data
-  const t = useTranslations('admin')
 
   return (
     <div className="max-w-lg mx-auto py-12 px-4 space-y-6">

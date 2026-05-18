@@ -13,18 +13,6 @@ export const pathnames = {
     es: '/perfil',
     en: '/profile',
   },
-  '/preguntanos': {
-    es: '/preguntanos',
-    en: '/contact',
-  },
-  '/preguntanos/nuevo': {
-    es: '/preguntanos/nuevo',
-    en: '/contact/new',
-  },
-  '/preguntanos/[id]': {
-    es: '/preguntanos/[id]',
-    en: '/contact/[id]',
-  },
   '/que-es-athx': {
     es: '/que-es-athx',
     en: '/what-is-athx',

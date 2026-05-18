@@ -2,7 +2,7 @@ import { useTranslations, useFormatter } from 'next-intl'
 import { Link } from '@/shared/i18n/routing'
 import type { SupportThreadWithMeta } from '../domain/thread'
 
-type ThreadPathname = '/preguntanos/[id]' | '/admin/mensajes/[id]'
+type ThreadPathname = '/admin/mensajes/[id]'
 
 interface Props {
   threads: SupportThreadWithMeta[]

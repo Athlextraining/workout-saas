@@ -9,7 +9,6 @@ const PRIVATE_PATHS = [
   "/entrenamiento",
   "/perfil",
   "/bienvenida",
-  "/preguntanos",
 ];
 
 const PRIVATE_PATHS_EN = [
@@ -18,7 +17,6 @@ const PRIVATE_PATHS_EN = [
   "/en/training",
   "/en/profile",
   "/en/welcome",
-  "/en/contact",
 ];
 
 export default function robots(): MetadataRoute.Robots {

@@ -30,6 +30,27 @@ export async function createThread(params: {
   return { thread, message }
 }
 
+export async function createAdminThread(params: {
+  userId: string
+  subject: string
+  body: string
+}): Promise<{ thread?: SupportThread; error?: string }> {
+  const supabase = await createSupabaseServerClient()
+  const { data: thread, error: tErr } = await supabase
+    .from('support_threads')
+    .insert({ user_id: params.userId, subject: params.subject })
+    .select()
+    .single()
+  if (tErr || !thread) return { error: tErr?.message ?? 'No se pudo crear el hilo.' }
+
+  const { error: mErr } = await supabase
+    .from('support_messages')
+    .insert({ thread_id: thread.id, author: 'admin', body: params.body })
+  if (mErr) return { error: mErr.message }
+
+  return { thread }
+}
+
 export async function addMessage(params: {
   threadId: string
   author: 'user' | 'admin'

@@ -45,17 +45,12 @@ export async function sendReplyToUser(input: ReplyInput) {
     locale: input.recipientLocale,
     namespace: 'emails.replyToUser',
   })
-  const path =
-    input.recipientLocale === 'en'
-      ? `/en/contact/${input.threadId}`
-      : `/preguntanos/${input.threadId}`
-  const link = `${input.appUrl}${path}`
   await resend.emails.send({
     from: FROM,
     to: input.userEmail,
     replyTo: ADMIN,
     subject: t('subject', { subject: input.subject }),
-    text: `${input.body}\n\n${t('bodyTrailer', { link })}`,
+    text: input.body,
   })
   return { skipped: false }
 }
