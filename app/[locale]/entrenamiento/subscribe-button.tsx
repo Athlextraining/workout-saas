@@ -21,7 +21,7 @@ export function SubscribeButton({
   async function handleSubscribe() {
     if (loading) return
     setLoading(true)
-    trackEvent('begin_checkout', { currency: 'EUR', value: 14.9 })
+    trackEvent('begin_checkout', { currency: 'EUR', value: 9.8 })
     try {
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
       const data = await res.json()

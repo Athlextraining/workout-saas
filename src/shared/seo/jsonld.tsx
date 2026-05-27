@@ -43,7 +43,7 @@ export function softwareApplicationLd(locale?: 'es' | 'en') {
       "Programación y entrenamiento ATHX con plan semanal, seguimiento y chat directo.",
     offers: {
       "@type": "Offer",
-      price: "14.90",
+      price: "9.80",
       priceCurrency: "EUR",
       availability: "https://schema.org/InStock",
       url: `${SITE_URL}/login`,
