@@ -4,7 +4,7 @@ import { Link } from "@/shared/i18n/routing";
 import { getCurrentUser } from "@/modules/identity/application/get-current-user";
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
-import { getCurrentWeekWorkout } from "@/modules/training/application/get-current-week-workout";
+import { getWeekWorkout } from "@/modules/training/application/get-week-workout";
 
 export const metadata: Metadata = {
   robots: {
@@ -22,6 +22,7 @@ import type { WeekContent } from "@/modules/training/domain/workout";
 import { Reveal } from "../reveal";
 import { SubscribeButton } from "./subscribe-button";
 import { WeekView } from "./week-view";
+import { AdminWeekBadge } from "./admin-week-badge";
 import { WorkoutTimer } from "@/modules/training/ui/workout-timer";
 
 const DAY_KEYS: (keyof WeekContent)[] = [
@@ -34,7 +35,11 @@ const DAY_KEYS: (keyof WeekContent)[] = [
   "sabado",
 ];
 
-export default async function EntrenamientoPage() {
+export default async function EntrenamientoPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ week?: string }>
+}) {
   const user = await getCurrentUser();
   const locale = await getLocale();
   const t = await getTranslations('entrenamiento');
@@ -101,10 +106,16 @@ export default async function EntrenamientoPage() {
     );
   }
 
-  const [subscribed, workout, profile] = await Promise.all([
+  const resolvedParams = await searchParams;
+  const profile = await getCurrentProfile();
+  const isAdmin = profile?.is_admin ?? false;
+  const adminWeekOverride = isAdmin && resolvedParams?.week
+    ? parseInt(resolvedParams.week)
+    : undefined;
+
+  const [subscribed, workout] = await Promise.all([
     isUserSubscribed(user.id),
-    getCurrentWeekWorkout(locale as 'es' | 'en'),
-    getCurrentProfile(),
+    getWeekWorkout(locale as 'es' | 'en', adminWeekOverride),
   ]);
 
   if (!workout) {
@@ -164,13 +175,21 @@ export default async function EntrenamientoPage() {
         </div>
         <div className="train-header-content">
           <div className="train-header-row">
-            <span
-              className={`badge badge--pill badge--glass phase-${phase.code.toLowerCase()}`}
-            >
-              <span className="badge-dot phase-chip-dot" />
-              {profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"} · {t('week.phase')}{" "}
-              {weekNumber}
-            </span>
+            {isAdmin ? (
+              <AdminWeekBadge
+                categoryLabel={profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"}
+                weekNumber={weekNumber}
+                phaseLabel={t('week.phase')}
+              />
+            ) : (
+              <span
+                className={`badge badge--pill badge--glass phase-${phase.code.toLowerCase()}`}
+              >
+                <span className="badge-dot phase-chip-dot" />
+                {profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"} · {t('week.phase')}{" "}
+                {weekNumber}
+              </span>
+            )}
             <WorkoutTimer compact />
           </div>
         </div>
