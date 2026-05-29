@@ -184,6 +184,15 @@ export default async function EntrenamientoPage() {
           weekNumber={weekNumber}
           maxes={maxes}
         />
+        {!subscribed && (
+          <div className="mt-6 glass rounded-xl p-5 text-center space-y-3">
+            <p className="text-sm text-muted">{t('paywall.subtitle')}</p>
+            <SubscribeButton
+              className="block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+              label={t('paywall.button')}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -213,6 +213,7 @@
     "actions": {
       "managePortal": "Manage subscription",
       "managingPortal": "Opening portal...",
+      "subscribe": "Subscribe — €9.80/month",
       "signOut": "Sign out",
       "signingOut": "Signing out..."
     }

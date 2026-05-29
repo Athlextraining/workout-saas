@@ -213,6 +213,7 @@
     "actions": {
       "managePortal": "Gestionar suscripción",
       "managingPortal": "Abriendo portal...",
+      "subscribe": "Suscribirse — 9,80€/mes",
       "signOut": "Cerrar sesión",
       "signingOut": "Cerrando sesión..."
     }
