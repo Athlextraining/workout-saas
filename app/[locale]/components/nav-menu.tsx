@@ -8,14 +8,16 @@ import { Drawer } from 'vaul'
 import { LanguageSwitcher } from '@/shared/i18n/components/language-switcher'
 import { signOut } from '@/modules/identity/application/sign-out'
 import { InstallPwa } from './install-pwa'
+import { SubscribeButton } from '../entrenamiento/subscribe-button'
 
 interface Props {
   avatarUrl?: string | null
   emailInitial: string
   isAdmin: boolean
+  isSubscribed: boolean
 }
 
-export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
+export function NavMenu({ avatarUrl, emailInitial, isAdmin, isSubscribed }: Props) {
   const t = useTranslations('nav.menu')
   const [open, setOpen] = useState(false)
 
@@ -91,6 +93,15 @@ export function NavMenu({ avatarUrl, emailInitial, isAdmin }: Props) {
               )}
               <InstallPwa variant="menu-row" onBeforeInstall={() => setOpen(false)} />
             </nav>
+
+            {!isSubscribed && (
+              <div className="pt-4">
+                <SubscribeButton
+                  className="block w-full py-3 rounded-xl text-sm font-semibold btn-gradient"
+                  label={t('subscribeLink')}
+                />
+              </div>
+            )}
 
             <div className="mt-auto pt-4 border-t border-white/10">
               <form action={signOut}>

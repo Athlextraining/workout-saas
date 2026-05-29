@@ -7,7 +7,6 @@ import { signOut } from '@/modules/identity/application/sign-out'
 import { getActiveSubscription } from '@/modules/billing/infra/subscription-repository'
 import { PortalButton } from './portal-button'
 import { SignOutButton } from './sign-out-button'
-import { SubscribeButton } from '../entrenamiento/subscribe-button'
 
 export const metadata: Metadata = {
   robots: {
@@ -73,12 +72,6 @@ export default async function PerfilPage() {
 
       <div className="space-y-3">
         {subscription && <PortalButton />}
-        {!subscription && (
-          <SubscribeButton
-            className="block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
-            label={t('actions.subscribe')}
-          />
-        )}
 
         <form action={signOut}>
           <SignOutButton />

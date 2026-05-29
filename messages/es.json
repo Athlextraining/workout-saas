@@ -213,7 +213,7 @@
     "actions": {
       "managePortal": "Gestionar suscripción",
       "managingPortal": "Abriendo portal...",
-      "subscribe": "Suscribirse — 9,80€/mes",
+      "subscribe": "Suscribirse",
       "signOut": "Cerrar sesión",
       "signingOut": "Cerrando sesión..."
     }
@@ -412,7 +412,8 @@
       "contactLink": "Pregúntanos",
       "adminLink": "Admin · Mensajes",
       "installLink": "Instalar app",
-      "signOut": "Cerrar sesión"
+      "signOut": "Cerrar sesión",
+      "subscribeLink": "Suscribirse"
     },
     "adminBell": {
       "ariaLabel": "Mensajes",

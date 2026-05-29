@@ -213,7 +213,7 @@
     "actions": {
       "managePortal": "Manage subscription",
       "managingPortal": "Opening portal...",
-      "subscribe": "Subscribe — €9.80/month",
+      "subscribe": "Subscribe",
       "signOut": "Sign out",
       "signingOut": "Signing out..."
     }
@@ -412,7 +412,8 @@
       "contactLink": "Contact",
       "adminLink": "Admin · Messages",
       "installLink": "Install app",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "subscribeLink": "Subscribe"
     },
     "adminBell": {
       "ariaLabel": "Messages",

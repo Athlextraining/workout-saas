@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infra/supabase/server";
+import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
 import { LanguageSwitcher } from "@/shared/i18n/components/language-switcher";
 import { NavMenu } from "./components/nav-menu";
 import { AdminBell } from "./components/admin-bell";
@@ -14,6 +15,7 @@ export async function Navbar() {
   } = await supabase.auth.getUser();
 
   let isAdmin = false;
+  let isSubscribed = false;
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
@@ -21,6 +23,7 @@ export async function Navbar() {
       .eq("id", user.id)
       .maybeSingle();
     isAdmin = Boolean(profile?.is_admin);
+    isSubscribed = await isUserSubscribed(user.id);
   }
 
   return (
@@ -48,6 +51,7 @@ export async function Navbar() {
               avatarUrl={user.user_metadata?.avatar_url ?? null}
               emailInitial={user.email?.[0] ?? "?"}
               isAdmin={isAdmin}
+              isSubscribed={isSubscribed}
             />
           </>
         ) : (
