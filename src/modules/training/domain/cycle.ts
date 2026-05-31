@@ -17,7 +17,13 @@ export function getUserCycleWeek(cycleStartDate: string | Date): UserCycleWeek {
     start = cycleStartDate
   }
   const startMonday = getMondayOf(start)
-  const todayMonday = getMondayOf(new Date())
+  // Semana arranca domingo 22:00 hora Madrid (Lun 00:00 − 2h).
+  // toLocaleString respeta DST → 22:00 Madrid exacto todo el año.
+  const SHIFT_MS = 2 * 60 * 60 * 1000
+  const nowMadrid = new Date(
+    new Date().toLocaleString('en-US', { timeZone: 'Europe/Madrid' })
+  )
+  const todayMonday = getMondayOf(new Date(nowMadrid.getTime() + SHIFT_MS))
 
   const weeksElapsed = Math.floor(
     (todayMonday.getTime() - startMonday.getTime()) / MS_PER_WEEK
