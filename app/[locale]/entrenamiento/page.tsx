@@ -5,6 +5,7 @@ import { getCurrentUser } from "@/modules/identity/application/get-current-user"
 import { getCurrentProfile } from "@/modules/identity/application/get-current-profile";
 import { isUserSubscribed } from "@/modules/billing/application/get-subscription-status";
 import { getWeekWorkout } from "@/modules/training/application/get-week-workout";
+import { getPreviewWorkout } from "@/modules/training/application/get-preview-workout";
 
 export const metadata: Metadata = {
   robots: {
@@ -44,65 +45,114 @@ export default async function EntrenamientoPage({
   const locale = await getLocale();
   const t = await getTranslations('entrenamiento');
 
-  // Not registered: CTA to sign up
+  // Not registered: show ATHX PRO week-1 preview (lunes open, rest gated)
   if (!user) {
+    const preview = await getPreviewWorkout(locale as 'es' | 'en');
+
+    if (!preview) {
+      return (
+        <section className="train-cta-shell">
+          <div className="train-cta-bg" aria-hidden="true">
+            <div className="train-cta-image" />
+            <div className="train-cta-vignette" />
+            <div className="train-cta-grain" />
+            <div className="train-cta-fade" />
+          </div>
+
+          <div className="train-cta-content">
+            <span className="hero-eyebrow">
+              <span className="hero-dot" />
+              {t('ctaUnregistered.eyebrow')}
+            </span>
+
+            <Reveal delay={0.1}>
+              <h1 className="train-cta-title">
+                {t('ctaUnregistered.title')}
+                <br />
+                <span className="train-cta-title-accent font-extrabold">
+                  {t('ctaUnregistered.title').split('\n')[2]}
+                </span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <p className="train-cta-sub">
+                {t('ctaUnregistered.subtitle')}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.3} className="w-full">
+              <Link href="/login" className="hero-cta-primary">
+                {t('ctaUnregistered.button')}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 12h14M13 5l7 7-7 7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </Reveal>
+
+            <Reveal delay={0.4}>
+              <p className="train-cta-fineprint">{t('ctaUnregistered.fineprint')}</p>
+            </Reveal>
+          </div>
+        </section>
+      );
+    }
+
+    const previewPhase = getCyclePhase(1);
+
     return (
-      <section className="train-cta-shell">
-        <div className="train-cta-bg" aria-hidden="true">
-          <div className="train-cta-image" />
-          <div className="train-cta-vignette" />
-          <div className="train-cta-grain" />
-          <div className="train-cta-fade" />
-        </div>
-
-        <div className="train-cta-content">
-          <span className="hero-eyebrow">
-            <span className="hero-dot" />
-            {t('ctaUnregistered.eyebrow')}
-          </span>
-
-          <Reveal delay={0.1}>
-            <h1 className="train-cta-title">
-              {t('ctaUnregistered.title')}
-              <br />
-              <span className="train-cta-title-accent font-extrabold">
-                {t('ctaUnregistered.title').split('\n')[2]}
-              </span>
-            </h1>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <p className="train-cta-sub">
-              {t('ctaUnregistered.subtitle')}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.3} className="w-full">
-            <Link href="/login" className="hero-cta-primary">
-              {t('ctaUnregistered.button')}
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
+      <div className="train-page">
+        <header className="train-header">
+          <div className="train-header-bg" aria-hidden="true">
+            <div className="hero-grid" />
+            <div className="train-header-fade" />
+          </div>
+          <div className="train-header-content">
+            <div className="train-header-row">
+              <span
+                className={`badge badge--pill badge--glass phase-${previewPhase.code.toLowerCase()}`}
               >
-                <path
-                  d="M5 12h14M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </Reveal>
+                <span className="badge-dot phase-chip-dot" />
+                ATHX PRO · {t('week.phase')} 1
+              </span>
+              <WorkoutTimer compact />
+            </div>
+          </div>
+        </header>
 
-          <Reveal delay={0.4}>
-            <p className="train-cta-fineprint">{t('ctaUnregistered.fineprint')}</p>
-          </Reveal>
+        <div className="w-full max-w-md mx-auto px-6 pb-12 -mt-6 relative z-10">
+          <WeekView
+            content={preview.content}
+            todayKey="lunes"
+            cycleNumber={1}
+            weekNumber={1}
+            maxes={{ strictPress: null, backSquat: null, deadlift: null }}
+            preview
+          />
+          <div className="mt-6 glass rounded-xl p-5 text-center space-y-3">
+            <p className="text-sm font-semibold">{t('preview.bannerTitle')}</p>
+            <p className="text-sm text-muted">{t('preview.bannerSubtitle')}</p>
+            <Link
+              href="/login"
+              className="block w-full py-3.5 rounded-xl text-base font-semibold btn-gradient"
+            >
+              {t('preview.bannerButton')}
+            </Link>
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 
