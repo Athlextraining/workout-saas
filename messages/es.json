@@ -228,6 +228,14 @@
       "button": "COMIENZA AHORA",
       "fineprint": "Primera semana gratis"
     },
+    "preview": {
+      "lockedTitle": "Desbloquea esta sesión",
+      "lockedSubtitle": "El lunes es gratis. Regístrate para ver las 6 semanas completas y seguir tu progreso.",
+      "lockedButton": "Regístrate gratis",
+      "bannerTitle": "Primera semana gratis",
+      "bannerSubtitle": "Crea tu cuenta para desbloquear el plan completo de 6 semanas adaptado a tu categoría.",
+      "bannerButton": "Empieza ahora"
+    },
     "paywall": {
       "title": "Continua tu progreso",
       "subtitle": "Has completado tu primera semana gratuita. Suscríbete para acceder al resto.",
