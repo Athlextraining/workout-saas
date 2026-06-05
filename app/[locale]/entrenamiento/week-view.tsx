@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations, useFormatter } from 'next-intl'
 import { AnimatePresence, motion } from 'motion/react'
 import type { WeekContent, DayWorkout } from '@/modules/training/domain/workout'
+import { Link } from '@/shared/i18n/routing'
 
 type DayKey = keyof WeekContent
 
@@ -40,6 +41,7 @@ interface Props {
   cycleNumber: number
   weekNumber: number
   maxes: UserMaxes
+  preview?: boolean
 }
 
 export function WeekView({
@@ -48,6 +50,7 @@ export function WeekView({
   cycleNumber,
   weekNumber,
   maxes,
+  preview = false,
 }: Props) {
   const t = useTranslations('entrenamiento')
   const format = useFormatter()
@@ -82,6 +85,7 @@ export function WeekView({
   }, [active])
 
   const dayContent = content[active]
+  const isLocked = (day: DayKey) => preview && day !== 'lunes'
 
   // Get short day label using formatter
   const getDayShort = (day: DayKey) => {
@@ -111,10 +115,17 @@ export function WeekView({
               key={day}
               data-day={day}
               onClick={() => setActive(day)}
-              className={`day-pill ${isActive ? 'is-active' : ''} ${isToday ? 'is-today' : ''} ${isDone ? 'is-done' : ''}`}
+              className={`day-pill ${isActive ? 'is-active' : ''} ${isToday ? 'is-today' : ''} ${isDone ? 'is-done' : ''} ${isLocked(day) ? 'is-locked' : ''}`}
             >
               <span className="day-pill-label">{getDayShort(day)}</span>
-              {isDone && (
+              {isLocked(day) ? (
+                <span className="day-pill-check" aria-hidden>
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 10V8a6 6 0 1 1 12 0v2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <rect x="4" y="10" width="16" height="11" rx="2" fill="currentColor" />
+                  </svg>
+                </span>
+              ) : isDone && (
                 <span className="day-pill-check" aria-hidden>
                   <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
                     <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
@@ -134,14 +145,19 @@ export function WeekView({
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
-          <DayCard
-            dayKey={active}
-            day={dayContent}
-            done={done[active]}
-            onToggleDone={() => toggleDone(active)}
-            maxes={maxes}
-            getDayFull={getDayFull}
-          />
+          {isLocked(active) ? (
+            <GateCard />
+          ) : (
+            <DayCard
+              dayKey={active}
+              day={dayContent}
+              done={done[active]}
+              onToggleDone={() => toggleDone(active)}
+              maxes={maxes}
+              getDayFull={getDayFull}
+              hideToggle={preview}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -155,6 +171,7 @@ function DayCard({
   onToggleDone,
   maxes,
   getDayFull,
+  hideToggle = false,
 }: {
   dayKey: DayKey
   day: DayWorkout | undefined
@@ -162,6 +179,7 @@ function DayCard({
   onToggleDone: () => void
   maxes: UserMaxes
   getDayFull: (day: DayKey) => string
+  hideToggle?: boolean
 }) {
   const t = useTranslations('entrenamiento')
   return (
@@ -173,20 +191,22 @@ function DayCard({
             <p className="text-accent text-xs mt-1">{day.titulo}</p>
           )}
         </div>
-        <button
-          type="button"
-          onClick={onToggleDone}
-          className={`done-toggle ${done ? 'is-done' : ''}`}
-          aria-label={done ? t('day.markUndone') : t('day.markDone')}
-        >
-          {done ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          ) : (
-            <span className="text-[10px] uppercase tracking-wider pl-[0.05em]">{t('done')}</span>
-          )}
-        </button>
+        {!hideToggle && (
+          <button
+            type="button"
+            onClick={onToggleDone}
+            className={`done-toggle ${done ? 'is-done' : ''}`}
+            aria-label={done ? t('day.markUndone') : t('day.markDone')}
+          >
+            {done ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <polyline points="5 12 10 17 19 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <span className="text-[10px] uppercase tracking-wider pl-[0.05em]">{t('done')}</span>
+            )}
+          </button>
+        )}
       </header>
 
       {day?.recuperacion ? (
@@ -266,6 +286,39 @@ function DayCard({
           )}
         </div>
       )}
+    </article>
+  )
+}
+
+function GateCard() {
+  const t = useTranslations('entrenamiento')
+  return (
+    <article className="glass rounded-2xl p-6 relative overflow-hidden">
+      <div className="space-y-3 blur-sm select-none pointer-events-none" aria-hidden>
+        <div className="h-4 w-2/3 rounded bg-white/10" />
+        <div className="h-3 w-1/2 rounded bg-white/10" />
+        <div className="h-3 w-3/4 rounded bg-white/10" />
+        <div className="h-3 w-2/5 rounded bg-white/10" />
+        <div className="h-3 w-3/5 rounded bg-white/10" />
+      </div>
+      <div className="relative mt-6 text-center space-y-4">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M6 10V8a6 6 0 1 1 12 0v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <rect x="4" y="10" width="16" height="11" rx="2" fill="currentColor" />
+          </svg>
+        </div>
+        <div className="space-y-1.5">
+          <h3 className="text-lg font-semibold">{t('preview.lockedTitle')}</h3>
+          <p className="text-muted text-sm">{t('preview.lockedSubtitle')}</p>
+        </div>
+        <Link href="/login" className="hero-cta-primary inline-flex">
+          {t('preview.lockedButton')}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+      </div>
     </article>
   )
 }
