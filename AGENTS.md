@@ -122,7 +122,7 @@ app/
 ├─ onboarding/page.tsx           ─→ onboarding.{save-basic-info, save-category, save-fitness-data, complete-onboarding}
 │                                  + identity.update-avatar + shared.supabase.client
 ├─ entrenamiento/page.tsx        ─→ identity.get-current-user + billing.get-subscription-status
-│                                  + training.{get-current-week-workout, cycle.is-free-week}
+│                                  + training.{get-week-workout, get-preview-workout, cycle}
 ├─ entrenamiento/subscribe-button.tsx ─→ POST /api/stripe/checkout
 ├─ perfil/page.tsx               ─→ identity.{get-current-user, sign-out} + billing.get-active-subscription
 │                                  + components.install-pwa
@@ -179,9 +179,10 @@ src/modules/
 │  │  ├─ cycle.ts                ─→ shared.dates.getMondayOf   (getUserCycleWeek, isFreeWeek)
 │  │  ├─ workout.ts              ─→ identity.profile.Category  (DayWorkout, WeekContent, WorkoutTemplate)
 │  │  └─ timer.ts                (TimerConfig, TimerMode, TimerSnapshot, formatMs, modeLabel)
-│  ├─ infra/template-repository.ts ─→ shared.supabase.server + training.workout (getTemplate)
+│  ├─ infra/template-repository.ts ─→ shared.supabase.{server, admin} + training.workout (getTemplate, getPublicTemplate)
 │  ├─ application/get-current-week-workout.ts
 │  │    ─→ identity.{get-current-user, profile-repository} + training.{cycle, template-repository, workout}
+│  ├─ get-preview-workout.ts     ─→ training.template-repository.getPublicTemplate (ATHX PRO wk1, no auth)
 │  └─ ui/
 │     ├─ timer-audio.ts          (Web Audio beeps + vibrate + wake-lock helpers)
 │     ├─ use-timer.ts            ─→ training.domain.timer + training.ui.timer-audio
