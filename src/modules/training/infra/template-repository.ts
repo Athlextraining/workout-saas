@@ -77,9 +77,15 @@ export async function getRawTemplate(
   return data.content as LocalizedWeekContent
 }
 
+/** Scalar blocks: always written as-is (never removed), since `titulo` is required. */
+const STRING_BLOCKS: BlockKey[] = ['titulo', 'recuperacion']
+
 /**
  * Merges a single block into one day, for each provided locale, leaving every
- * other day/block/locale untouched. Empty value removes the block. Service-role
+ * other day/block/locale untouched. For array/object blocks an empty value
+ * removes the block. Returns an error (rather than silently dropping) if a
+ * non-empty value targets a locale/day that isn't seeded — we never create a
+ * partial locale week, since that would shadow the ES fallback. Service-role
  * client — gated by requireAdmin in the use case.
  */
 export async function updateTemplateBlock(
@@ -101,17 +107,26 @@ export async function updateTemplateBlock(
 
   const content = data.content as LocalizedWeekContent
 
-  for (const [locale, value] of Object.entries(byLocale) as [Locale, unknown][]) {
-    const week = content[locale]
-    if (!week) continue
-    const dayWorkout = week[day] as unknown as Record<string, unknown> | undefined
-    if (!dayWorkout) continue
+  const isStringBlock = STRING_BLOCKS.includes(blockKey)
 
+  for (const [locale, value] of Object.entries(byLocale) as [Locale, unknown][]) {
     const empty =
-      value === null ||
-      value === undefined ||
-      value === '' ||
-      (Array.isArray(value) && value.length === 0)
+      !isStringBlock &&
+      (value === null ||
+        value === undefined ||
+        value === '' ||
+        (Array.isArray(value) && value.length === 0))
+
+    const week = content[locale]
+    if (!week) {
+      if (empty) continue
+      return { error: `El idioma "${locale}" no está sembrado en esta plantilla` }
+    }
+    const dayWorkout = week[day] as unknown as Record<string, unknown> | undefined
+    if (!dayWorkout) {
+      if (empty) continue
+      return { error: `El día "${day}" no existe en "${locale}"` }
+    }
 
     if (empty) {
       delete dayWorkout[blockKey]
