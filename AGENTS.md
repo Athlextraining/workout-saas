@@ -143,6 +143,11 @@ app/
 ├─ admin/mensajes/
 │  ├─ page.tsx                   ─→ support.{require-admin, list-all-threads, ui.thread-list}
 │  └─ [id]/page.tsx              ─→ support.{require-admin, get-thread, ui.message-bubble, ui.reply-form}
+├─ admin/entrenos/
+│  ├─ page.tsx                   ─→ support.require-admin
+│  ├─ [category]/[week]/page.tsx ─→ support.require-admin + training.get-admin-template
+│  │                                + identity.profile.isCategory + entrenos.block-editor
+│  └─ block-editor.tsx           ─→ training.{update-template-block, workout-validators}
 ├─ auth/callback/route.ts        ─→ shared.supabase.server
 ├─ bienvenida/page.tsx           ─→ motion + components.{reveal, install-pwa}  (post-checkout cinematic tour, install CTA on final step)
 ├─ que-es-athx/page.tsx          ─→ shared.seo.jsonld
@@ -178,11 +183,14 @@ src/modules/
 │  ├─ domain/
 │  │  ├─ cycle.ts                ─→ shared.dates.getMondayOf   (getUserCycleWeek, isFreeWeek)
 │  │  ├─ workout.ts              ─→ identity.profile.Category  (DayWorkout, WeekContent, WorkoutTemplate)
-│  │  └─ timer.ts                (TimerConfig, TimerMode, TimerSnapshot, formatMs, modeLabel)
-│  ├─ infra/template-repository.ts ─→ shared.supabase.{server, admin} + training.workout (getTemplate, getPublicTemplate)
+│  │  ├─ timer.ts                (TimerConfig, TimerMode, TimerSnapshot, formatMs, modeLabel)
+│  │  └─ workout-validators.ts   (validateBlock, BlockKey — pure)
+│  ├─ infra/template-repository.ts ─→ shared.supabase.{server, admin} + training.workout (getTemplate, getPublicTemplate; + getRawTemplate, updateTemplateBlock)
 │  ├─ application/get-current-week-workout.ts
 │  │    ─→ identity.{get-current-user, profile-repository} + training.{cycle, template-repository, workout}
 │  ├─ get-preview-workout.ts     ─→ training.template-repository.getPublicTemplate (ATHX PRO wk1, no auth)
+│  ├─ application/get-admin-template.ts    ─→ support.require-admin + training.template-repository
+│  ├─ application/update-template-block.ts ─→ support.require-admin + training.{workout-validators, template-repository}
 │  └─ ui/
 │     ├─ timer-audio.ts          (Web Audio beeps + vibrate + wake-lock helpers)
 │     ├─ use-timer.ts            ─→ training.domain.timer + training.ui.timer-audio
