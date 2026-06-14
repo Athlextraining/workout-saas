@@ -39,7 +39,7 @@ const DAY_KEYS: (keyof WeekContent)[] = [
 export default async function EntrenamientoPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ week?: string }>
+  searchParams?: Promise<{ week?: string; cat?: string }>
 }) {
   const user = await getCurrentUser();
   const locale = await getLocale();
@@ -162,10 +162,15 @@ export default async function EntrenamientoPage({
   const adminWeekOverride = isAdmin && resolvedParams?.week
     ? parseInt(resolvedParams.week)
     : undefined;
+  const adminCategoryOverride =
+    isAdmin && (resolvedParams?.cat === 'athx' || resolvedParams?.cat === 'athx_pro')
+      ? resolvedParams.cat
+      : undefined;
+  const effectiveCategory = adminCategoryOverride ?? profile?.category;
 
   const [subscribed, workout] = await Promise.all([
     isUserSubscribed(user.id),
-    getWeekWorkout(locale as 'es' | 'en', adminWeekOverride),
+    getWeekWorkout(locale as 'es' | 'en', adminWeekOverride, adminCategoryOverride),
   ]);
 
   if (!workout) {
@@ -227,7 +232,7 @@ export default async function EntrenamientoPage({
           <div className="train-header-row">
             {isAdmin ? (
               <AdminWeekBadge
-                categoryLabel={profile?.category === "athx_pro" ? "ATHX PRO" : "ATHX"}
+                category={effectiveCategory === "athx_pro" ? "athx_pro" : "athx"}
                 weekNumber={weekNumber}
                 phaseLabel={t('week.phase')}
               />

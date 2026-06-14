@@ -4,10 +4,12 @@ import { getUserCycleWeek } from '../domain/cycle'
 import { getTemplate } from '../infra/template-repository'
 import type { UserWeekWorkout } from '../domain/workout'
 import type { Locale } from '@/shared/i18n/config'
+import type { Category } from '@/modules/identity/domain/profile'
 
 export async function getWeekWorkout(
   locale: Locale,
   weekNumberOverride?: number,
+  categoryOverride?: Category,
 ): Promise<UserWeekWorkout | null> {
   const user = await getCurrentUser()
   if (!user) return null
@@ -21,7 +23,9 @@ export async function getWeekWorkout(
       ? weekNumberOverride
       : weekNumber
 
-  const template = await getTemplate(profile.category, effectiveWeek, locale)
+  const effectiveCategory = categoryOverride ?? profile.category
+
+  const template = await getTemplate(effectiveCategory, effectiveWeek, locale)
   if (!template) return null
 
   return { ...template, cycle_number: cycleNumber, week_number: effectiveWeek }
