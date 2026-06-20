@@ -680,5 +680,52 @@
         "step3": "Una vez en Safari, vuelve a tocar «Instalar app»."
       }
     }
+  },
+  "ambassadors": {
+    "pageTitle": "Sé embajador ATHLEX Training",
+    "pageDescription": "Únete al programa de embajadores de ATHLEX Training. Promueve la programación ATHX y forma parte del equipo.",
+    "ogTitle": "Programa de embajadores ATHLEX Training",
+    "ogDescription": "Cómo funciona el programa de embajadores y cómo aplicar.",
+    "eyebrow": "Programa de embajadores",
+    "title": "Entrena, comparte, crece con ATHLEX",
+    "intro": "Buscamos atletas que ya viven la programación ATHX y quieren representarla. Si entrenas en serio y tienes una comunidad que te escucha, esto es para ti.",
+    "sections": {
+      "about": {
+        "title": "Quiénes somos",
+        "body": "ATHLEX Training es la programación ATHX oficial: planes semanales, seguimiento de cargas y chat directo con coach. Los embajadores son la cara visible del programa frente a su comunidad."
+      },
+      "howItWorks": {
+        "title": "Cómo funciona",
+        "steps": [
+          "Aplica con tus datos y tus redes.",
+          "Revisamos tu perfil y entrenamiento actual.",
+          "Te incorporamos al programa con acceso y materiales.",
+          "Promocionas ATHLEX Training a tu manera, con nuestro apoyo."
+        ]
+      },
+      "criteria": {
+        "title": "Qué buscamos",
+        "items": [
+          "Entrenamiento activo y constante (cualquier disciplina de fuerza/fitness).",
+          "Comunidad propia en redes sociales, del tamaño que sea.",
+          "Ganas de compartir tu proceso de forma honesta."
+        ]
+      }
+    },
+    "form": {
+      "title": "Aplica ahora",
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu nombre completo",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "socialLinkLabel": "Red social (opcional)",
+      "socialLinkPlaceholder": "https://instagram.com/tu_usuario",
+      "messageLabel": "Cuéntanos sobre ti",
+      "messagePlaceholder": "Tu disciplina, tu comunidad, por qué quieres ser embajador...",
+      "submit": "Enviar solicitud",
+      "submitSending": "Enviando…",
+      "successTitle": "¡Solicitud enviada!",
+      "successBody": "Gracias por aplicar. Revisaremos tu solicitud y te contactaremos por email."
+    }
   }
 }
