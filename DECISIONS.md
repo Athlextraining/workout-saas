@@ -13,16 +13,16 @@ DEC supersedes the old one (bidirectional link).
 
 ## Status board
 
-| DEC     | Title                  | Status | Assignee |
-|---------|------------------------|--------|----------|
-| DEC-001 | Adopt the DEC chain    | Done   | @patri   |
+| DEC     | Title                  | Status | Assignee         |
+|---------|------------------------|--------|------------------|
+| DEC-001 | Adopt the DEC chain    | Done   | @patricioguerra  |
 
 ---
 
 ## DEC-001 — Adopt the DEC chain
 
 - Status: Done
-- Assignee: @patri
+- Assignee: @patricioguerra
 - Created: 2026-06-20
 - Branch: —
 - Supersedes: —
