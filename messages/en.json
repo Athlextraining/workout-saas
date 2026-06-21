@@ -689,18 +689,23 @@
     "eyebrow": "Ambassador program",
     "title": "Train, share, grow with ATHLEX",
     "intro": "We're looking for athletes who already live the ATHX programming and want to represent it. If you train seriously and have a community that listens to you, this is for you.",
+    "hero": {
+      "badge": "ATHX Ambassador",
+      "cta": "I want to apply",
+      "fineprint": "No commitment. Every application gets a real review."
+    },
     "sections": {
       "about": {
         "title": "Who we are",
-        "body": "ATHLEX Training is the official ATHX programming: weekly plans, load tracking, and direct chat with your coach. Ambassadors are the visible face of the program to their community."
+        "body": "ATHLEX Training is the ATHX™ programming: weekly plans, load tracking, and direct chat with your coach. Ambassadors are part of our community, sharing their workouts with our clients and earning money for it."
       },
       "howItWorks": {
         "title": "How it works",
         "steps": [
-          "Apply with your details and your socials.",
-          "We review your profile and current training.",
-          "We onboard you into the program with access and materials.",
-          "You promote ATHLEX Training your way, with our support."
+          "Send us your details and your socials.",
+          "We review your profile and get in touch with you.",
+          "We onboard you into the program, sharing your workouts.",
+          "You earn income from the people subscribed to your training."
         ]
       },
       "criteria": {

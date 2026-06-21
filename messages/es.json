@@ -683,24 +683,29 @@
   },
   "ambassadors": {
     "pageTitle": "Sé embajador ATHLEX Training",
-    "pageDescription": "Únete al programa de embajadores de ATHLEX Training. Promueve la programación ATHX y forma parte del equipo.",
+    "pageDescription": "Únete al programa de embajadores de ATHLEX Training. Promueve la programación ATHX™ y forma parte del equipo.",
     "ogTitle": "Programa de embajadores ATHLEX Training",
     "ogDescription": "Cómo funciona el programa de embajadores y cómo aplicar.",
     "eyebrow": "Programa de embajadores",
     "title": "Entrena, comparte, crece con ATHLEX",
-    "intro": "Buscamos atletas que ya viven la programación ATHX y quieren representarla. Si entrenas en serio y tienes una comunidad que te escucha, esto es para ti.",
+    "intro": "Buscamos atletas que entrenen ATHX™ y quieran mostrar sus entrenos a cambio de ingresos. Si te dedicas a ello y tienes una comunidad que te escucha, esto es para ti.",
+    "hero": {
+      "badge": "Embajador ATHX™",
+      "cta": "Quiero aplicar",
+      "fineprint": "Sin compromiso. Revisamos cada solicitud a mano."
+    },
     "sections": {
       "about": {
-        "title": "Quiénes somos",
-        "body": "ATHLEX Training es la programación ATHX oficial: planes semanales, seguimiento de cargas y chat directo con coach. Los embajadores son la cara visible del programa frente a su comunidad."
+        "title": "Quiénes somos y que puedes aportar",
+        "body": "ATHLEX Training es la programación ATHX™: planes semanales, seguimiento de cargas y chat directo con coach. Los embajadores forman parte de nuestra comunidad, compartiendo sus entrenos con nuestros clientes y generando dinero por ello."
       },
       "howItWorks": {
         "title": "Cómo funciona",
         "steps": [
-          "Aplica con tus datos y tus redes.",
-          "Revisamos tu perfil y entrenamiento actual.",
-          "Te incorporamos al programa con acceso y materiales.",
-          "Promocionas ATHLEX Training a tu manera, con nuestro apoyo."
+          "Envía tus datos y tus redes.",
+          "Revisamos tu perfil y nos ponemos en contacto contigo.",
+          "Te incorporamos al programa compartiendo tus entrenos.",
+          "Recibes ingresos por las personas suscritas a tu entreno."
         ]
       },
       "criteria": {
