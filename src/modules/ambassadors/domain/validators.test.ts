@@ -3,11 +3,11 @@ import assert from 'node:assert/strict'
 import { validateName, validateEmail, validateMessage } from './validators'
 
 test('validateName: empty fails', () => {
-  assert.match(validateName('') ?? '', /nombre/)
+  assert.match(validateName('') ?? '', /nombre/i)
 })
 
 test('validateName: single char fails', () => {
-  assert.match(validateName('A') ?? '', /nombre/)
+  assert.match(validateName('A') ?? '', /nombre/i)
 })
 
 test('validateName: valid passes', () => {
@@ -15,11 +15,11 @@ test('validateName: valid passes', () => {
 })
 
 test('validateEmail: missing @ fails', () => {
-  assert.match(validateEmail('not-an-email') ?? '', /email/)
+  assert.match(validateEmail('not-an-email') ?? '', /email/i)
 })
 
 test('validateEmail: missing domain fails', () => {
-  assert.match(validateEmail('ana@') ?? '', /email/)
+  assert.match(validateEmail('ana@') ?? '', /email/i)
 })
 
 test('validateEmail: valid passes', () => {
@@ -27,11 +27,11 @@ test('validateEmail: valid passes', () => {
 })
 
 test('validateMessage: empty fails', () => {
-  assert.match(validateMessage('') ?? '', /mensaje/)
+  assert.match(validateMessage('') ?? '', /mensaje/i)
 })
 
 test('validateMessage: too long fails', () => {
-  assert.match(validateMessage('a'.repeat(2001)) ?? '', /mensaje/)
+  assert.match(validateMessage('a'.repeat(2001)) ?? '', /mensaje/i)
 })
 
 test('validateMessage: valid passes', () => {

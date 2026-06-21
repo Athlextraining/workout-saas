@@ -7,20 +7,20 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function validateName(name: string): string | null {
   const n = name.trim()
-  if (n.length < NAME_MIN) return `nombre demasiado corto (min ${NAME_MIN}).`
-  if (n.length > NAME_MAX) return `nombre demasiado largo (max ${NAME_MAX}).`
+  if (n.length < NAME_MIN) return `Nombre demasiado corto (min ${NAME_MIN}).`
+  if (n.length > NAME_MAX) return `Nombre demasiado largo (max ${NAME_MAX}).`
   return null
 }
 
 export function validateEmail(email: string): string | null {
   const e = email.trim()
-  if (!EMAIL_RE.test(e)) return 'email no válido.'
+  if (!EMAIL_RE.test(e)) return 'Email no válido.'
   return null
 }
 
 export function validateMessage(message: string): string | null {
   const m = message.trim()
-  if (m.length < MESSAGE_MIN) return 'mensaje vacío.'
-  if (m.length > MESSAGE_MAX) return `mensaje demasiado largo (max ${MESSAGE_MAX}).`
+  if (m.length < MESSAGE_MIN) return 'Mensaje vacío.'
+  if (m.length > MESSAGE_MAX) return `Mensaje demasiado largo (max ${MESSAGE_MAX}).`
   return null
 }
